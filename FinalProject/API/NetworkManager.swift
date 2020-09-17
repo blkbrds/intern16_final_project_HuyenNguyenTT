@@ -26,6 +26,7 @@ class NetworkManager: Networkable {
                 do {
                     let rs = try response.filterSuccessfulStatusCodes()
                     let data = try rs.mapJSON() as? [String: Any]
+                    
                     print(data)
                 } catch {
                     print(error)

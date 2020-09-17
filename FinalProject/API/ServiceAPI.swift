@@ -18,7 +18,7 @@ extension ServiceAPI: TargetType {
     var baseURL: URL {
         return URL.init(string: "https://jsonplaceholder.typicode.com/")!
     }
-    
+
     var path: String {
         switch self {
         case .posts, .postsWith:
