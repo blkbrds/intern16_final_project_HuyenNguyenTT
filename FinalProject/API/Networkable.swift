@@ -14,4 +14,5 @@ protocol Networkable {
     
     func getPosts() -> Single<Any>
     func getPostWith(id: Int, completion: @escaping (Post?, Error?) -> ())
+//    func login(id: Int, pw: String, completion: @escaping (Post?, Error?) -> ())
 }
