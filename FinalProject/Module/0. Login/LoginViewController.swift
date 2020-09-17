@@ -52,7 +52,7 @@ final class LoginViewController: UIViewController {
             #warning("Show alert need input value")
             return
         }
-        viewModel.requestLogin(username: userNameTextField.text!, password: passwordTextField.text!) { isSuccess in
+        viewModel.requestLogin(username: userName, password: password) { isSuccess in
             switch isSuccess {
             case true:
                 #warning("setroot")
