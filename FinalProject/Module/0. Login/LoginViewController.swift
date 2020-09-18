@@ -56,6 +56,8 @@ final class LoginViewController: UIViewController {
             switch isSuccess {
             case true:
                 #warning("setroot")
+                let vc = HomeViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             case false:
                 // Show alert
                 break
