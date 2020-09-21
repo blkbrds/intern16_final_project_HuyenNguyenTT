@@ -42,8 +42,9 @@ final class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         
         loginButton.layer.cornerRadius = 20
-        
-        userNameTextField.becomeFirstResponder()
+                
+        userNameTextField.returnKeyType = UIReturnKeyType.next
+        passwordTextField.returnKeyType = UIReturnKeyType.done
     }
     
     // MARK: - IBActions
@@ -66,4 +67,16 @@ final class LoginViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
+    private func switchBasedNextTextField(_ textField: UITextField) {
+    switch textField {
+    case self.userNameTextField:
+        passwordTextField.becomeFirstResponder()
+    default:
+        loginButtonTouchUpInside(loginButton)
+        }
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.switchBasedNextTextField(textField)
+        return true
+    }
 }
