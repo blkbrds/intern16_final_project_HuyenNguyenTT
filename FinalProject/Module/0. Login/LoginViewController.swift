@@ -75,6 +75,7 @@ extension LoginViewController: UITextFieldDelegate {
         loginButtonTouchUpInside(loginButton)
         }
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.switchBasedNextTextField(textField)
         return true
