@@ -55,9 +55,7 @@ final class LoginViewController: UIViewController {
         viewModel.requestLogin(username: userName, password: password) { isSuccess in
             switch isSuccess {
             case true:
-                #warning("setroot")
-                let vc = HomeViewController()
-                self.navigationController?.pushViewController(vc, animated: true)
+                SceneDelegate.shared.changeRoot(screen: .home)
             case false:
                 // Show alert
                 break
