@@ -1,0 +1,22 @@
+{
+  "images" : [
+    {
+      "filename" : "tnm_poster_shadow_1_1__1.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "tnm_poster_shadow_1_1__1-1.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -6,10 +6,12 @@ PODS:
     - Moya/Core
     - RxSwift (~> 5.0)
   - RxSwift (5.1.1)
+  - SideMenu (6.4.9)
   - SwiftLint (0.40.2)
 
 DEPENDENCIES:
   - Moya/RxSwift
+  - SideMenu
   - SwiftLint
 
 SPEC REPOS:
@@ -17,14 +19,16 @@ SPEC REPOS:
     - Alamofire
     - Moya
     - RxSwift
+    - SideMenu
     - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
   SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
 
-PODFILE CHECKSUM: 4adfde36984ebee99539851663b09e6750581dbc
+PODFILE CHECKSUM: 50deb2c25133f3d31e2cf8a301c033a5704fd295
 
 COCOAPODS: 1.9.3

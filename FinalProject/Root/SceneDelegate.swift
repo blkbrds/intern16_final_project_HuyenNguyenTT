@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -35,9 +36,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func changeRoot(screen: Screen) {
         switch screen {
         case .login:
-            window?.rootViewController = LoginViewController()
+            let homeVC = HomeViewController()
+            let navigationController = UINavigationController(rootViewController: homeVC)
+            window?.rootViewController = navigationController
+//            window?.rootViewController = LoginViewController()
         case .home:
-            window?.rootViewController = HomeViewController()
+            let homeVC = HomeViewController()
+            let navigationController = UINavigationController(rootViewController: homeVC)
+            window?.rootViewController = navigationController
         }
     }
     

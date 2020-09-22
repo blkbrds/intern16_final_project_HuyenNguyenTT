@@ -9,5 +9,25 @@
 import Foundation
 
 final class HomeViewModel {
+    // MARK: - Properties
+    private(set) var movies: [Movies] = []
+
+    init() {
+        // Dummy
+        getImages()
+    }
     
+    func numberOfRows(inSection section: Int) -> Int {
+        return movies.count
+    }
+    
+    func viewModelForItem(at indexPath: IndexPath) -> MoviesCollectionViewCellViewModel? {
+        guard movies.count > indexPath.row else { return nil }
+        let movieImage = movies[indexPath.row]
+        return MoviesCollectionViewCellViewModel(movies: movieImage)
+    }
+    
+    private func getImages() {
+        movies = DataManager.movie()
+    }
 }

@@ -13,5 +13,5 @@ target 'FinalProject' do
     inherit! :search_paths
     # Pods for testing
   end
-
+pod 'SideMenu'
 end

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 final class HomeViewController: UIViewController {
     
@@ -21,13 +22,13 @@ final class HomeViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     @IBOutlet private weak var movieNameLabel: UILabel!
-    @IBOutlet private weak var genreLabel: UILabel!
-    @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
     
     // MARK: - Properties
-    private var viewModel = HomeViewModel()
-
+    var viewModel = HomeViewModel()
+    var menuController: UIViewController?
+    var sideMenu = SideMenuNavigationController(rootViewController: MenuViewController())
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +39,18 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Private function
     private func configNavigation() {
-        let profile = UIBarButtonItem(image: #imageLiteral(resourceName: "img_menu_logowhite"), style: .plain, target: self, action: #selector(profileTouchUpInside))
-        navigationItem.leftBarButtonItem = profile
+        let infoItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_menu_logowhite"), style: .plain, target: self, action: #selector(profileTouchUpInside))
+        navigationItem.leftBarButtonItem = infoItem
+
         let menuItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_home_menu"), style: .plain, target: self, action: #selector(menuTouchUpInside))
         navigationItem.rightBarButtonItem = menuItem
-        navigationController?.navigationBar.tintColor = .white
         
+        // set side menu
+        sideMenu.leftSide = false
+        SideMenuManager.default.rightMenuNavigationController = sideMenu
+        SideMenuManager.default.addPanGestureToPresent(toView: view)
+        
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
     }
     
@@ -52,10 +59,10 @@ final class HomeViewController: UIViewController {
     }
     
     private func configCollectionView() {
-        let nib = UINib(nibName: "MoviesCollectionViewCell", bundle: .main)
+        let nib = UINib(nibName: "MoviesCollectionViewCell", bundle: Bundle.main)
         collectionView.register(nib, forCellWithReuseIdentifier: "MoviesCollectionViewCell")
-        collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     // MARK: - Action
@@ -68,16 +75,26 @@ final class HomeViewController: UIViewController {
     // MARK: - Objc
     @objc private func profileTouchUpInside() { }
     
-    @objc private func menuTouchUpInside() { }
+    @objc private func menuTouchUpInside() {
+        present(sideMenu, animated: true)
+    }
 }
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+// Add Menu VC
+//class MenuViewController: UIViewController {}
+
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.numberOfRows(inSection: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesCollectionViewCell", for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
+        cell.viewModel = viewModel.viewModelForItem(at: indexPath)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width / 2, height: 250)
     }
 }
