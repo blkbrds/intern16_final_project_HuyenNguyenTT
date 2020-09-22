@@ -80,9 +80,6 @@ final class HomeViewController: UIViewController {
     }
 }
 
-// Add Menu VC
-//class MenuViewController: UIViewController {}
-
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows(inSection: section)
