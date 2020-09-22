@@ -68,7 +68,7 @@ final class HomeViewController: UIViewController {
         
         // Custom collection
         let layout = UPCarouselFlowLayout()
-        layout.itemSize = CGSize(width: 200, height: 200)
+        layout.itemSize = CGSize(width: 200, height: collectionView.contentSize.height)
         collectionView.collectionViewLayout = layout
         layout.sideItemScale = 0.6
         layout.sideItemAlpha = 0.2
