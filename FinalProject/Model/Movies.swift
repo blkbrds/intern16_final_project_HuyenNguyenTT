@@ -9,8 +9,15 @@
 import Foundation
 
 final class Movies {
+    var categoryId: Int
     var imageName: String
-    init(imageName: String = "") {
+    var name: String
+    var releaseDate: String
+    
+    init(categoryId: Int, imageName: String = "", name: String = "", releaseDate: String = "") {
+        self.categoryId = categoryId
         self.imageName = imageName
+        self.name = name
+        self.releaseDate = releaseDate
     }
 }

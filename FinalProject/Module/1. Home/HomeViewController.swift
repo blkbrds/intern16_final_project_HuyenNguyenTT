@@ -8,6 +8,7 @@
 
 import UIKit
 import SideMenu
+import UPCarouselFlowLayout
 
 final class HomeViewController: UIViewController {
     
@@ -51,7 +52,8 @@ final class HomeViewController: UIViewController {
         SideMenuManager.default.addPanGestureToPresent(toView: view)
         
         navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     private func configUI() {
@@ -63,6 +65,15 @@ final class HomeViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "MoviesCollectionViewCell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        // Custom collection
+        let layout = UPCarouselFlowLayout()
+        layout.itemSize = CGSize(width: 200, height: 200)
+        collectionView.collectionViewLayout = layout
+        layout.sideItemScale = 0.6
+        layout.sideItemAlpha = 0.2
+        layout.spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -70)
+        layout.scrollDirection = .horizontal
     }
     
     // MARK: - Action
