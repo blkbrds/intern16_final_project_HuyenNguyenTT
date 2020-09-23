@@ -30,7 +30,6 @@
 		83303CEB2519B30B0089BE1E /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83303CE92519B30B0089BE1E /* MenuViewController.swift */; };
 		83303CEC2519B30B0089BE1E /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83303CEA2519B30B0089BE1E /* MenuViewController.xib */; };
 		835C47D725189CC7002D83A5 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C47D625189CC7002D83A5 /* Movies.swift */; };
-		835C47D925189FD1002D83A5 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C47D825189FD1002D83A5 /* DataManager.swift */; };
 		8EEB3D4DE025B99592CD1248 /* Pods_FinalProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8B1F4D95006C6444E9465 /* Pods_FinalProjectTests.framework */; };
 		B62B00D71BA33A723BAF864B /* Pods_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED98509F8A89809E661E8135 /* Pods_FinalProject.framework */; };
 /* End PBXBuildFile section */
@@ -76,7 +75,6 @@
 		83303CE92519B30B0089BE1E /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		83303CEA2519B30B0089BE1E /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
 		835C47D625189CC7002D83A5 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
-		835C47D825189FD1002D83A5 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		8E81EE897478CE01D48B2924 /* Pods-FinalProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-FinalProjectTests/Pods-FinalProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED98509F8A89809E661E8135 /* Pods_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6046E894A3411896691E3C /* Pods-FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProject.release.xcconfig"; path = "Target Support Files/Pods-FinalProject/Pods-FinalProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				835C47D625189CC7002D83A5 /* Movies.swift */,
-				835C47D825189FD1002D83A5 /* DataManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -486,7 +483,6 @@
 				0EBA37452511C97B003465DD /* Networkable.swift in Sources */,
 				0EBA374D2511CAB7003465DD /* ArrayExt.swift in Sources */,
 				8328639C251317A00048C63C /* LoginViewModel.swift in Sources */,
-				835C47D925189FD1002D83A5 /* DataManager.swift in Sources */,
 				835C47D725189CC7002D83A5 /* Movies.swift in Sources */,
 				83303CEB2519B30B0089BE1E /* MenuViewController.swift in Sources */,
 				0EBA37132511C6C2003465DD /* AppDelegate.swift in Sources */,

@@ -13,5 +13,4 @@ protocol Networkable {
     var provider: MoyaProvider<ServiceAPI> { get }
     
     func getPosts() -> Single<Any>
-    func getPostWith(id: Int, completion: @escaping (Post?, Error?) -> ())
 }

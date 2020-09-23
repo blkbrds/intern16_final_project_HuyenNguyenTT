@@ -10,12 +10,11 @@ import Foundation
 
 final class HomeViewModel {
     // MARK: - Properties
-    private(set) var movies: [Movie] = []
-
-    init() {
-        // Dummy
-        getImages()
-    }
+    private(set) var movies: [Movie] = [Movie(categoryId: 0, imageName: "img_home_movie"),
+    Movie(categoryId: 0, imageName: "img_home_movie"),
+    Movie(categoryId: 0, imageName: "img_home_movie"),
+    Movie(categoryId: 0, imageName: "img_home_movie"),
+    Movie(categoryId: 0, imageName: "img_home_movie")]
     
     func numberOfRows(inSection section: Int) -> Int {
         return movies.count
@@ -25,9 +24,5 @@ final class HomeViewModel {
         guard movies.count > indexPath.row else { return nil }
         let movieImage = movies[indexPath.row]
         return MoviesCollectionViewCellViewModel(movies: movieImage)
-    }
-    
-    private func getImages() {
-        movies = DataManager.movies()
     }
 }
