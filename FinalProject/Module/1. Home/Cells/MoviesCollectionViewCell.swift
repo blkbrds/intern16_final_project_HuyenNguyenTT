@@ -8,14 +8,21 @@
 
 import UIKit
 
-class MoviesCollectionViewCell: UICollectionViewCell {
+final class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
     @IBOutlet private weak var movieImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - Properties
+    var viewModel: MoviesCollectionViewCellViewModel? {
+        didSet {
+            updateView()
+        }
     }
-    
+
+    // MARK: - Function
+    private func updateView() {
+        guard let viewModel = viewModel else { return }
+        movieImageView.image = UIImage(named: viewModel.imageName)
+    }
 }

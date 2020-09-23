@@ -13,5 +13,6 @@ target 'FinalProject' do
     inherit! :search_paths
     # Pods for testing
   end
-
+pod 'SideMenu'
+pod "UPCarouselFlowLayout"
 end

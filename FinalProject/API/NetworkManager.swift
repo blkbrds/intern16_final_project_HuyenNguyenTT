@@ -19,7 +19,7 @@ class NetworkManager: Networkable {
             .mapJSON()
     }
 
-    func getPostWith(id: Int, completion: @escaping (Post?, Error?) -> ()) {
+    func getPostWith(id: Int, completion: @escaping (Error?) -> ()) {
         provider.request(.posts) { (result) in
             switch result {
             case .success(let response):
