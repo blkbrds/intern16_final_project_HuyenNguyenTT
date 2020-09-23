@@ -10,7 +10,7 @@ import Foundation
 
 final class HomeViewModel {
     // MARK: - Properties
-    private(set) var movies: [Movies] = []
+    private(set) var movies: [Movie] = []
 
     init() {
         // Dummy
@@ -28,6 +28,6 @@ final class HomeViewModel {
     }
     
     private func getImages() {
-        movies = DataManager.movie()
+        movies = DataManager.movies()
     }
 }

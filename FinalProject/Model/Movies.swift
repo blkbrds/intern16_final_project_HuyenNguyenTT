@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Movies {
+final class Movie {
     var categoryId: Int
     var imageName: String
     var name: String
