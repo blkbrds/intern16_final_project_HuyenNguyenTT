@@ -61,8 +61,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func configCollectionView() {
-        let nib = UINib(nibName: "MoviesCollectionViewCell", bundle: Bundle.main)
-        collectionView.register(nib, forCellWithReuseIdentifier: "MoviesCollectionViewCell")
+        collectionView.register(MoviesCollectionViewCell.self)
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -97,7 +96,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoviesCollectionViewCell", for: indexPath) as? MoviesCollectionViewCell else { return UICollectionViewCell() }
+        let cell = collectionView.dequeue(MoviesCollectionViewCell.self, at: indexPath)
         cell.viewModel = viewModel.viewModelForItem(at: indexPath)
         return cell
     }
