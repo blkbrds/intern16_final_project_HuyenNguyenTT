@@ -71,7 +71,7 @@
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeD-NC-q88">
                                     <rect key="frame" x="0.0" y="40" width="187" height="2"/>
-                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="2" id="vUQ-1k-y4f"/>
                                     </constraints>
@@ -142,7 +142,7 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kF5-9p-Xkd">
                     <rect key="frame" x="107" y="705.5" width="200" height="40"/>
-                    <color key="backgroundColor" red="0.99997633699999999" green="0.69807213540000002" blue="0.13730937239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="1" green="0.69803921568627447" blue="0.13725490196078433" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="ROm-XV-3pr"/>
                         <constraint firstAttribute="height" constant="40" id="e9F-z5-6Vw"/>

@@ -10,6 +10,10 @@ import Foundation
 
 extension Error {
 
+    static var json: Error {
+        return NSError(domain: "", code: 3_840, userInfo: [NSLocalizedDescriptionKey: "json"])
+    }
+    
     public var code: Int {
         let `self` = self as NSError
         return self.code

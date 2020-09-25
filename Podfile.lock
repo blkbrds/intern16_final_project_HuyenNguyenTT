@@ -5,6 +5,7 @@ PODS:
   - Moya/RxSwift (14.0.0):
     - Moya/Core
     - RxSwift (~> 5.0)
+  - ObjectMapper (4.2.0)
   - RxSwift (5.1.1)
   - SideMenu (6.4.9)
   - SwiftLint (0.40.2)
@@ -12,6 +13,7 @@ PODS:
 
 DEPENDENCIES:
   - Moya/RxSwift
+  - ObjectMapper
   - SideMenu
   - SwiftLint
   - UPCarouselFlowLayout
@@ -20,6 +22,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Moya
+    - ObjectMapper
     - RxSwift
     - SideMenu
     - SwiftLint
@@ -28,11 +31,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
   SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: 37aeed23ba37207fdad6c2d77b032118634f72db
+PODFILE CHECKSUM: a28d2647c61e9e82c89d1140c6fe2bd252f0f6de
 
 COCOAPODS: 1.9.3

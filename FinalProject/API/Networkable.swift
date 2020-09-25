@@ -7,10 +7,8 @@
 //
 
 import Moya
-import RxSwift
 
 protocol Networkable {
     var provider: MoyaProvider<ServiceAPI> { get }
-    
-    func getPosts() -> Single<Any>
+    func getMovies(completion: @escaping (_ result: Result<[Movie], Error>) -> Void)
 }

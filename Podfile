@@ -15,4 +15,5 @@ target 'FinalProject' do
   end
 pod 'SideMenu'
 pod "UPCarouselFlowLayout"
+pod 'ObjectMapper'
 end

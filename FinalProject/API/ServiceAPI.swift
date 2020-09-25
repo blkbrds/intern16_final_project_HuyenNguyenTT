@@ -9,28 +9,28 @@
 import Moya
 
 enum ServiceAPI {
-    case posts
-    case postsWith(id: Int)
+    case movie(cat: Int)
 }
 
 extension ServiceAPI: TargetType {
 
     var baseURL: URL {
-        return URL.init(string: "https://jsonplaceholder.typicode.com/")!
+        guard let url = URL(string: "https://www.cgv.vn/default/api/") else {
+            fatalError("Invalid API URL")
+        }
+        return url
     }
 
     var path: String {
         switch self {
-        case .posts, .postsWith:
-            return "posts"
+        case .movie:
+            return "movie/listSneakShow"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .posts:
-            return .get
-        case .postsWith:
+        case .movie:
             return .get
         }
     }
@@ -41,10 +41,8 @@ extension ServiceAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .posts:
-            return .requestPlain
-        case .postsWith(let id):
-            return .requestParameters(parameters: ["id": id], encoding: JSONEncoding.default)
+        case .movie(let cat):
+        return .requestParameters(parameters: ["cat": cat], encoding: URLEncoding.default)
         }
     }
     

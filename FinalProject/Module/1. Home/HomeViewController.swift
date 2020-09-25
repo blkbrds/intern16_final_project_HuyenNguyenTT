@@ -36,6 +36,7 @@ final class HomeViewController: UIViewController {
         configNavigation()
         configUI()
         configCollectionView()
+        getMovies()
     }
     
     // MARK: - Private function
@@ -75,10 +76,33 @@ final class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
     }
     
-    // MARK: - Action
-    @IBAction private func playingButtonTouchUpInside(_ sender: UIButton) { }
+    func getMovies() {
+        viewModel.getMovies { (result) in
+            switch result {
+            case .success:
+                self.collectionView.reloadData()
+            case .failure(_):
+                print("NO data")
+            }
+        }
+    }
     
-    @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) { }
+    // MARK: - Action
+    @IBAction private func playingButtonTouchUpInside(_ sender: UIButton) {
+        // set UI
+        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+        upcommingButton.titleLabel?.font = .none
+        lineUpcomingView.backgroundColor = .black
+    }
+    
+    @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
+        // set UI
+        playingButton.titleLabel?.font = .none
+        linePlayingView.backgroundColor = .black
+        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+    }
     
     @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) { }
     
@@ -91,6 +115,7 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.numberOfRows(inSection: section)
     }

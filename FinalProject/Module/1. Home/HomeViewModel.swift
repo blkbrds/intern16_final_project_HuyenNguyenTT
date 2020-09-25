@@ -8,13 +8,20 @@
 
 import Foundation
 
-final class HomeViewModel {
-    // MARK: - Properties
-    private(set) var movies: [Movie] = [Movie(categoryId: 0, imageName: "img_home_movie", name: "32vrb", releaseDate: "368423591"),
-    Movie(categoryId: 0, imageName: "img_home_movie", name: "325ygvrb", releaseDate: "368423591"),
-    Movie(categoryId: 0, imageName: "img_home_movie", name: "32vebrb", releaseDate: "368423591"),
-    Movie(categoryId: 0, imageName: "img_home_movie", name: "g42n32vrb", releaseDate: "368423591"),
-    Movie(categoryId: 0, imageName: "img_home_movie", name: "rb", releaseDate: "368423591")]
+class HomeViewModel {
+    var movies = [Movie]()
+    
+    func getMovies(completion: @escaping (APIResult) -> Void) {
+        apiProvider.getMovies { result in
+            switch result {
+            case .success(let movies):
+                self.movies = movies
+                completion(.success)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
     func numberOfRows(inSection section: Int) -> Int {
         return movies.count
