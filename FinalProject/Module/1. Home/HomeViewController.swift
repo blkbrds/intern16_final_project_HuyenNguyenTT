@@ -76,7 +76,7 @@ final class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
     }
     
-    func getMovies() {
+    private func getMovies() {
         viewModel.getMovies { (result) in
             switch result {
             case .success:
@@ -114,6 +114,7 @@ final class HomeViewController: UIViewController {
     }
 }
 
+// MARK: - Extension
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

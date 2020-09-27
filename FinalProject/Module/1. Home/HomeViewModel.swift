@@ -8,9 +8,11 @@
 
 import Foundation
 
-class HomeViewModel {
+final class HomeViewModel {
+    // MARK: - Properties
     var movies = [Movie]()
     
+    // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
         apiProvider.getMovies { result in
             switch result {
