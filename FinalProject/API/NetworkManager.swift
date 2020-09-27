@@ -14,7 +14,6 @@ enum APIResult {
     case failure(Error)
 }
 
-//typealias APICompletion = (APIResult) -> Void
 typealias JSON = [String: Any]
 
 let apiProvider = NetworkManager.shared

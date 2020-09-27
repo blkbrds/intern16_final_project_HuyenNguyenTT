@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SDWebImage
 
 final class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
-    @IBOutlet private weak var movieImageView: UIImageView!
+    @IBOutlet weak var movieImageView: UIImageView!
     
     // MARK: - Properties
     var viewModel: MoviesCollectionViewCellViewModel? {
@@ -23,6 +24,6 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     // MARK: - Function
     private func updateView() {
         guard let viewModel = viewModel else { return }
-        movieImageView.image = UIImage(named: viewModel.imageName)
+        movieImageView.sd_setImage(with: URL(string: viewModel.imageName))
     }
 }

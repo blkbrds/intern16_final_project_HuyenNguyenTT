@@ -7,6 +7,9 @@ PODS:
     - RxSwift (~> 5.0)
   - ObjectMapper (4.2.0)
   - RxSwift (5.1.1)
+  - SDWebImage (5.9.1):
+    - SDWebImage/Core (= 5.9.1)
+  - SDWebImage/Core (5.9.1)
   - SideMenu (6.4.9)
   - SwiftLint (0.40.2)
   - UPCarouselFlowLayout (1.1.2)
@@ -14,6 +17,7 @@ PODS:
 DEPENDENCIES:
   - Moya/RxSwift
   - ObjectMapper
+  - SDWebImage (~> 5.0)
   - SideMenu
   - SwiftLint
   - UPCarouselFlowLayout
@@ -24,6 +28,7 @@ SPEC REPOS:
     - Moya
     - ObjectMapper
     - RxSwift
+    - SDWebImage
     - SideMenu
     - SwiftLint
     - UPCarouselFlowLayout
@@ -33,10 +38,11 @@ SPEC CHECKSUMS:
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
   SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: a28d2647c61e9e82c89d1140c6fe2bd252f0f6de
+PODFILE CHECKSUM: 6702f343422ca1cd3da9a08557108197708a958e
 
 COCOAPODS: 1.9.3

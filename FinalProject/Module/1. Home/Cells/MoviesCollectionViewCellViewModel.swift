@@ -14,7 +14,7 @@ final class MoviesCollectionViewCellViewModel {
     var imageName: String {
         return movies.thumbnail
     }
-    
+
     // MARK: - Initialization
     init(movies: Movie) {
         self.movies = movies

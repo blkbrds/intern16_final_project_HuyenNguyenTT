@@ -82,7 +82,7 @@ final class HomeViewController: UIViewController {
             case .success:
                 self.collectionView.reloadData()
             case .failure(_):
-                print("NO data")
+                print("No data")
             }
         }
     }

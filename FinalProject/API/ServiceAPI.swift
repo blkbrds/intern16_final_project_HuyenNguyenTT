@@ -17,7 +17,7 @@ extension ServiceAPI: TargetType {
     var baseURL: URL {
         guard let url = URL(string: "https://www.cgv.vn/default/api/") else {
             fatalError("Invalid API URL")
-        }
+        } 
         return url
     }
 
