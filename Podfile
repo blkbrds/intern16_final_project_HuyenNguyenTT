@@ -15,4 +15,6 @@ target 'FinalProject' do
   end
 pod 'SideMenu'
 pod "UPCarouselFlowLayout"
+pod 'ObjectMapper'
+pod 'SDWebImage', '~> 5.0'
 end

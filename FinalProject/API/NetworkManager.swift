@@ -9,30 +9,49 @@
 import Moya
 import RxSwift
 
+enum APIResult {
+    case success
+    case failure(Error)
+}
+
+typealias JSON = [String: Any]
+
+let apiProvider = NetworkManager.shared
+
 class NetworkManager: Networkable {
     
-    var provider = MoyaProvider<ServiceAPI>(plugins: [NetworkLoggerPlugin(configuration: .init(logOptions: .verbose))])
+    var provider = MoyaProvider<ServiceAPI>()
+    static let shared = NetworkManager()
     
-    func getPosts() -> Single<Any> {
-        return provider.rx.request(.posts)
-            .filterSuccessfulStatusCodes()
-            .mapJSON()
-    }
-
-    func getPostWith(id: Int, completion: @escaping (Error?) -> ()) {
-        provider.request(.posts) { (result) in
+    func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
+        provider.request(.movie(cat: 2)) { result in
             switch result {
             case .success(let response):
-                do {
-                    let rs = try response.filterSuccessfulStatusCodes()
-                    let data = try rs.mapJSON() as? [String: Any]
-                    
-                    print(data)
-                } catch {
-                    print(error)
+                guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {
+                    completion(.failure(MoyaError.statusCode(response)))
+                    return
                 }
+                guard let json = try? filterResponse.mapJSON() as? JSON else {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                    return
+                }
+                if let data = json["data"] as? [JSON] {
+                    let movies = data.compactMap { Movie(JSON: $0) }
+                    completion(.success(movies))
+                    return
+                }
+                if let errors = json["errors"] as? [JSON],
+                    let first = errors.first,
+                    let apiError = APIError(JSON: first) {
+                    let error = NSError(domain: response.request?.url?.host ?? "",
+                                        code: apiError.code,
+                                        userInfo: [NSLocalizedDescriptionKey: apiError.detail])
+                    completion(.failure(error))
+                    return
+                }
+                completion(.failure(MoyaError.jsonMapping(response)))
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
     }

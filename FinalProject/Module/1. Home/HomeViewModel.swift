@@ -10,11 +10,20 @@ import Foundation
 
 final class HomeViewModel {
     // MARK: - Properties
-    private(set) var movies: [Movie] = [Movie(categoryId: 0, imageName: "img_home_movie"),
-    Movie(categoryId: 0, imageName: "img_home_movie"),
-    Movie(categoryId: 0, imageName: "img_home_movie"),
-    Movie(categoryId: 0, imageName: "img_home_movie"),
-    Movie(categoryId: 0, imageName: "img_home_movie")]
+    var movies = [Movie]()
+    
+    // MARK: - Function
+    func getMovies(completion: @escaping (APIResult) -> Void) {
+        apiProvider.getMovies { result in
+            switch result {
+            case .success(let movies):
+                self.movies = movies
+                completion(.success)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
     func numberOfRows(inSection section: Int) -> Int {
         return movies.count

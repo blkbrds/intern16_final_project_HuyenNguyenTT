@@ -12,9 +12,9 @@ final class MoviesCollectionViewCellViewModel {
     // MARK: - Properties
     var movies: Movie
     var imageName: String {
-        return movies.imageName
+        return movies.thumbnail
     }
-    
+
     // MARK: - Initialization
     init(movies: Movie) {
         self.movies = movies

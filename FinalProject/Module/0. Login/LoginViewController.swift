@@ -18,6 +18,7 @@ final class LoginViewController: UIViewController {
     @IBOutlet private weak var passwordTextField: UITextField!
     
     @IBOutlet private weak var loginButton: UIButton!
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     // MARK: - Properties
     private var viewModel = LoginViewModel()
@@ -41,10 +42,12 @@ final class LoginViewController: UIViewController {
         passwordTextField.placeholder = "Nhập mật khẩu đăng nhập"
         passwordTextField.delegate = self
         
-        loginButton.layer.cornerRadius = 20
+        loginButton.layer.cornerRadius = loginButton.bounds.height / 2
                 
         userNameTextField.returnKeyType = UIReturnKeyType.next
         passwordTextField.returnKeyType = UIReturnKeyType.done
+        
+        backgroundImageView.addBlackGradientLayerInForeground(frame: self.backgroundImageView.bounds, colors: [.clear, .black])
     }
     
     // MARK: - IBActions
