@@ -10,6 +10,7 @@ import Moya
 
 enum ServiceAPI {
     case movie(cat: Int)
+    case detail(id: Int)
 }
 
 extension ServiceAPI: TargetType {
@@ -25,12 +26,14 @@ extension ServiceAPI: TargetType {
         switch self {
         case .movie:
             return "movie/listSneakShow"
+        case .detail(let id):
+            return "movie/movie/id/\(id)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .movie:
+        case .movie, .detail:
             return .get
         }
     }
@@ -43,6 +46,8 @@ extension ServiceAPI: TargetType {
         switch self {
         case .movie(let cat):
         return .requestParameters(parameters: ["cat": cat], encoding: URLEncoding.default)
+        case .detail(id: let id):
+            return .requestParameters(parameters: ["id": id], encoding: URLEncoding.default)
         }
     }
     

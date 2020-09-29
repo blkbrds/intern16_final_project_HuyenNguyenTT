@@ -19,9 +19,10 @@ typealias JSON = [String: Any]
 let apiProvider = NetworkManager.shared
 
 class NetworkManager: Networkable {
-    
+        
     var provider = MoyaProvider<ServiceAPI>()
     static let shared = NetworkManager()
+//    var id: String =
     
     func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
         provider.request(.movie(cat: 2)) { result in
@@ -53,6 +54,19 @@ class NetworkManager: Networkable {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+    func getDetail(completion: @escaping (Result<Detail, Error>) -> Void) {
+        provider.request(.detail(id: 2567)) { (result) in
+            switch result {
+            case .success(let response):
+                guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {
+                    completion(.failure(MoyaError.statusCode(response)))
+                    return
+                }
+            case .failure(let error):
+                    completion(.failure(error))
+                }
         }
     }
 }
