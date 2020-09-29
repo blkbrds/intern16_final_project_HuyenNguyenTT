@@ -140,4 +140,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             dateLabel.text = viewModel.movies[visibleIndexPath[1]].releaseDate
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
