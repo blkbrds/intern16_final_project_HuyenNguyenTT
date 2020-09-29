@@ -10,6 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
+    // MARK: - Outlet
     @IBOutlet private weak var youtubeButton: UIButton!
     @IBOutlet private weak var bookButton: UIButton!
     
@@ -26,14 +27,17 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var movieActress: UILabel!
     @IBOutlet private weak var movieLanguage: UILabel!
     
+    // MARK: - Properties
     var viewModel = DetailViewModel()
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
         updateUI()
     }
     
+    // MARK: - Function
     private func configUI() {
         navigationController?.navigationBar.layer.opacity = 0
         headerImageView.layer.opacity = 0.5
@@ -52,6 +56,7 @@ class DetailViewController: UIViewController {
         
     }
     
+    // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
