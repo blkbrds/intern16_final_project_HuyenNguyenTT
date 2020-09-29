@@ -26,24 +26,34 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var movieActress: UILabel!
     @IBOutlet private weak var movieLanguage: UILabel!
     
+    var viewModel = DetailViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        configImageView()
-        configButton()
-        configNavigation()
+        configUI()
+        updateUI()
     }
     
-    private func configImageView() {
+    private func configUI() {
+        navigationController?.navigationBar.layer.opacity = 0
         headerImageView.layer.opacity = 0.5
-        
-    }
-    
-    private func configButton() {
         bookButton.layer.cornerRadius = bookButton.bounds.height / 2
     }
     
-    private func configNavigation() {
-        navigationController?.navigationBar.layer.opacity = 0
+    private func updateUI() {
+        nameLabel.text = viewModel.detail.name
+        genreLabel.text = viewModel.detail.genre
+        movieEndTimeLabel.text = "\(viewModel.detail.movieEndtime)"
+        releaseDateLabel.text = viewModel.detail.releaseDate
+        fullDescriptionLabel.text = viewModel.detail.fullDescription
+        movieDirectorLabel.text = viewModel.detail.movieDirector
+        movieActress.text = viewModel.detail.movieActress
+        movieLanguage.text = viewModel.detail.movieLanguage
+        
+    }
+    
+    @IBAction private func backTouchUpInside(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {}
