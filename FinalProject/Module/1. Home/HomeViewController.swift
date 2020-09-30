@@ -2,7 +2,7 @@
 //  HomeViewController.swift
 //  FinalProject
 //
-//  Created by bu on 9/17/20.
+//  Created by Huyen on 9/17/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -30,13 +30,24 @@ final class HomeViewController: UIViewController {
     var menuController: UIViewController?
     var sideMenu = SideMenuNavigationController(rootViewController: MenuViewController())
     
+    enum TypeSegment: Int {
+        case dangChieu = 0
+        case sapChieu
+    }
+    
+    private var currentType: TypeSegment = .dangChieu {
+        didSet {
+            getMovies(withCategoryId: currentType.rawValue)
+        }
+    }
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configNavigation()
-        configUI()
+        configButton()
         configCollectionView()
-        getMovies()
+//        getMovies(withCategoryId: currentType.rawValue)
     }
     
     // MARK: - Private function
@@ -57,7 +68,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    private func configUI() {
+    private func configButton() {
         bookButton.layer.cornerRadius = 10
     }
     
@@ -76,8 +87,12 @@ final class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
     }
     
-    private func getMovies() {
-        viewModel.getMovies { (result) in
+    private func setSegment() {
+        
+    }
+    
+    private func getMovies(withCategoryId id: Int) {
+        viewModel.getMovies(withCategoryId: id) { (result) in
             switch result {
             case .success:
                 self.collectionView.reloadData()
@@ -94,6 +109,8 @@ final class HomeViewController: UIViewController {
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         upcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
+        guard currentType != .dangChieu else { return }
+        currentType = .dangChieu
     }
     
     @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
@@ -102,6 +119,8 @@ final class HomeViewController: UIViewController {
         linePlayingView.backgroundColor = .black
         upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+        guard currentType != .sapChieu else { return }
+        currentType = .sapChieu
     }
     
     @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) { }

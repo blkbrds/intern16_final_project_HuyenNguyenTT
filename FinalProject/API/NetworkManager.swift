@@ -24,7 +24,7 @@ class NetworkManager: Networkable {
     static let shared = NetworkManager()
     
     func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        provider.request(.movie(cat: 2)) { result in
+        provider.request(.movies(cat: 2)) { result in
             switch result {
             case .success(let response):
                 guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {

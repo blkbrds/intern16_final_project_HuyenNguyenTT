@@ -13,7 +13,19 @@ final class HomeViewModel {
     var movies = [Movie]()
     
     // MARK: - Function
-    func getMovies(completion: @escaping (APIResult) -> Void) {
+//    func getMovies(completion: @escaping (APIResult) -> Void) {
+//        apiProvider.getMovies { result in
+//            switch result {
+//            case .success(let movies):
+//                self.movies = movies
+//                completion(.success)
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
+    
+    func getMovies(withCategoryId id: Int, completion: @escaping (APIResult) -> Void) {
         apiProvider.getMovies { result in
             switch result {
             case .success(let movies):
