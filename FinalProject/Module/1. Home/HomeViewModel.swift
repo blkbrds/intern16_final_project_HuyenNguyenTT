@@ -34,4 +34,9 @@ final class HomeViewModel {
         let movieImage = movies[indexPath.row]
         return MoviesCollectionViewCellViewModel(movies: movieImage)
     }
+    
+    func getDetailViewModel(atIndexPath indexPath: IndexPath) -> DetailViewModel {
+        guard 0 <= indexPath.row && indexPath.row < movies.count else { return DetailViewModel() }
+        return DetailViewModel(movie: movies[indexPath.row])
+    }
 }
