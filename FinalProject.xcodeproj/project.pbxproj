@@ -269,9 +269,9 @@
 			children = (
 				83303CE82519B2F90089BE1E /* Menu */,
 				83303CD42519A6360089BE1E /* Cells */,
-				83303CD82519A6360089BE1E /* HomeViewModel.swift */,
-				83303CD92519A6360089BE1E /* HomeViewController.xib */,
 				83303CDA2519A6360089BE1E /* HomeViewController.swift */,
+				83303CD92519A6360089BE1E /* HomeViewController.xib */,
+				83303CD82519A6360089BE1E /* HomeViewModel.swift */,
 			);
 			path = "1. Home";
 			sourceTree = "<group>";
