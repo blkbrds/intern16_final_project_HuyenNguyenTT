@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DetailViewController: UIViewController {
 
@@ -21,6 +22,7 @@ class DetailViewController: UIViewController {
     @IBOutlet private weak var genreLabel: UILabel!
     @IBOutlet private weak var movieEndTimeLabel: UILabel!
     @IBOutlet private weak var releaseDateLabel: UILabel!
+    @IBOutlet private weak var ratingCodeLabel: UILabel!
     
     @IBOutlet private weak var fullDescriptionLabel: UILabel!
     @IBOutlet private weak var movieDirectorLabel: UILabel!
@@ -41,7 +43,7 @@ class DetailViewController: UIViewController {
     // MARK: - Function
     private func configUI() {
         navigationController?.navigationBar.layer.opacity = 0
-        headerImageView.layer.opacity = 0.5
+        headerImageView.layer.opacity = 0.2
         bookButton.layer.cornerRadius = bookButton.bounds.height / 2
     }
     
@@ -50,11 +52,14 @@ class DetailViewController: UIViewController {
         genreLabel.text = viewModel.detail.genre
         movieEndTimeLabel.text = "\(viewModel.detail.movieEndtime)"
         releaseDateLabel.text = viewModel.detail.releaseDate
+        ratingCodeLabel.text = viewModel.detail.ratingCode
         fullDescriptionLabel.text = viewModel.detail.fullDescription
         movieDirectorLabel.text = viewModel.detail.movieDirector
         movieActress.text = viewModel.detail.movieActress
         movieLanguage.text = viewModel.detail.movieLanguage
         
+        headerImageView.sd_setImage(with: URL(string: viewModel.detail.thumbnail))
+        contentImageView.sd_setImage(with: URL(string: viewModel.detail.thumbnail))
     }
     
     private func getDetail() {
