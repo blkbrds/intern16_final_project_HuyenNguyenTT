@@ -22,7 +22,6 @@ class NetworkManager: Networkable {
         
     var provider = MoyaProvider<ServiceAPI>()
     static let shared = NetworkManager()
-//    var id: String =
     
     func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
         provider.request(.movie(cat: 2)) { result in
@@ -57,13 +56,33 @@ class NetworkManager: Networkable {
         }
     }
     func getDetail(completion: @escaping (Result<Detail, Error>) -> Void) {
-        provider.request(.detail(id: 2567)) { (result) in
+        provider.request(.detail(id: Int(DetailViewModel().id) ?? 0)) { (result) in
             switch result {
             case .success(let response):
                 guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {
                     completion(.failure(MoyaError.statusCode(response)))
                     return
                 }
+                guard let json = try? filterResponse.mapJSON() as? JSON else {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                    return
+                }
+//                if let data = json["data"] as? JSON {
+//                    let detail = data.compactMap { Detail(JSONString: ) }
+//                    completion(.success(detail))
+//                    return
+//                }
+//                if let errors = json["errors"] as? JSON,
+//                    let first = errors.first,
+//                    let apiError = APIError(JSON: first) {
+//                    let error = NSError(domain: response.request?.url?.host ?? "",
+//                                        code: apiError.code,
+//                                        userInfo: [NSLocalizedDescriptionKey: apiError.detail])
+//                    completion(.failure(error))
+//                    return
+//                }
+                
+                completion(.failure(MoyaError.jsonMapping(response)))
             case .failure(let error):
                     completion(.failure(error))
                 }

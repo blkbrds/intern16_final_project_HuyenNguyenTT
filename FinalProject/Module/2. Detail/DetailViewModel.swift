@@ -11,8 +11,12 @@ import Foundation
 final class DetailViewModel {
     // MARK: - Properties
     var id: String = ""
-    var detail = Detail()
+    var detail: Detail
     
+    init(detail: Detail = Detail()) {
+        self.detail = detail
+    }
+
     // MARK: - Function
     func getDetail(completion: @escaping (APIResult) -> Void) {
         apiProvider.getDetail { (result) in

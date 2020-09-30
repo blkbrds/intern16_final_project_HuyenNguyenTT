@@ -35,6 +35,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         updateUI()
+        getDetail()
     }
     
     // MARK: - Function
@@ -55,6 +56,27 @@ class DetailViewController: UIViewController {
         movieLanguage.text = viewModel.detail.movieLanguage
         
     }
+    
+    private func getDetail() {
+        viewModel.getDetail { (result) in
+            switch result {
+            case .success:
+                self.updateUI()
+            case .failure(_):
+                print("No data")
+            }
+        }
+    }
+//    private func getMovies() {
+//        viewModel.getMovies { (result) in
+//            switch result {
+//            case .success:
+//                self.collectionView.reloadData()
+//            case .failure(_):
+//                print("No data")
+//            }
+//        }
+//    }
     
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {

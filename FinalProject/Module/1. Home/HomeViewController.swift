@@ -143,7 +143,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
-        detailVC.viewModel.detail.id = viewModel.movies[indexPath.row].id
+        detailVC.viewModel = viewModel.getDetailViewModel(atIndexPath: indexPath)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
