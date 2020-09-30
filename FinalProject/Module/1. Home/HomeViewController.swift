@@ -81,10 +81,6 @@ final class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
     }
     
-    private func setSegment() {
-        
-    }
-    
     private func getMovies() {
         viewModel.getMovies { (result) in
             switch result {
@@ -136,8 +132,8 @@ final class HomeViewController: UIViewController {
     }
     
     private func updateInfo() {
-        movieNameLabel.text = viewModel.movies[currentIndexPath.row].name
-        dateLabel.text = viewModel.movies[currentIndexPath.row].releaseDate
+        movieNameLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.name
+        dateLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate
     }
 }
 
