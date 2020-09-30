@@ -20,10 +20,15 @@
 		0EBA374D2511CAB7003465DD /* ArrayExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EBA374C2511CAB7003465DD /* ArrayExt.swift */; };
 		830743FF251305A50034E2BF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830743FD251305A50034E2BF /* LoginViewController.swift */; };
 		83074400251305A50034E2BF /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830743FE251305A50034E2BF /* LoginViewController.xib */; };
+		8321E1B32521892400183DEC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321E1B12521892400183DEC /* DetailViewController.swift */; };
+		8321E1B42521892400183DEC /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8321E1B22521892400183DEC /* DetailViewController.xib */; };
 		83268486251DEF03007294CD /* UIImageView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83268485251DEF03007294CD /* UIImageView.Ext.swift */; };
 		8328639C251317A00048C63C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328639B251317A00048C63C /* LoginViewModel.swift */; };
+		8328A10C2521C5F8009AEAD6 /* TableViewRegisterCell.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A10B2521C5F8009AEAD6 /* TableViewRegisterCell.Ext.swift */; };
+		8328A10E2521C86E009AEAD6 /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A10D2521C86E009AEAD6 /* Detail.swift */; };
+		8328A1122521D60D009AEAD6 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A1112521D60D009AEAD6 /* DetailViewModel.swift */; };
 		832A65AE251CDE3400FA5AD9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A65AD251CDE3400FA5AD9 /* Movie.swift */; };
-		832E7185251B3E31006BD2D4 /* RegisterCellExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832E7184251B3E31006BD2D4 /* RegisterCellExt.swift */; };
+		832E7185251B3E31006BD2D4 /* CollectionViewRegisterCell.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832E7184251B3E31006BD2D4 /* CollectionViewRegisterCell.Ext.swift */; };
 		83303CDB2519A6360089BE1E /* MoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83303CD52519A6360089BE1E /* MoviesCollectionViewCell.xib */; };
 		83303CDC2519A6360089BE1E /* MoviesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83303CD62519A6360089BE1E /* MoviesCollectionViewCell.swift */; };
 		83303CDD2519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83303CD72519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift */; };
@@ -68,10 +73,15 @@
 		550C4E5595AD36ADC972504A /* Pods-FinalProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProjectTests.release.xcconfig"; path = "Target Support Files/Pods-FinalProjectTests/Pods-FinalProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		830743FD251305A50034E2BF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		830743FE251305A50034E2BF /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		8321E1B12521892400183DEC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		8321E1B22521892400183DEC /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		83268485251DEF03007294CD /* UIImageView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.Ext.swift; sourceTree = "<group>"; };
 		8328639B251317A00048C63C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8328A10B2521C5F8009AEAD6 /* TableViewRegisterCell.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewRegisterCell.Ext.swift; sourceTree = "<group>"; };
+		8328A10D2521C86E009AEAD6 /* Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detail.swift; sourceTree = "<group>"; };
+		8328A1112521D60D009AEAD6 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		832A65AD251CDE3400FA5AD9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
-		832E7184251B3E31006BD2D4 /* RegisterCellExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCellExt.swift; sourceTree = "<group>"; };
+		832E7184251B3E31006BD2D4 /* CollectionViewRegisterCell.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewRegisterCell.Ext.swift; sourceTree = "<group>"; };
 		83303CD52519A6360089BE1E /* MoviesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviesCollectionViewCell.xib; sourceTree = "<group>"; };
 		83303CD62519A6360089BE1E /* MoviesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCell.swift; sourceTree = "<group>"; };
 		83303CD72519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -153,6 +163,7 @@
 		0EBA37342511C86A003465DD /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				8321E1B02521890D00183DEC /* 2. Detail */,
 				83303CD32519A6360089BE1E /* 1. Home */,
 				830743FC251305650034E2BF /* 0. Login */,
 			);
@@ -179,8 +190,9 @@
 			isa = PBXGroup;
 			children = (
 				0EBA374C2511CAB7003465DD /* ArrayExt.swift */,
-				832E7184251B3E31006BD2D4 /* RegisterCellExt.swift */,
+				832E7184251B3E31006BD2D4 /* CollectionViewRegisterCell.Ext.swift */,
 				83268485251DEF03007294CD /* UIImageView.Ext.swift */,
+				8328A10B2521C5F8009AEAD6 /* TableViewRegisterCell.Ext.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -189,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				832A65AD251CDE3400FA5AD9 /* Movie.swift */,
+				8328A10D2521C86E009AEAD6 /* Detail.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,6 +252,16 @@
 				8328639B251317A00048C63C /* LoginViewModel.swift */,
 			);
 			path = "0. Login";
+			sourceTree = "<group>";
+		};
+		8321E1B02521890D00183DEC /* 2. Detail */ = {
+			isa = PBXGroup;
+			children = (
+				8321E1B12521892400183DEC /* DetailViewController.swift */,
+				8321E1B22521892400183DEC /* DetailViewController.xib */,
+				8328A1112521D60D009AEAD6 /* DetailViewModel.swift */,
+			);
+			path = "2. Detail";
 			sourceTree = "<group>";
 		};
 		83303CD32519A6360089BE1E /* 1. Home */ = {
@@ -379,6 +402,7 @@
 			files = (
 				83074400251305A50034E2BF /* LoginViewController.xib in Resources */,
 				83303CEC2519B30B0089BE1E /* MenuViewController.xib in Resources */,
+				8321E1B42521892400183DEC /* DetailViewController.xib in Resources */,
 				0EBA371F2511C6C7003465DD /* LaunchScreen.storyboard in Resources */,
 				83303CDF2519A6360089BE1E /* HomeViewController.xib in Resources */,
 				0EBA371C2511C6C7003465DD /* Assets.xcassets in Resources */,
@@ -484,13 +508,17 @@
 			files = (
 				832A65AE251CDE3400FA5AD9 /* Movie.swift in Sources */,
 				0EBA37442511C97B003465DD /* NetworkManager.swift in Sources */,
+				8328A10E2521C86E009AEAD6 /* Detail.swift in Sources */,
 				0EBA37422511C97B003465DD /* Error.swift in Sources */,
 				83303CDD2519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift in Sources */,
 				83303CE02519A6360089BE1E /* HomeViewController.swift in Sources */,
 				83303CDE2519A6360089BE1E /* HomeViewModel.swift in Sources */,
 				0EBA37462511C97B003465DD /* ServiceAPI.swift in Sources */,
-				832E7185251B3E31006BD2D4 /* RegisterCellExt.swift in Sources */,
+				8321E1B32521892400183DEC /* DetailViewController.swift in Sources */,
+				832E7185251B3E31006BD2D4 /* CollectionViewRegisterCell.Ext.swift in Sources */,
+				8328A10C2521C5F8009AEAD6 /* TableViewRegisterCell.Ext.swift in Sources */,
 				0EBA374B2511CA7A003465DD /* App.swift in Sources */,
+				8328A1122521D60D009AEAD6 /* DetailViewModel.swift in Sources */,
 				0EBA37452511C97B003465DD /* Networkable.swift in Sources */,
 				0EBA374D2511CAB7003465DD /* ArrayExt.swift in Sources */,
 				8328639C251317A00048C63C /* LoginViewModel.swift in Sources */,
