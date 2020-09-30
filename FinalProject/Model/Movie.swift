@@ -16,6 +16,7 @@ class Movie: Mappable {
     var isBooking: Bool = false
     var releaseDate: String = ""
     
+    required init() {}
     required init?(map: Map) { }
     
     func mapping(map: Map) {

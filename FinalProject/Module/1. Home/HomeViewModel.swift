@@ -37,8 +37,6 @@ final class HomeViewModel {
     
     func getDetailViewModel(atIndexPath indexPath: IndexPath) -> DetailViewModel {
         guard 0 <= indexPath.row && indexPath.row < movies.count else { return DetailViewModel() }
-        let detail = Detail()
-        detail.id = movies[indexPath.row].id
-        return DetailViewModel(detail: detail)
+        return DetailViewModel(movie: movies[indexPath.row])
     }
 }

@@ -58,7 +58,7 @@ class DetailViewController: UIViewController {
     }
     
     private func getDetail() {
-        viewModel.getDetail { (result) in
+        viewModel.getDetail(id: viewModel.movie.id) { (result) in
             switch result {
             case .success:
                 self.updateUI()
@@ -67,16 +67,6 @@ class DetailViewController: UIViewController {
             }
         }
     }
-//    private func getMovies() {
-//        viewModel.getMovies { (result) in
-//            switch result {
-//            case .success:
-//                self.collectionView.reloadData()
-//            case .failure(_):
-//                print("No data")
-//            }
-//        }
-//    }
     
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
