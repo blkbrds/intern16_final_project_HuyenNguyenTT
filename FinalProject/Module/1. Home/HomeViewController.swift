@@ -26,20 +26,14 @@ final class HomeViewController: UIViewController {
     @IBOutlet private weak var dateLabel: UILabel!
     
     // MARK: - Properties
+    private var currentIndexPath: IndexPath = IndexPath(row: 0, section: 0) {
+        didSet {
+            updateInfo()
+        }
+    }
     var viewModel = HomeViewModel()
     var menuController: UIViewController?
     var sideMenu = SideMenuNavigationController(rootViewController: MenuViewController())
-    
-    enum TypeSegment: Int {
-        case dangChieu = 0
-        case sapChieu
-    }
-    
-    private var currentType: TypeSegment = .dangChieu {
-        didSet {
-            getMovies(withCategoryId: currentType.rawValue)
-        }
-    }
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -47,7 +41,7 @@ final class HomeViewController: UIViewController {
         configNavigation()
         configButton()
         configCollectionView()
-//        getMovies(withCategoryId: currentType.rawValue)
+        getMovies()
     }
     
     // MARK: - Private function
@@ -91,13 +85,13 @@ final class HomeViewController: UIViewController {
         
     }
     
-    private func getMovies(withCategoryId id: Int) {
-        viewModel.getMovies(withCategoryId: id) { (result) in
+    private func getMovies() {
+        viewModel.getMovies { (result) in
             switch result {
             case .success:
-                self.collectionView.reloadData()
-            case .failure(_):
-                print("No data")
+                self.reloadData()
+            case .failure(let error):
+                print(error)
             }
         }
     }
@@ -109,8 +103,9 @@ final class HomeViewController: UIViewController {
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         upcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
-        guard currentType != .dangChieu else { return }
-        currentType = .dangChieu
+        guard viewModel.movieType != .playing else { return }
+        viewModel.movieType = .playing
+        reloadData()
     }
     
     @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
@@ -119,8 +114,9 @@ final class HomeViewController: UIViewController {
         linePlayingView.backgroundColor = .black
         upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        guard currentType != .sapChieu else { return }
-        currentType = .sapChieu
+        guard viewModel.movieType != .upcomming else { return }
+        viewModel.movieType = .upcomming
+        reloadData()
     }
     
     @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) { }
@@ -130,6 +126,18 @@ final class HomeViewController: UIViewController {
     
     @objc private func menuTouchUpInside() {
         present(sideMenu, animated: true)
+    }
+    
+    private func reloadData() {
+        currentIndexPath = IndexPath(row: 0, section: 0)
+        collectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: false)
+        collectionView.reloadData()
+        updateInfo()
+    }
+    
+    private func updateInfo() {
+        movieNameLabel.text = viewModel.movies[currentIndexPath.row].name
+        dateLabel.text = viewModel.movies[currentIndexPath.row].releaseDate
     }
 }
 
@@ -155,8 +163,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) {
-            movieNameLabel.text = viewModel.movies[visibleIndexPath[1]].name
-            dateLabel.text = viewModel.movies[visibleIndexPath[1]].releaseDate
+            currentIndexPath = visibleIndexPath
         }
     }
     

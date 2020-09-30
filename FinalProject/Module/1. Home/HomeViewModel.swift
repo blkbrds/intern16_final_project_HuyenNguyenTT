@@ -9,27 +9,40 @@
 import Foundation
 
 final class HomeViewModel {
+    
+    // Types
+    enum MovieType: Int {
+        case playing = 0, upcomming
+    }
+    
     // MARK: - Properties
-    var movies = [Movie]()
+    var movies: [Movie] {
+        switch movieType {
+        case .playing:
+            return playingMovies
+        case .upcomming:
+            return upcommingMovies
+        }
+    }
+    var movieType: MovieType = .playing
+    private var playingMovies: [Movie] = []
+    private var upcommingMovies: [Movie] = []
     
     // MARK: - Function
-//    func getMovies(completion: @escaping (APIResult) -> Void) {
-//        apiProvider.getMovies { result in
-//            switch result {
-//            case .success(let movies):
-//                self.movies = movies
-//                completion(.success)
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-    
-    func getMovies(withCategoryId id: Int, completion: @escaping (APIResult) -> Void) {
+    func getMovies(completion: @escaping (APIResult) -> Void) {
         apiProvider.getMovies { result in
             switch result {
             case .success(let movies):
-                self.movies = movies
+                for movie in movies {
+                    if let type = MovieType(rawValue: movie.categoryID) {
+                        switch type {
+                        case .playing:
+                            self.playingMovies.append(movie)
+                        case .upcomming:
+                            self.upcommingMovies.append(movie)
+                        }
+                    }
+                }
                 completion(.success)
             case .failure(let error):
                 completion(.failure(error))

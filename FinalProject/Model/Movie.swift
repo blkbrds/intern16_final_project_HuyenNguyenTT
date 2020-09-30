@@ -10,7 +10,7 @@ import ObjectMapper
 
 class Movie: Mappable {
     var id: String = ""
-    var categoryID: String = ""
+    var categoryID: Int = 0
     var name: String = ""
     var thumbnail: String = ""
     var isBooking: Bool = false

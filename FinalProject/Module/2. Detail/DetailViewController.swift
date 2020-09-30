@@ -58,7 +58,8 @@ class DetailViewController: UIViewController {
     
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.layer.opacity = 1
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {}
