@@ -11,7 +11,6 @@ import Foundation
 final class DetailViewModel {
     // MARK: - Properties
     var movie: Movie
-    var detail: Detail = Detail()
     
     init(movie: Movie = Movie()) {
         self.movie = movie
@@ -22,7 +21,7 @@ final class DetailViewModel {
         apiProvider.getDetail(id: movie.id) { (result) in
             switch result {
             case .success(let detail):
-                self.detail = detail
+                self.movie = detail
                 completion(.success)
             case .failure(let error):
                 completion(.failure(error))

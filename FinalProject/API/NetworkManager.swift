@@ -41,23 +41,13 @@ class NetworkManager: Networkable {
                     completion(.success(movies))
                     return
                 }
-                if let errors = json["errors"] as? [JSON],
-                    let first = errors.first,
-                    let apiError = APIError(JSON: first) {
-                    let error = NSError(domain: response.request?.url?.host ?? "",
-                                        code: apiError.code,
-                                        userInfo: [NSLocalizedDescriptionKey: apiError.detail])
-                    completion(.failure(error))
-                    return
-                }
-                completion(.failure(MoyaError.jsonMapping(response)))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
     
-    func getDetail(id: String, completion: @escaping (Result<Detail, Error>) -> Void) {
+    func getDetail(id: String, completion: @escaping (Result<Movie, Error>) -> Void) {
         provider.request(.detail(id: id)) { (result) in
             switch result {
             case .success(let response):
@@ -69,20 +59,10 @@ class NetworkManager: Networkable {
                     completion(.failure(MoyaError.jsonMapping(response)))
                     return
                 }
-                if let data = json["data"] as? JSON, let detail = Detail(JSON: data) {
+                if let data = json["data"] as? JSON, let detail = Movie(JSON: data) {
                     completion(.success(detail))
                     return
                 }
-                if let errors = json["errors"] as? [JSON],
-                    let first = errors.first,
-                    let apiError = APIError(JSON: first) {
-                    let error = NSError(domain: response.request?.url?.host ?? "",
-                                        code: apiError.code,
-                                        userInfo: [NSLocalizedDescriptionKey: apiError.detail])
-                    completion(.failure(error))
-                    return
-                }
-                completion(.failure(MoyaError.jsonMapping(response)))
             case .failure(let error):
                 completion(.failure(error))
             }
