@@ -67,8 +67,8 @@ class DetailViewController: UIViewController {
             switch result {
             case .success:
                 self.updateUI()
-            case .failure(_):
-                print("No data")
+            case .failure(let error):
+                print(error)
             }
         }
     }
