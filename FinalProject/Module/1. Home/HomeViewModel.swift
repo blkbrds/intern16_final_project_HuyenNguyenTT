@@ -30,16 +30,17 @@ final class HomeViewModel {
     
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
-        apiProvider.getMovies { result in
+        apiProvider.getMovies { [weak self] result in
+            guard let this = self else { return }
             switch result {
             case .success(let movies):
                 for movie in movies {
                     if let type = MovieType(rawValue: movie.categoryID) {
                         switch type {
                         case .playing:
-                            self.playingMovies.append(movie)
+                            this.playingMovies.append(movie)
                         case .upcomming:
-                            self.upcommingMovies.append(movie)
+                            this.upcommingMovies.append(movie)
                         }
                     }
                 }

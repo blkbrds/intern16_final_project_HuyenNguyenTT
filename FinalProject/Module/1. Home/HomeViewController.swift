@@ -87,30 +87,31 @@ final class HomeViewController: UIViewController {
             case .success:
                 self.reloadData()
             case .failure(let error):
-                print(error)
+                self.showAlert(alertText: "Error", alertMessage: "\(error)")
             }
         }
     }
     
     // MARK: - Action
     @IBAction private func playingButtonTouchUpInside(_ sender: UIButton) {
+        guard viewModel.movieType != .playing else { return }
         // set UI
-        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         upcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
-        guard viewModel.movieType != .playing else { return }
+        
         viewModel.movieType = .playing
         reloadData()
     }
     
     @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
+        guard viewModel.movieType != .upcomming else { return }
         // set UI
         playingButton.titleLabel?.font = .none
         linePlayingView.backgroundColor = .black
-        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        guard viewModel.movieType != .upcomming else { return }
         viewModel.movieType = .upcomming
         reloadData()
     }
