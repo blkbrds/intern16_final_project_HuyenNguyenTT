@@ -2,7 +2,7 @@
 //  APIError.swift
 //  FinalProject
 //
-//  Created by bu on 9/24/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/24/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 

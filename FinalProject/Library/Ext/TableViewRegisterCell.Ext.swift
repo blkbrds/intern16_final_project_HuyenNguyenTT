@@ -2,7 +2,7 @@
 //  TableViewRegisterCell.Ext.swift
 //  FinalProject
 //
-//  Created by bu on 9/28/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/28/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ extension UITableView {
             register(aClass, forCellReuseIdentifier: identifier)
         }
     }
+    
     func register<T: UITableViewHeaderFooterView>(_ aClass: T.Type, bundle bundleOrNil: Bundle? = nil) {
         let identifier = String(describing: aClass)
         if Bundle.main.path(forResource: identifier, ofType: "nib") != nil {
@@ -25,6 +26,7 @@ extension UITableView {
             register(aClass, forHeaderFooterViewReuseIdentifier: identifier)
         }
     }
+    
     func dequeue<T: UITableViewCell>(_ aClass: T.Type, indexPath: IndexPath) -> T {
         let identifier = String(describing: aClass)
         guard let cell = dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? T else {
@@ -32,6 +34,7 @@ extension UITableView {
         }
         return cell
     }
+    
     func dequeue<T: UITableViewHeaderFooterView>(_ aClass: T.Type) -> T? {
         let identifier = String(describing: aClass)
         return dequeueReusableHeaderFooterView(withIdentifier: identifier) as? T
