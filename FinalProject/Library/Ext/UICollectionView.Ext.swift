@@ -1,5 +1,5 @@
 //
-//  CollectionViewRegisterCell.Ext.swift
+//  UICollectionView.Ext.swift
 //  FinalProject
 //
 //  Created by bu on 9/23/20.

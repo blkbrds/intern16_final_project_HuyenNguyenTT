@@ -80,7 +80,9 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {
-        let player = AVPlayer(url: URL(fileURLWithPath: viewModel.detail.movieTrailer))
+        let videoURL = URL(string: viewModel.detail.movieTrailer)
+        guard let URL = videoURL else { return }
+        let player = AVPlayer(url: URL)
         let vc = AVPlayerViewController()
         vc.player = player
 
