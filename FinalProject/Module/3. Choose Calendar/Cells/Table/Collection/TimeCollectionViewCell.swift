@@ -14,8 +14,15 @@ final class TimeCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        configButton()
+        }
+    
+    private func configButton() {
+        timeButton.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     }
     
-    @IBAction private func chooseTimeTouchUpInside(sender: UIButton) {}
+    @IBAction private func chooseTimeTouchUpInside(sender: UIButton) {
+        sender.layer.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+    }
 
 }

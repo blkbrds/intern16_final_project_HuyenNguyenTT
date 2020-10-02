@@ -22,6 +22,9 @@
 		83074400251305A50034E2BF /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830743FE251305A50034E2BF /* LoginViewController.xib */; };
 		8321E1B32521892400183DEC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321E1B12521892400183DEC /* DetailViewController.swift */; };
 		8321E1B42521892400183DEC /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8321E1B22521892400183DEC /* DetailViewController.xib */; };
+		8325DD1925270D3B00E83022 /* TimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8325DD1625270D3B00E83022 /* TimeCollectionViewCell.xib */; };
+		8325DD1A25270D3B00E83022 /* TimeCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8325DD1725270D3B00E83022 /* TimeCollectionViewCellViewModel.swift */; };
+		8325DD1B25270D3B00E83022 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8325DD1825270D3B00E83022 /* TimeCollectionViewCell.swift */; };
 		83268486251DEF03007294CD /* UIImageView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83268485251DEF03007294CD /* UIImageView.Ext.swift */; };
 		8328639C251317A00048C63C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328639B251317A00048C63C /* LoginViewModel.swift */; };
 		8328A10C2521C5F8009AEAD6 /* UITableView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */; };
@@ -43,9 +46,6 @@
 		833E09542526DC8800666A48 /* TimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E09522526DC8800666A48 /* TimeTableViewCell.swift */; };
 		833E09552526DC8800666A48 /* TimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833E09532526DC8800666A48 /* TimeTableViewCell.xib */; };
 		833E09572526DCA200666A48 /* TimeTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E09562526DCA200666A48 /* TimeTableViewCellViewModel.swift */; };
-		833E095C2526DD9400666A48 /* TimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E095A2526DD9400666A48 /* TimeCollectionViewCell.swift */; };
-		833E095D2526DD9400666A48 /* TimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 833E095B2526DD9400666A48 /* TimeCollectionViewCell.xib */; };
-		833E095F2526DDB000666A48 /* TimeCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833E095E2526DDB000666A48 /* TimeCollectionViewCellViewModel.swift */; };
 		836A68F3251CD89300ACA550 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A68F2251CD89300ACA550 /* APIError.swift */; };
 		8EEB3D4DE025B99592CD1248 /* Pods_FinalProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8B1F4D95006C6444E9465 /* Pods_FinalProjectTests.framework */; };
 		B62B00D71BA33A723BAF864B /* Pods_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED98509F8A89809E661E8135 /* Pods_FinalProject.framework */; };
@@ -84,6 +84,9 @@
 		830743FE251305A50034E2BF /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		8321E1B12521892400183DEC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8321E1B22521892400183DEC /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		8325DD1625270D3B00E83022 /* TimeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeCollectionViewCell.xib; sourceTree = "<group>"; };
+		8325DD1725270D3B00E83022 /* TimeCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		8325DD1825270D3B00E83022 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		83268485251DEF03007294CD /* UIImageView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.Ext.swift; sourceTree = "<group>"; };
 		8328639B251317A00048C63C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.Ext.swift; sourceTree = "<group>"; };
@@ -105,9 +108,6 @@
 		833E09522526DC8800666A48 /* TimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCell.swift; sourceTree = "<group>"; };
 		833E09532526DC8800666A48 /* TimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeTableViewCell.xib; sourceTree = "<group>"; };
 		833E09562526DCA200666A48 /* TimeTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewCellViewModel.swift; sourceTree = "<group>"; };
-		833E095A2526DD9400666A48 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
-		833E095B2526DD9400666A48 /* TimeCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeCollectionViewCell.xib; sourceTree = "<group>"; };
-		833E095E2526DDB000666A48 /* TimeCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		836A68F2251CD89300ACA550 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8E81EE897478CE01D48B2924 /* Pods-FinalProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-FinalProjectTests/Pods-FinalProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED98509F8A89809E661E8135 /* Pods_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,6 +283,16 @@
 			path = "2. Detail";
 			sourceTree = "<group>";
 		};
+		8325DD1525270D3B00E83022 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				8325DD1825270D3B00E83022 /* TimeCollectionViewCell.swift */,
+				8325DD1625270D3B00E83022 /* TimeCollectionViewCell.xib */,
+				8325DD1725270D3B00E83022 /* TimeCollectionViewCellViewModel.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
 		83303CD32519A6360089BE1E /* 1. Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,7 +338,6 @@
 		833E09512526DC6000666A48 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				833E09592526DD7100666A48 /* Collection */,
 				833E09582526DD5E00666A48 /* Table */,
 			);
 			path = Cells;
@@ -337,21 +346,12 @@
 		833E09582526DD5E00666A48 /* Table */ = {
 			isa = PBXGroup;
 			children = (
+				8325DD1525270D3B00E83022 /* Collection */,
 				833E09522526DC8800666A48 /* TimeTableViewCell.swift */,
 				833E09532526DC8800666A48 /* TimeTableViewCell.xib */,
 				833E09562526DCA200666A48 /* TimeTableViewCellViewModel.swift */,
 			);
 			path = Table;
-			sourceTree = "<group>";
-		};
-		833E09592526DD7100666A48 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-				833E095A2526DD9400666A48 /* TimeCollectionViewCell.swift */,
-				833E095B2526DD9400666A48 /* TimeCollectionViewCell.xib */,
-				833E095E2526DDB000666A48 /* TimeCollectionViewCellViewModel.swift */,
-			);
-			path = Collection;
 			sourceTree = "<group>";
 		};
 		D2E67B09594A769705B6FA29 /* Pods */ = {
@@ -466,7 +466,7 @@
 				833E094E2526D07E00666A48 /* CalendarViewController.xib in Resources */,
 				83303CDF2519A6360089BE1E /* HomeViewController.xib in Resources */,
 				0EBA371C2511C6C7003465DD /* Assets.xcassets in Resources */,
-				833E095D2526DD9400666A48 /* TimeCollectionViewCell.xib in Resources */,
+				8325DD1925270D3B00E83022 /* TimeCollectionViewCell.xib in Resources */,
 				833E09552526DC8800666A48 /* TimeTableViewCell.xib in Resources */,
 				83303CDB2519A6360089BE1E /* MoviesCollectionViewCell.xib in Resources */,
 			);
@@ -578,12 +578,13 @@
 				83303CE02519A6360089BE1E /* HomeViewController.swift in Sources */,
 				83303CDE2519A6360089BE1E /* HomeViewModel.swift in Sources */,
 				0EBA37462511C97B003465DD /* ServiceAPI.swift in Sources */,
+				8325DD1A25270D3B00E83022 /* TimeCollectionViewCellViewModel.swift in Sources */,
 				8321E1B32521892400183DEC /* DetailViewController.swift in Sources */,
-				833E095F2526DDB000666A48 /* TimeCollectionViewCellViewModel.swift in Sources */,
 				832E7185251B3E31006BD2D4 /* UICollectionView.Ext.swift in Sources */,
 				8328A10C2521C5F8009AEAD6 /* UITableView.Ext.swift in Sources */,
 				0EBA374B2511CA7A003465DD /* App.swift in Sources */,
 				8328A1122521D60D009AEAD6 /* DetailViewModel.swift in Sources */,
+				8325DD1B25270D3B00E83022 /* TimeCollectionViewCell.swift in Sources */,
 				0EBA37452511C97B003465DD /* Networkable.swift in Sources */,
 				0EBA374D2511CAB7003465DD /* ArrayExt.swift in Sources */,
 				8328639C251317A00048C63C /* LoginViewModel.swift in Sources */,
@@ -594,7 +595,6 @@
 				0EBA37152511C6C2003465DD /* SceneDelegate.swift in Sources */,
 				830743FF251305A50034E2BF /* LoginViewController.swift in Sources */,
 				83303CDC2519A6360089BE1E /* MoviesCollectionViewCell.swift in Sources */,
-				833E095C2526DD9400666A48 /* TimeCollectionViewCell.swift in Sources */,
 				833E09572526DCA200666A48 /* TimeTableViewCellViewModel.swift in Sources */,
 				836A68F3251CD89300ACA550 /* APIError.swift in Sources */,
 			);

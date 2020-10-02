@@ -16,28 +16,28 @@
                 <rect key="frame" x="0.0" y="0.0" width="174" height="103"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rnT-cA-d2Z">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4aD-O0-vQV">
                         <rect key="frame" x="0.0" y="0.0" width="174" height="103"/>
-                        <state key="normal" title="Button">
+                        <state key="normal" title="11:02 AM">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
-                            <action selector="chooseTimeTouchUpInsideSender:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Kjr-7O-9wa"/>
+                            <action selector="chooseTimeTouchUpInsideSender:" destination="gTV-IL-0wX" eventType="touchUpInside" id="jUa-OY-A64"/>
                         </connections>
                     </button>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="rnT-cA-d2Z" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="G6j-rg-qUD"/>
-                <constraint firstItem="rnT-cA-d2Z" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Jr7-5N-dMy"/>
-                <constraint firstAttribute="trailing" secondItem="rnT-cA-d2Z" secondAttribute="trailing" id="Qoh-Gp-nXw"/>
-                <constraint firstAttribute="bottom" secondItem="rnT-cA-d2Z" secondAttribute="bottom" id="rVK-MO-oCk"/>
+                <constraint firstAttribute="bottom" secondItem="4aD-O0-vQV" secondAttribute="bottom" id="40w-sp-wR2"/>
+                <constraint firstItem="4aD-O0-vQV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="CST-9n-UqE"/>
+                <constraint firstAttribute="trailing" secondItem="4aD-O0-vQV" secondAttribute="trailing" id="F1J-Jb-y1E"/>
+                <constraint firstItem="4aD-O0-vQV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="x0Y-oK-30g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="174" height="103"/>
             <connections>
-                <outlet property="timeButton" destination="rnT-cA-d2Z" id="czf-xs-dvd"/>
+                <outlet property="timeButton" destination="4aD-O0-vQV" id="hPh-m0-qlM"/>
             </connections>
             <point key="canvasLocation" x="227.536231884058" y="154.35267857142856"/>
         </collectionViewCell>

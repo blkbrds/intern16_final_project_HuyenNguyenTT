@@ -14,9 +14,30 @@ final class TimeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        configTableView()
+        configCollectionView()
     }
 
-    private func configTableView() {}
+    private func configCollectionView() {
+        collectionView.register(TimeCollectionViewCell.self)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
     
+}
+
+extension TimeTableViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(TimeCollectionViewCell.self, at: indexPath)
+        return cell
+    }
+}
+
+extension TimeTableViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 25)
+    }
 }

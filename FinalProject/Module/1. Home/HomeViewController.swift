@@ -118,9 +118,12 @@ final class HomeViewController: UIViewController {
     
     @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) {
         let bookTicketVC = CalendarViewController()
-        navigationController?.pushViewController(bookTicketVC, animated: true)
-        let backButton = UIBarButtonItem(title: viewModel.movies[currentIndexPath.row].name, style: .plain, target: self, action: nil)
+        
+        // TODO: crash
+        let backButton = UIBarButtonItem(title: viewModel.movies[currentIndexPath.row].name, style: .plain, target: self, action: .none)
         navigationItem.backBarButtonItem = backButton
+
+        navigationController?.pushViewController(bookTicketVC, animated: true)
     }
     
     // MARK: - Objc
