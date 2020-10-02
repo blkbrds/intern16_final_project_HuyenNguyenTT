@@ -34,6 +34,9 @@ class DetailViewController: UIViewController {
     var viewModel = DetailViewModel()
     
     // MARK: - Life Cycle
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -77,11 +80,11 @@ class DetailViewController: UIViewController {
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
-        navigationController?.navigationBar.layer.opacity = 1
+        navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {
-        let videoURL = URL(string: viewModel.detail.movieTrailer)
+        let videoURL = URL(string: viewModel.movie.movieTrailer)
         guard let URL = videoURL else { return }
         let player = AVPlayer(url: URL)
         let vc = AVPlayerViewController()
@@ -92,5 +95,11 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @IBAction private func bookTouchUpInside(_ sender: UIButton) {}
+    @IBAction private func bookTouchUpInside(_ sender: UIButton) {
+        let bookTicketVC = CalendarViewController()
+        navigationController?.navigationBar.isHidden = false
+        let backButton = UIBarButtonItem(title: viewModel.movie.name, style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        navigationController?.pushViewController(bookTicketVC, animated: true)
+    }
 }
