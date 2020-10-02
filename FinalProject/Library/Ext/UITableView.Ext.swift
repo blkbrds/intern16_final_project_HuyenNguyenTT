@@ -1,5 +1,5 @@
 //
-//  TableViewRegisterCell.Ext.swift
+//  UITableView.Ext.swift
 //  FinalProject
 //
 //  Created by Huyen Nguyen T.T.[2] on 9/28/20.

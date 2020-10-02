@@ -116,7 +116,12 @@ final class HomeViewController: UIViewController {
         reloadData()
     }
     
-    @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) { }
+    @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) {
+        let bookTicketVC = CalendarViewController()
+        navigationController?.pushViewController(bookTicketVC, animated: true)
+        let backButton = UIBarButtonItem(title: viewModel.movies[currentIndexPath.row].name, style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+    }
     
     // MARK: - Objc
     @objc private func profileTouchUpInside() { }
