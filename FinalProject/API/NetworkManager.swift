@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  FinalProject
 //
-//  Created by Hai Ca on 9/9/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/9/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -25,7 +25,7 @@ class NetworkManager: Networkable {
     let detailVM = DetailViewModel()
     
     func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        provider.request(.movie(cat: 2)) { result in
+        provider.request(.movies(cat: 2)) { result in
             switch result {
             case .success(let response):
                 guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {

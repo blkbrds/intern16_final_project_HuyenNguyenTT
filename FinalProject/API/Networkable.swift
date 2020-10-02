@@ -2,7 +2,7 @@
 //  Networkable.swift
 //  FinalProject
 //
-//  Created by Hai Ca on 9/9/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/9/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 

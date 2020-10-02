@@ -2,7 +2,7 @@
 //  Movie.swift
 //  FinalProject
 //
-//  Created by bu on 9/24/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/24/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import ObjectMapper
 
 class Movie: Mappable {
     var id: String = ""
-    var categoryID: String = ""
+    var categoryID: Int = 0
     var name: String = ""
     var thumbnail: String = ""
     var isBooking: Bool = false

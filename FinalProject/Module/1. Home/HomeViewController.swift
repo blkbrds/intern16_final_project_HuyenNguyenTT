@@ -2,7 +2,7 @@
 //  HomeViewController.swift
 //  FinalProject
 //
-//  Created by bu on 9/17/20.
+//  Created by Huyen on 9/17/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -26,6 +26,11 @@ final class HomeViewController: UIViewController {
     @IBOutlet private weak var dateLabel: UILabel!
     
     // MARK: - Properties
+    private var currentIndexPath: IndexPath = IndexPath(row: 0, section: 0) {
+        didSet {
+            updateInfo()
+        }
+    }
     var viewModel = HomeViewModel()
     var menuController: UIViewController?
     var sideMenu = SideMenuNavigationController(rootViewController: MenuViewController())
@@ -34,7 +39,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configNavigation()
-        configUI()
+        configButton()
         configCollectionView()
         getMovies()
     }
@@ -57,7 +62,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.isTranslucent = false
     }
     
-    private func configUI() {
+    private func configButton() {
         bookButton.layer.cornerRadius = 10
     }
     
@@ -80,28 +85,35 @@ final class HomeViewController: UIViewController {
         viewModel.getMovies { (result) in
             switch result {
             case .success:
-                self.collectionView.reloadData()
+                self.reloadData()
             case .failure(let error):
-                print(error)
+                self.showAlert(alertText: "Error", alertMessage: "\(error)")
             }
         }
     }
     
     // MARK: - Action
     @IBAction private func playingButtonTouchUpInside(_ sender: UIButton) {
+        guard viewModel.movieType != .playing else { return }
         // set UI
-        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         upcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
+        
+        viewModel.movieType = .playing
+        reloadData()
     }
     
     @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
+        guard viewModel.movieType != .upcomming else { return }
         // set UI
         playingButton.titleLabel?.font = .none
         linePlayingView.backgroundColor = .black
-        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+        viewModel.movieType = .upcomming
+        reloadData()
     }
     
     @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) { }
@@ -111,6 +123,18 @@ final class HomeViewController: UIViewController {
     
     @objc private func menuTouchUpInside() {
         present(sideMenu, animated: true)
+    }
+    
+    private func reloadData() {
+        currentIndexPath = IndexPath(row: 0, section: 0)
+        collectionView.scrollToItem(at: currentIndexPath, at: .centeredHorizontally, animated: false)
+        collectionView.reloadData()
+        updateInfo()
+    }
+    
+    private func updateInfo() {
+        movieNameLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.name
+        dateLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate
     }
 }
 
@@ -136,8 +160,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         if let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint) {
-            movieNameLabel.text = viewModel.movies[visibleIndexPath[1]].name
-            dateLabel.text = viewModel.movies[visibleIndexPath[1]].releaseDate
+            currentIndexPath = visibleIndexPath
         }
     }
     

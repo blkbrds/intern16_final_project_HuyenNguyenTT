@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  FinalProject
 //
-//  Created by bu on 9/28/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/28/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -75,7 +75,8 @@ class DetailViewController: UIViewController {
     
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.layer.opacity = 1
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {}
