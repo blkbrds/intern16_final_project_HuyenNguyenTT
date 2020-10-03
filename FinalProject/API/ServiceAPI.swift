@@ -2,15 +2,15 @@
 //  ServiceAPI.swift
 //  FinalProject
 //
-//  Created by Hai Ca on 8/30/20.
+//  Created by Huyen Nguyen T.T.[2] on 8/30/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
 import Moya
 
 enum ServiceAPI {
-    case movie(cat: Int)
     case detail(id: String)
+    case movies(cat: Int)
 }
 
 extension ServiceAPI: TargetType {
@@ -24,7 +24,7 @@ extension ServiceAPI: TargetType {
     
     var path: String {
         switch self {
-        case .movie:
+        case .movies:
             return "movie/listSneakShow"
         case .detail(let id):
             return "movie/movie/id/\(id)"
@@ -33,7 +33,7 @@ extension ServiceAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .movie, .detail:
+        case .movies, .detail:
             return .get
         }
     }
@@ -44,7 +44,7 @@ extension ServiceAPI: TargetType {
     
     var task: Task {
         switch self {
-        case .movie(let cat):
+        case .movies(let cat):
             return .requestParameters(parameters: ["cat": cat], encoding: URLEncoding.default)
         case .detail(id: let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.default)

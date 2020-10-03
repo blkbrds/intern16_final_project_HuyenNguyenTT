@@ -2,7 +2,7 @@
 //  NetworkManager.swift
 //  FinalProject
 //
-//  Created by Hai Ca on 9/9/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/9/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -25,7 +25,7 @@ class NetworkManager: Networkable {
     let detailVM = DetailViewModel()
     
     func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        provider.request(.movie(cat: 2)) { result in
+        provider.request(.movies(cat: 2)) { result in
             switch result {
             case .success(let response):
                 guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {
@@ -41,23 +41,13 @@ class NetworkManager: Networkable {
                     completion(.success(movies))
                     return
                 }
-                if let errors = json["errors"] as? [JSON],
-                    let first = errors.first,
-                    let apiError = APIError(JSON: first) {
-                    let error = NSError(domain: response.request?.url?.host ?? "",
-                                        code: apiError.code,
-                                        userInfo: [NSLocalizedDescriptionKey: apiError.detail])
-                    completion(.failure(error))
-                    return
-                }
-                completion(.failure(MoyaError.jsonMapping(response)))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
     
-    func getDetail(id: String, completion: @escaping (Result<Detail, Error>) -> Void) {
+    func getDetail(id: String, completion: @escaping (Result<Movie, Error>) -> Void) {
         provider.request(.detail(id: id)) { (result) in
             switch result {
             case .success(let response):
@@ -69,20 +59,10 @@ class NetworkManager: Networkable {
                     completion(.failure(MoyaError.jsonMapping(response)))
                     return
                 }
-                if let data = json["data"] as? JSON, let detail = Detail(JSON: data) {
+                if let data = json["data"] as? JSON, let detail = Movie(JSON: data) {
                     completion(.success(detail))
                     return
                 }
-                if let errors = json["errors"] as? [JSON],
-                    let first = errors.first,
-                    let apiError = APIError(JSON: first) {
-                    let error = NSError(domain: response.request?.url?.host ?? "",
-                                        code: apiError.code,
-                                        userInfo: [NSLocalizedDescriptionKey: apiError.detail])
-                    completion(.failure(error))
-                    return
-                }
-                completion(.failure(MoyaError.jsonMapping(response)))
             case .failure(let error):
                 completion(.failure(error))
             }

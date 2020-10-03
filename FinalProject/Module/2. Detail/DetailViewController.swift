@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  FinalProject
 //
-//  Created by bu on 9/28/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/28/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -49,18 +49,18 @@ class DetailViewController: UIViewController {
     }
     
     private func updateUI() {
-        nameLabel.text = viewModel.detail.name
-        genreLabel.text = viewModel.detail.genre
-        movieEndTimeLabel.text = "\(viewModel.detail.movieEndtime)"
-        releaseDateLabel.text = viewModel.detail.releaseDate
-        ratingCodeLabel.text = viewModel.detail.ratingCode
-        fullDescriptionLabel.text = viewModel.detail.fullDescription
-        movieDirectorLabel.text = viewModel.detail.movieDirector
-        movieActress.text = viewModel.detail.movieActress
-        movieLanguage.text = viewModel.detail.movieLanguage
+        nameLabel.text = viewModel.movie.name
+        genreLabel.text = viewModel.movie.genre
+        movieEndTimeLabel.text = "\(viewModel.movie.movieEndtime)"
+        releaseDateLabel.text = viewModel.movie.releaseDate
+        ratingCodeLabel.text = viewModel.movie.ratingCode
+        fullDescriptionLabel.text = viewModel.movie.fullDescription
+        movieDirectorLabel.text = viewModel.movie.movieDirector
+        movieActress.text = viewModel.movie.movieActress
+        movieLanguage.text = viewModel.movie.movieLanguage
         
-        headerImageView.sd_setImage(with: URL(string: viewModel.detail.thumbnail))
-        contentImageView.sd_setImage(with: URL(string: viewModel.detail.thumbnail))
+        headerImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
+        contentImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
     }
     
     private func getDetail() {
@@ -68,15 +68,16 @@ class DetailViewController: UIViewController {
             switch result {
             case .success:
                 self.updateUI()
-            case .failure(_):
-                print("No data")
+            case .failure(let error):
+                print(error)
             }
         }
     }
     
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        navigationController?.navigationBar.layer.opacity = 1
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {

@@ -2,7 +2,7 @@
 //  DetailViewModel.swift
 //  FinalProject
 //
-//  Created by bu on 9/28/20.
+//  Created by Huyen Nguyen T.T.[2] on 9/28/20.
 //  Copyright © 2020 Asian Tech Co., Ltd. All rights reserved.
 //
 
@@ -11,7 +11,6 @@ import Foundation
 final class DetailViewModel {
     // MARK: - Properties
     var movie: Movie
-    var detail: Detail = Detail()
     
     init(movie: Movie = Movie()) {
         self.movie = movie
@@ -22,7 +21,7 @@ final class DetailViewModel {
         apiProvider.getDetail(id: movie.id) { (result) in
             switch result {
             case .success(let detail):
-                self.detail = detail
+                self.movie = detail
                 completion(.success)
             case .failure(let error):
                 completion(.failure(error))
