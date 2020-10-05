@@ -12,7 +12,7 @@ final class HomeViewModel {
     
     // Types
     enum MovieType: Int {
-        case playing = 0, upcomming
+        case playing = 0, upcomming, favorites
     }
     
     // MARK: - Properties
@@ -22,11 +22,14 @@ final class HomeViewModel {
             return playingMovies
         case .upcomming:
             return upcommingMovies
+        case .favorites:
+            return favoriteMovies
         }
     }
     var movieType: MovieType = .playing
     private var playingMovies: [Movie] = []
     private var upcommingMovies: [Movie] = []
+    private var favoriteMovies: [Movie] = []
     
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
@@ -41,6 +44,8 @@ final class HomeViewModel {
                             this.playingMovies.append(movie)
                         case .upcomming:
                             this.upcommingMovies.append(movie)
+                        case .favorites:
+                            this.favoriteMovies.append(movie)
                         }
                     }
                 }

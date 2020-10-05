@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="352" height="174"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yG5-Ox-YJG">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_login_backgroud" translatesAutoresizingMaskIntoConstraints="NO" id="yG5-Ox-YJG">
                         <rect key="frame" x="0.0" y="0.0" width="352" height="174"/>
                     </imageView>
                 </subviews>
@@ -35,4 +35,7 @@
             <point key="canvasLocation" x="356.52173913043481" y="194.86607142857142"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="img_login_backgroud" width="435" height="290"/>
+    </resources>
 </document>
