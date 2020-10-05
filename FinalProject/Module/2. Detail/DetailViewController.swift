@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
 
     // MARK: - Outlet
     @IBOutlet private weak var youtubeButton: UIButton!
-    @IBOutlet private weak var bookButton: UIButton!
+    @IBOutlet private weak var heartButton: UIButton!
     
     @IBOutlet private weak var headerImageView: UIImageView!
     @IBOutlet private weak var contentImageView: UIImageView!
@@ -45,7 +45,6 @@ class DetailViewController: UIViewController {
     private func configUI() {
         navigationController?.navigationBar.isHidden = true
         headerImageView.layer.opacity = 0.2
-        bookButton.layer.cornerRadius = bookButton.bounds.height / 2
     }
     
     private func updateUI() {
@@ -92,5 +91,5 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @IBAction private func bookTouchUpInside(_ sender: UIButton) {}
+    @IBAction private func heartTouchUpInside(_ sender: UIButton) {}
 }
