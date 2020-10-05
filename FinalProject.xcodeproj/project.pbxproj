@@ -279,8 +279,8 @@
 		83303CD42519A6360089BE1E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				83303CD52519A6360089BE1E /* MoviesCollectionViewCell.xib */,
 				83303CD62519A6360089BE1E /* MoviesCollectionViewCell.swift */,
+				83303CD52519A6360089BE1E /* MoviesCollectionViewCell.xib */,
 				83303CD72519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift */,
 			);
 			path = Cells;

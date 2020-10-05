@@ -11,13 +11,13 @@
             <connections>
                 <outlet property="collectionView" destination="toZ-T3-DYa" id="zd2-9K-PmP"/>
                 <outlet property="dateLabel" destination="ltc-3K-ftG" id="XbO-OR-lYo"/>
-                <outlet property="favoriteButton" destination="NUh-KI-pMu" id="L27-Cl-pGu"/>
                 <outlet property="lineFavoriteView" destination="3Ld-gq-5Tb" id="Xlq-OO-Jez"/>
                 <outlet property="linePlayingView" destination="9Wt-9d-2h6" id="I5M-wa-52o"/>
                 <outlet property="lineUpcomingView" destination="KeD-NC-q88" id="ur0-ae-KHC"/>
                 <outlet property="movieNameLabel" destination="QHT-ar-1GO" id="Hgr-Zs-abt"/>
-                <outlet property="playingButton" destination="3Dn-5h-dQs" id="0v7-0E-J7Z"/>
-                <outlet property="upcommingButton" destination="1TS-Y8-Nvx" id="JHi-6y-EyD"/>
+                <outlet property="tabFavoriteButton" destination="NUh-KI-pMu" id="L27-Cl-pGu"/>
+                <outlet property="tabPlayingButton" destination="3Dn-5h-dQs" id="0v7-0E-J7Z"/>
+                <outlet property="tabUpcommingButton" destination="1TS-Y8-Nvx" id="JHi-6y-EyD"/>
                 <outlet property="view" destination="DJJ-yZ-QNZ" id="cDt-hG-tlf"/>
             </connections>
         </placeholder>
@@ -39,7 +39,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
-                                        <action selector="playingButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Hbx-To-YbE"/>
+                                        <action selector="tabPlayingButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="Hbx-To-YbE"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Wt-9d-2h6">
@@ -68,7 +68,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
-                                        <action selector="upcomingButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="NF1-CE-Gz2"/>
+                                        <action selector="tabUpcomingButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="NF1-CE-Gz2"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KeD-NC-q88">
@@ -97,7 +97,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>
-                                        <action selector="favoriteButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="CAt-70-PI8"/>
+                                        <action selector="tabFavoriteButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="CAt-70-PI8"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Ld-gq-5Tb">

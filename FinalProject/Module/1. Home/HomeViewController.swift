@@ -13,9 +13,9 @@ import UPCarouselFlowLayout
 final class HomeViewController: UIViewController {
     
     // MARK: - Outlet
-    @IBOutlet private weak var playingButton: UIButton!
-    @IBOutlet private weak var upcommingButton: UIButton!
-    @IBOutlet private weak var favoriteButton: UIButton!
+    @IBOutlet private weak var tabPlayingButton: UIButton!
+    @IBOutlet private weak var tabUpcommingButton: UIButton!
+    @IBOutlet private weak var tabFavoriteButton: UIButton!
     
     @IBOutlet private weak var linePlayingView: UIView!
     @IBOutlet private weak var lineUpcomingView: UIView!
@@ -89,45 +89,45 @@ final class HomeViewController: UIViewController {
     }
     
     // MARK: - Action
-    @IBAction private func playingButtonTouchUpInside(_ sender: UIButton) {
+    @IBAction private func tabPlayingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .playing else { return }
         
         // set UI
-        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        tabPlayingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        upcommingButton.titleLabel?.font = .none
+        tabUpcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
-        favoriteButton.titleLabel?.font = .none
+        tabFavoriteButton.titleLabel?.font = .none
         lineFavoriteView.backgroundColor = .black
         
         viewModel.movieType = .playing
         reloadData()
     }
     
-    @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
+    @IBAction private func tabUpcomingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .upcomming else { return }
         
         // set UI
-        playingButton.titleLabel?.font = .none
+        tabPlayingButton.titleLabel?.font = .none
         linePlayingView.backgroundColor = .black
-        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        tabUpcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        favoriteButton.titleLabel?.font = .none
+        tabFavoriteButton.titleLabel?.font = .none
         lineFavoriteView.backgroundColor = .black
         
         viewModel.movieType = .upcomming
         reloadData()
     }
     
-    @IBAction private func favoriteButtonTouchUpInside(_ sender: UIButton) {
+    @IBAction private func tabFavoriteButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .upcomming else { return }
         
         // set UI
-        playingButton.titleLabel?.font = .none
+        tabPlayingButton.titleLabel?.font = .none
         linePlayingView.backgroundColor = .black
-        upcommingButton.titleLabel?.font = .none
+        tabUpcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
-        favoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        tabFavoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         
         viewModel.movieType = .favorites

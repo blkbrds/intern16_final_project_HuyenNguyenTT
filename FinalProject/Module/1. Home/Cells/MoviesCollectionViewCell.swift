@@ -12,7 +12,8 @@ import SDWebImage
 final class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
-    @IBOutlet weak var movieImageView: UIImageView!
+    @IBOutlet private weak var movieImageView: UIImageView!
+    @IBOutlet private weak var heartButton: UIButton!
     
     // MARK: - Properties
     var viewModel: MoviesCollectionViewCellViewModel? {
@@ -21,6 +22,11 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    // MARK: - Action
+    @IBAction private func heartButtonTouchUpInside(_ sender: UIButton) {
+        
+    }
+    
     // MARK: - Function
     private func updateView() {
         guard let viewModel = viewModel else { return }

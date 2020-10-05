@@ -9,6 +9,7 @@ target 'FinalProject' do
   pod 'Moya/RxSwift'
   pod 'SwiftLint'
   pod 'RealmSwift'
+  pod 'ObjectMapper'
 
   target 'FinalProjectTests' do
     inherit! :search_paths
@@ -16,6 +17,5 @@ target 'FinalProject' do
   end
 pod 'SideMenu'
 pod "UPCarouselFlowLayout"
-pod 'ObjectMapper'
 pod 'SDWebImage', '~> 5.0'
 end
