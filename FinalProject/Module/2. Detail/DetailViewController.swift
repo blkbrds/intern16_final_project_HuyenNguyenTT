@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import AVKit
 
 class DetailViewController: UIViewController {
 
@@ -42,7 +43,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - Function
     private func configUI() {
-        navigationController?.navigationBar.layer.opacity = 0
+        navigationController?.navigationBar.isHidden = true
         headerImageView.layer.opacity = 0.2
         bookButton.layer.cornerRadius = bookButton.bounds.height / 2
     }
@@ -79,7 +80,17 @@ class DetailViewController: UIViewController {
         navigationController?.navigationBar.layer.opacity = 1
     }
     
-    @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {}
+    @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {
+        let videoURL = URL(string: viewModel.detail.movieTrailer)
+        guard let URL = videoURL else { return }
+        let player = AVPlayer(url: URL)
+        let vc = AVPlayerViewController()
+        vc.player = player
+
+        present(vc, animated: true) {
+            vc.player?.play()
+        }
+    }
     
     @IBAction private func bookTouchUpInside(_ sender: UIButton) {}
 }

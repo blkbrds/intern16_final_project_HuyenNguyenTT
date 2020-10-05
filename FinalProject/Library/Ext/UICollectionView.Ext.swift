@@ -1,5 +1,5 @@
 //
-//  CollectionViewRegisterCell.Ext.swift
+//  UICollectionView.Ext.swift
 //  FinalProject
 //
 //  Created by Huyen Nguyen T.T.[2] on 9/23/20.
