@@ -9,11 +9,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="FinalProject" customModuleProvider="target">
             <connections>
-                <outlet property="bookButton" destination="ieO-mb-3UI" id="VSW-CA-JCt"/>
                 <outlet property="contentImageView" destination="FAZ-s3-ZtE" id="Dev-X3-MDA"/>
                 <outlet property="fullDescriptionLabel" destination="oiM-on-c4L" id="RhQ-xl-88t"/>
                 <outlet property="genreLabel" destination="fhP-PU-SaJ" id="L3o-LM-Zbc"/>
                 <outlet property="headerImageView" destination="ILo-pC-bPU" id="VcV-r5-8bs"/>
+                <outlet property="heartButton" destination="m0K-Dt-uad" id="BT4-W3-tfu"/>
                 <outlet property="movieActress" destination="zUS-R5-LZQ" id="aCT-US-118"/>
                 <outlet property="movieDirectorLabel" destination="rwF-FU-FAL" id="FC4-G9-wXl"/>
                 <outlet property="movieEndTimeLabel" destination="UN9-RX-JZr" id="aTY-rr-SgX"/>
@@ -128,23 +128,8 @@
                         <action selector="youtubeTouchUpInside:" destination="-1" eventType="touchUpInside" id="QPp-Vn-A7Q"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ieO-mb-3UI">
-                    <rect key="frame" x="162" y="777" width="90" height="35"/>
-                    <color key="backgroundColor" red="0.99997633699999999" green="0.69807213540000002" blue="0.13730937239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="BMZ-JG-3bu"/>
-                        <constraint firstAttribute="width" constant="90" id="Paq-N0-Uv8"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <state key="normal" title="ĐẶT VÉ">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="bookTouchUpInside:" destination="-1" eventType="touchUpInside" id="244-Lr-aFg"/>
-                    </connections>
-                </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mf5-T5-oKz">
-                    <rect key="frame" x="16" y="453" width="382" height="294"/>
+                    <rect key="frame" x="16" y="453" width="382" height="359"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeU-V0-9jz" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="234"/>
@@ -226,7 +211,7 @@
                     </constraints>
                 </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X3p-CJ-i7d">
-                    <rect key="frame" x="16" y="74" width="66" height="22"/>
+                    <rect key="frame" x="16" y="64" width="66" height="22"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="  PHIM" image="chevron.left" catalog="system">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -235,22 +220,34 @@
                         <action selector="backTouchUpInside:" destination="-1" eventType="touchUpInside" id="k40-mH-Zvy"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0K-Dt-uad">
+                    <rect key="frame" x="368" y="60.5" width="30" height="27.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="6p5-Ii-P23"/>
+                        <constraint firstAttribute="height" constant="30" id="O8I-x5-jTU"/>
+                    </constraints>
+                    <color key="tintColor" red="1" green="0.67450980390000004" blue="0.074509803920000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" backgroundImage="heart" catalog="system"/>
+                    <connections>
+                        <action selector="heartTouchUpInside:" destination="-1" eventType="touchUpInside" id="fkN-Qr-BdB"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="X3p-CJ-i7d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="0uz-Sf-RaX"/>
-                <constraint firstItem="ieO-mb-3UI" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="1yH-T6-70k"/>
                 <constraint firstItem="O6L-4m-NeI" firstAttribute="centerX" secondItem="ILo-pC-bPU" secondAttribute="centerX" id="5h3-B4-L10"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="mf5-T5-oKz" secondAttribute="trailing" constant="16" id="9o5-xI-zTj"/>
                 <constraint firstItem="ILo-pC-bPU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="AIa-cl-uba"/>
+                <constraint firstItem="m0K-Dt-uad" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="Alu-pC-kvF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ILo-pC-bPU" secondAttribute="trailing" id="C1O-Ei-G6I"/>
-                <constraint firstItem="ieO-mb-3UI" firstAttribute="top" secondItem="mf5-T5-oKz" secondAttribute="bottom" constant="30" id="Dmb-TL-YNC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ieO-mb-3UI" secondAttribute="bottom" constant="50" id="ECu-n3-PKA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m0K-Dt-uad" secondAttribute="trailing" constant="16" id="IVz-Nz-nXm"/>
                 <constraint firstItem="O6L-4m-NeI" firstAttribute="centerY" secondItem="ILo-pC-bPU" secondAttribute="centerY" id="Ozs-RY-Glh"/>
                 <constraint firstItem="mf5-T5-oKz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Y46-kZ-Tjk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tCi-33-0TM" secondAttribute="trailing" constant="16" id="Z5O-J9-YFK"/>
                 <constraint firstItem="tCi-33-0TM" firstAttribute="centerY" secondItem="ILo-pC-bPU" secondAttribute="bottom" id="f9Q-la-d21"/>
-                <constraint firstItem="X3p-CJ-i7d" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="kXQ-OO-vLB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="mf5-T5-oKz" secondAttribute="bottom" constant="50" id="hXi-7G-zJn"/>
+                <constraint firstItem="X3p-CJ-i7d" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="kXQ-OO-vLB"/>
                 <constraint firstItem="ILo-pC-bPU" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="2:5" id="mMz-0J-0w6"/>
                 <constraint firstItem="mf5-T5-oKz" firstAttribute="top" secondItem="tCi-33-0TM" secondAttribute="bottom" constant="30" id="rlb-T7-rRJ"/>
                 <constraint firstItem="tCi-33-0TM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="te4-6u-xlM"/>
@@ -262,6 +259,7 @@
     </objects>
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="ic_detal_youtube" width="50.5" height="39"/>
         <image name="img_home_header" width="187.5" height="150"/>
         <image name="img_home_movie" width="47.5" height="64.5"/>
