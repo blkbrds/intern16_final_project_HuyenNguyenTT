@@ -8,6 +8,7 @@ target 'FinalProject' do
   # Pods for FinalProject
   pod 'Moya/RxSwift'
   pod 'SwiftLint'
+  pod 'RealmSwift'
 
   target 'FinalProjectTests' do
     inherit! :search_paths
