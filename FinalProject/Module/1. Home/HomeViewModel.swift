@@ -44,6 +44,10 @@ final class HomeViewModel {
     private var favoriteMovies: [Movie] = []
     weak var delegate: HomeViewModelDelegate?
     
+    init() {
+        setupObserve()
+    }
+    
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
         apiProvider.getMovies { [weak self] result in
@@ -69,16 +73,13 @@ final class HomeViewModel {
         }
     }
     
-    func setupObserve() {
+    private func setupObserve() {
         do {
             let realm = try Realm()
             notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
                 guard let this = self else { return }
                 if let delegate = this.delegate {
                     this.fetchData()
-                    for i in 0..<this.movies.count {
-                        this.movies[i].isFavorite = this.favoriteMovies.contains(where: { $0.id == this.movies[i].id })
-                    }
                     delegate.syncFavorite(viewModel: this, needperformAction: .reloadData)
                 }
             })
@@ -89,14 +90,9 @@ final class HomeViewModel {
     
     func fetchData() {
         do {
-            // realm
             let realm = try Realm()
-            // results
             let results = realm.objects(Movie.self)
-            
-            // convert to array
             favoriteMovies = Array(results)
-            
         } catch {
             print(error)
         }
@@ -119,7 +115,7 @@ final class HomeViewModel {
             print(error)
         }
     }
-
+    
     func deleteItemFavorite(id: String) {
         do {
             let realm = try Realm()

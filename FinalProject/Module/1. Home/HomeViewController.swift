@@ -91,7 +91,6 @@ final class HomeViewController: UIViewController {
     
     private func configSyncRealmData() {
         viewModel.delegate = self
-        viewModel.setupObserve()
     }
     
     // MARK: - Action
@@ -170,6 +169,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(MoviesCollectionViewCell.self, at: indexPath)
         cell.viewModel = viewModel.viewModelForItem(at: indexPath)
+        cell.delegate = self
         return cell
     }
     
@@ -196,5 +196,17 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 extension HomeViewController: HomeViewModelDelegate {
     func syncFavorite(viewModel: HomeViewModel, needperformAction action: HomeViewModel.Action) {
         collectionView.reloadData()
+    }
+}
+
+extension HomeViewController: MoviesCollectionViewCellDelegate {
+    
+    func handleFavorite(cell: MoviesCollectionViewCell, id: String, isFavorite: Bool) {
+        if isFavorite {
+            viewModel.deleteItemFavorite(id: id)
+        } else {
+            viewModel.addFavorite(id: cell.viewModel?.movies.id ?? "", categoryID: cell.viewModel?.movies.categoryID ?? 0, name: cell.viewModel?.movies.name ?? "", thumbnail: cell.viewModel?.movies.thumbnail ?? "", releaseDate: cell.viewModel?.movies.releaseDate ?? "")
+            collectionView.reloadData()
+        }
     }
 }
