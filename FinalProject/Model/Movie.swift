@@ -7,14 +7,16 @@
 //
 
 import ObjectMapper
+import RealmSwift
 
-class Movie: Mappable {
-    var id: String = ""
-    var categoryID: Int = 0
-    var name: String = ""
-    var thumbnail: String = ""
+final class Movie: Object, Mappable {
+    @objc dynamic var id: String = ""
+    @objc dynamic var categoryID: Int = 0
+    @objc dynamic var name: String = ""
+    @objc dynamic var thumbnail: String = ""
     var isBooking: Bool = false
-    var releaseDate: String = ""
+    @objc dynamic var releaseDate: String = ""
+    @objc dynamic var isFavorite: Bool = false
     
     //add propeties for detail
     var ratingCode: String = ""
@@ -28,6 +30,9 @@ class Movie: Mappable {
     
     required init() {}
     required init?(map: Map) { }
+    override static func primaryKey() -> String? {
+        return "id"
+    }
     
     func mapping(map: Map) {
         id <- map["id"]

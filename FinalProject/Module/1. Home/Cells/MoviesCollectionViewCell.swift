@@ -9,6 +9,11 @@
 import UIKit
 import SDWebImage
 
+// MARK: - Protocol
+protocol MoviesCollectionViewCellDelegate: class {
+    func handleFavorite(cell: MoviesCollectionViewCell, id: String, isFavorite: Bool)
+}
+
 final class MoviesCollectionViewCell: UICollectionViewCell {
     
     // MARK: - IBOutlets
@@ -21,15 +26,21 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
             updateView()
         }
     }
-
+    weak var delegate: MoviesCollectionViewCellDelegate?
+    
     // MARK: - Action
     @IBAction private func heartButtonTouchUpInside(_ sender: UIButton) {
-        
+        guard let viewModel = viewModel else { return }
+        if let delegate = delegate {
+            delegate.handleFavorite(cell: self, id: viewModel.id, isFavorite: viewModel.isFavorite)
+        }
+        updateView()
     }
     
     // MARK: - Function
     private func updateView() {
         guard let viewModel = viewModel else { return }
         movieImageView.sd_setImage(with: URL(string: viewModel.imageName))
+        heartButton.isSelected = viewModel.isFavorite
     }
 }

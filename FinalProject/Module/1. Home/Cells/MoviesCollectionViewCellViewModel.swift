@@ -14,6 +14,12 @@ final class MoviesCollectionViewCellViewModel {
     var imageName: String {
         return movies.thumbnail
     }
+    var isFavorite: Bool {
+        return movies.isFavorite
+    }
+    var id: String {
+        return movies.id
+    }
 
     // MARK: - Initialization
     init(movies: Movie) {

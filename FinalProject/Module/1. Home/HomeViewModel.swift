@@ -7,12 +7,23 @@
 //
 
 import Foundation
+import RealmSwift
+
+// MARK: - Protocol
+protocol HomeViewModelDelegate: class {
+    func syncFavorite(viewModel: HomeViewModel, needperformAction action: HomeViewModel.Action)
+}
 
 final class HomeViewModel {
     
+    // MARK: - Enum
+    enum Action {
+        case reloadData
+    }
     // Types
     enum MovieType: Int {
-        case playing = 0, upcomming, favorites
+        case playing = 0, upcomming
+        case favorite
     }
     
     // MARK: - Properties
@@ -22,14 +33,16 @@ final class HomeViewModel {
             return playingMovies
         case .upcomming:
             return upcommingMovies
-        case .favorites:
+        case .favorite:
             return favoriteMovies
         }
     }
+    private var notificationToken: NotificationToken?
     var movieType: MovieType = .playing
     private var playingMovies: [Movie] = []
     private var upcommingMovies: [Movie] = []
     private var favoriteMovies: [Movie] = []
+    weak var delegate: HomeViewModelDelegate?
     
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
@@ -44,7 +57,7 @@ final class HomeViewModel {
                             this.playingMovies.append(movie)
                         case .upcomming:
                             this.upcommingMovies.append(movie)
-                        case .favorites:
+                        case .favorite:
                             this.favoriteMovies.append(movie)
                         }
                     }
@@ -53,6 +66,76 @@ final class HomeViewModel {
             case .failure(let error):
                 completion(.failure(error))
             }
+        }
+    }
+    
+    func setupObserve() {
+        do {
+            let realm = try Realm()
+            notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
+                guard let this = self else { return }
+                if let delegate = this.delegate {
+                    this.fetchData()
+                    for i in 0..<this.movies.count {
+                        this.movies[i].isFavorite = this.favoriteMovies.contains(where: { $0.id == this.movies[i].id })
+                    }
+                    delegate.syncFavorite(viewModel: this, needperformAction: .reloadData)
+                }
+            })
+        } catch {
+            print(error)
+        }
+    }
+    
+    func fetchData() {
+        do {
+            // realm
+            let realm = try Realm()
+            // results
+            let results = realm.objects(Movie.self)
+            
+            // convert to array
+            favoriteMovies = Array(results)
+            
+        } catch {
+            print(error)
+        }
+    }
+    
+    func addFavorite(id: String, categoryID: Int, name: String, thumbnail: String, releaseDate: String) {
+        do {
+            let realm = try Realm()
+            let movie = Movie()
+            movie.id = id
+            movie.categoryID = categoryID
+            movie.name = name
+            movie.thumbnail = thumbnail
+            movie.releaseDate = releaseDate
+            try realm.write {
+                realm.add(movie, update: .all)
+                checkFavorite(favorite: true, id: id)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    func deleteItemFavorite(id: String) {
+        do {
+            let realm = try Realm()
+            let result = realm.objects(Movie.self).filter("id = '\(id)'")
+            try realm.write {
+                realm.delete(result)
+                checkFavorite(favorite: false, id: id)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func checkFavorite(favorite: Bool, id: String) {
+        for movie in movies where movie.id == id {
+            movie.isFavorite = favorite
         }
     }
     

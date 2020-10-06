@@ -42,6 +42,7 @@ final class HomeViewController: UIViewController {
         configNavigation()
         configCollectionView()
         getMovies()
+        configSyncRealmData()
     }
     
     // MARK: - Private function
@@ -88,6 +89,11 @@ final class HomeViewController: UIViewController {
         }
     }
     
+    private func configSyncRealmData() {
+        viewModel.delegate = self
+        viewModel.setupObserve()
+    }
+    
     // MARK: - Action
     @IBAction private func tabPlayingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .playing else { return }
@@ -120,7 +126,7 @@ final class HomeViewController: UIViewController {
     }
     
     @IBAction private func tabFavoriteButtonTouchUpInside(_ sender: UIButton) {
-        guard viewModel.movieType != .upcomming else { return }
+        guard viewModel.movieType != .favorite else { return }
         
         // set UI
         tabPlayingButton.titleLabel?.font = .none
@@ -130,7 +136,7 @@ final class HomeViewController: UIViewController {
         tabFavoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         
-        viewModel.movieType = .favorites
+        viewModel.movieType = .favorite
         reloadData()
     }
         
@@ -168,7 +174,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 2, height: 250)
+        return CGSize(width: UIScreen.main.bounds.width / 2, height: 2 * UIScreen.main.bounds.height / 5)
     }
     
     // Update label
@@ -184,5 +190,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let detailVC = DetailViewController()
         detailVC.viewModel = viewModel.getDetailViewModel(atIndexPath: indexPath)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+extension HomeViewController: HomeViewModelDelegate {
+    func syncFavorite(viewModel: HomeViewModel, needperformAction action: HomeViewModel.Action) {
+        collectionView.reloadData()
     }
 }
