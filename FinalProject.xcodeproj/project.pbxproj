@@ -27,6 +27,7 @@
 		8328A10C2521C5F8009AEAD6 /* UITableView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */; };
 		8328A1122521D60D009AEAD6 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A1112521D60D009AEAD6 /* DetailViewModel.swift */; };
 		832913982525E5A2003CFA26 /* AlertExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832913972525E5A2003CFA26 /* AlertExt.swift */; };
+		832A5D9D252EAF0E00595BFA /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A5D9C252EAF0E00595BFA /* UIViewControllerExt.swift */; };
 		832A65AE251CDE3400FA5AD9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A65AD251CDE3400FA5AD9 /* Movie.swift */; };
 		832E7185251B3E31006BD2D4 /* UICollectionView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832E7184251B3E31006BD2D4 /* UICollectionView.Ext.swift */; };
 		83303CDB2519A6360089BE1E /* MoviesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83303CD52519A6360089BE1E /* MoviesCollectionViewCell.xib */; };
@@ -80,6 +81,7 @@
 		8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.Ext.swift; sourceTree = "<group>"; };
 		8328A1112521D60D009AEAD6 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		832913972525E5A2003CFA26 /* AlertExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExt.swift; sourceTree = "<group>"; };
+		832A5D9C252EAF0E00595BFA /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		832A65AD251CDE3400FA5AD9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		832E7184251B3E31006BD2D4 /* UICollectionView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.Ext.swift; sourceTree = "<group>"; };
 		83303CD52519A6360089BE1E /* MoviesCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoviesCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				83268485251DEF03007294CD /* UIImageView.Ext.swift */,
 				8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */,
 				832913972525E5A2003CFA26 /* AlertExt.swift */,
+				832A5D9C252EAF0E00595BFA /* UIViewControllerExt.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -508,6 +511,7 @@
 			files = (
 				832A65AE251CDE3400FA5AD9 /* Movie.swift in Sources */,
 				0EBA37442511C97B003465DD /* NetworkManager.swift in Sources */,
+				832A5D9D252EAF0E00595BFA /* UIViewControllerExt.swift in Sources */,
 				0EBA37422511C97B003465DD /* Error.swift in Sources */,
 				83303CDD2519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift in Sources */,
 				83303CE02519A6360089BE1E /* HomeViewController.swift in Sources */,

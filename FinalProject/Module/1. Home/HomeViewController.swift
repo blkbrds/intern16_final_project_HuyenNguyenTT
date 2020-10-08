@@ -25,7 +25,7 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
-    
+        
     // MARK: - Properties
     private var currentIndexPath: IndexPath = IndexPath(row: 0, section: 0) {
         didSet {
@@ -41,6 +41,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         configNavigation()
         configCollectionView()
+        showSpinner(onView: self.view)
         getMovies()
     }
     
@@ -85,6 +86,7 @@ final class HomeViewController: UIViewController {
             case .failure(let error):
                 self.showAlert(alertText: "Error", alertMessage: "\(error)")
             }
+            self.removeSpinner()
         }
     }
     

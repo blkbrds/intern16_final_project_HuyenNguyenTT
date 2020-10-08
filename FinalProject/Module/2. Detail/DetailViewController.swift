@@ -38,6 +38,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configUI()
         updateUI()
+        showSpinner(onView: self.view)
         getDetail()
     }
     
@@ -70,6 +71,7 @@ class DetailViewController: UIViewController {
             case .failure(let error):
                 print(error)
             }
+            self.removeSpinner()
         }
     }
     
