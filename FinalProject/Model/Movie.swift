@@ -15,6 +15,7 @@ final class Movie: Object, Mappable {
     @objc dynamic var name: String = ""
     @objc dynamic var thumbnail: String = ""
     @objc dynamic var releaseDate: String = ""
+    @objc dynamic var isFavorite: Bool = false
 
     //add propeties for detail
     var ratingCode: String = ""
@@ -25,7 +26,6 @@ final class Movie: Object, Mappable {
     var movieDirector: String = ""
     var movieLanguage: String = ""
     var movieActress: String = ""
-    @objc dynamic var isFavorite: Bool = false
     var isBooking: Bool = false
     
     init?(map: Map) { }

@@ -12,7 +12,7 @@ import UPCarouselFlowLayout
 
 final class HomeViewController: UIViewController {
     
-    // MARK: - Outlet
+    // MARK: - Outlets
     @IBOutlet private weak var tabPlayingButton: UIButton!
     @IBOutlet private weak var tabUpcommingButton: UIButton!
     @IBOutlet private weak var tabFavoriteButton: UIButton!
@@ -93,7 +93,7 @@ final class HomeViewController: UIViewController {
         viewModel.delegate = self
     }
     
-    // MARK: - Action
+    // MARK: - Actions
     @IBAction private func tabPlayingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .playing else { return }
         

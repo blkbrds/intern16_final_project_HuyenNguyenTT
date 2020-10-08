@@ -16,11 +16,11 @@ protocol HomeViewModelDelegate: class {
 
 final class HomeViewModel {
     
-    // MARK: - Enum
+    // MARK: - Types
     enum Action {
         case reloadData
     }
-    // Types
+    
     enum MovieType: Int {
         case playing = 0
         case upcomming
@@ -45,6 +45,7 @@ final class HomeViewModel {
     private var favoriteMovies: [Movie] = []
     weak var delegate: HomeViewModelDelegate?
     
+    // MARK: - Initialization
     init() {
         setupObserve()
     }
