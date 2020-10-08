@@ -10,19 +10,19 @@ import Foundation
 
 final class MoviesCollectionViewCellViewModel {
     // MARK: - Properties
-    var movies: Movie
+    var movie: Movie
     var imageName: String {
-        return movies.thumbnail
+        return movie.thumbnail
     }
     var isFavorite: Bool {
-        return movies.isFavorite
+        return movie.isFavorite
     }
     var id: String {
-        return movies.id
+        return movie.id
     }
 
     // MARK: - Initialization
-    init(movies: Movie) {
-        self.movies = movies
+    init(movie: Movie) {
+        self.movie = movie
     }
 }

@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = navigationController
         }
     }
-    
+
     func sceneDidDisconnect(_ scene: UIScene) { }
     
     func sceneDidBecomeActive(_ scene: UIScene) { }

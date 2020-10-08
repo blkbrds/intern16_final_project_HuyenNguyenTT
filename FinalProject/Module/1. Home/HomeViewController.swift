@@ -84,7 +84,7 @@ final class HomeViewController: UIViewController {
             case .success:
                 self.reloadData()
             case .failure(let error):
-                self.showAlert(alertText: "Error", alertMessage: "\(error)")
+                self.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
     }
@@ -134,11 +134,11 @@ final class HomeViewController: UIViewController {
         lineUpcomingView.backgroundColor = .black
         tabFavoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        
+                
         viewModel.movieType = .favorite
         reloadData()
     }
-        
+    
     // MARK: - Objc
     @objc private func profileTouchUpInside() { }
     
@@ -193,20 +193,19 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 }
 
+// MARK: - Extension HomeViewModelDelegate
 extension HomeViewController: HomeViewModelDelegate {
-    func syncFavorite(viewModel: HomeViewModel, needperformAction action: HomeViewModel.Action) {
+    func viewModel(_ viewModel: HomeViewModel, needsPerform action: HomeViewModel.Action) {
         collectionView.reloadData()
     }
 }
 
+// MARK: - Extension MoviesCollectionViewCellDelegate
 extension HomeViewController: MoviesCollectionViewCellDelegate {
-    
-    func handleFavorite(cell: MoviesCollectionViewCell, id: String, isFavorite: Bool) {
-        if isFavorite {
-            viewModel.deleteItemFavorite(id: id)
-        } else {
-            viewModel.addFavorite(id: cell.viewModel?.movies.id ?? "", categoryID: cell.viewModel?.movies.categoryID ?? 0, name: cell.viewModel?.movies.name ?? "", thumbnail: cell.viewModel?.movies.thumbnail ?? "", releaseDate: cell.viewModel?.movies.releaseDate ?? "")
-            collectionView.reloadData()
+    func cell(_ cell: MoviesCollectionViewCell, needsPerform action: MoviesCollectionViewCell.Action) {
+        switch action {
+        case .didTapFavorite(let movie):
+            viewModel.updateRealm(movie: movie)
         }
     }
 }

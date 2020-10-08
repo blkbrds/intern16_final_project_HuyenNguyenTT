@@ -85,7 +85,6 @@ class DetailViewController: UIViewController {
         let player = AVPlayer(url: URL)
         let vc = AVPlayerViewController()
         vc.player = player
-
         present(vc, animated: true) {
             vc.player?.play()
         }

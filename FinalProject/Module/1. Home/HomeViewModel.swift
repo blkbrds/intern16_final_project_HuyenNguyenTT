@@ -11,7 +11,7 @@ import RealmSwift
 
 // MARK: - Protocol
 protocol HomeViewModelDelegate: class {
-    func syncFavorite(viewModel: HomeViewModel, needperformAction action: HomeViewModel.Action)
+    func viewModel(_ viewModel: HomeViewModel, needsPerform action: HomeViewModel.Action)
 }
 
 final class HomeViewModel {
@@ -22,7 +22,8 @@ final class HomeViewModel {
     }
     // Types
     enum MovieType: Int {
-        case playing = 0, upcomming
+        case playing = 0
+        case upcomming
         case favorite
     }
     
@@ -50,6 +51,7 @@ final class HomeViewModel {
     
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
+        fetchRealmData()
         apiProvider.getMovies { [weak self] result in
             guard let this = self else { return }
             switch result {
@@ -62,8 +64,9 @@ final class HomeViewModel {
                         case .upcomming:
                             this.upcommingMovies.append(movie)
                         case .favorite:
-                            this.favoriteMovies.append(movie)
+                            break
                         }
+                        this.syncFavoriteAllMovies()
                     }
                 }
                 completion(.success)
@@ -79,8 +82,8 @@ final class HomeViewModel {
             notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
                 guard let this = self else { return }
                 if let delegate = this.delegate {
-                    this.fetchData()
-                    delegate.syncFavorite(viewModel: this, needperformAction: .reloadData)
+                    this.fetchRealmData()
+                    delegate.viewModel(this, needsPerform: .reloadData)
                 }
             })
         } catch {
@@ -88,7 +91,7 @@ final class HomeViewModel {
         }
     }
     
-    func fetchData() {
+    private func fetchRealmData() {
         do {
             let realm = try Realm()
             let results = realm.objects(Movie.self)
@@ -98,40 +101,41 @@ final class HomeViewModel {
         }
     }
     
-    func addFavorite(id: String, categoryID: Int, name: String, thumbnail: String, releaseDate: String) {
+    func updateRealm(movie: Movie) {
         do {
             let realm = try Realm()
-            let movie = Movie()
-            movie.id = id
-            movie.categoryID = categoryID
-            movie.name = name
-            movie.thumbnail = thumbnail
-            movie.releaseDate = releaseDate
-            try realm.write {
-                realm.add(movie, update: .all)
-                checkFavorite(favorite: true, id: id)
+            if let object = realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
+                try realm.write {
+                    updateFavorite(favorite: false, id: movie.id)
+                    realm.delete(object)
+                }
+            } else {
+                try realm.write {
+                    movie.isFavorite = true
+                    updateFavorite(favorite: true, id: movie.id)
+                    realm.create(Movie.self, value: movie, update: .all)
+                }
             }
         } catch {
             print(error)
         }
     }
     
-    func deleteItemFavorite(id: String) {
-        do {
-            let realm = try Realm()
-            let result = realm.objects(Movie.self).filter("id = '\(id)'")
-            try realm.write {
-                realm.delete(result)
-                checkFavorite(favorite: false, id: id)
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-    func checkFavorite(favorite: Bool, id: String) {
-        for movie in movies where movie.id == id {
+    func updateFavorite(favorite: Bool, id: String) {
+        for movie in playingMovies where movie.id == id {
             movie.isFavorite = favorite
+        }
+        for movie in upcommingMovies where movie.id == id {
+            movie.isFavorite = favorite
+        }
+    }
+    
+    func syncFavoriteAllMovies() {
+        playingMovies.forEach { movie in
+            movie.isFavorite = favoriteMovies.first(where: { $0.id == movie.id }) != nil
+        }
+        upcommingMovies.forEach { movie in
+            movie.isFavorite = favoriteMovies.first(where: { $0.id == movie.id }) != nil
         }
     }
     
@@ -141,8 +145,8 @@ final class HomeViewModel {
     
     func viewModelForItem(at indexPath: IndexPath) -> MoviesCollectionViewCellViewModel? {
         guard movies.count > indexPath.row else { return nil }
-        let movieImage = movies[indexPath.row]
-        return MoviesCollectionViewCellViewModel(movies: movieImage)
+        let movie = movies[indexPath.row]
+        return MoviesCollectionViewCellViewModel(movie: movie)
     }
     
     func getDetailViewModel(atIndexPath indexPath: IndexPath) -> DetailViewModel {

@@ -11,10 +11,15 @@ import SDWebImage
 
 // MARK: - Protocol
 protocol MoviesCollectionViewCellDelegate: class {
-    func handleFavorite(cell: MoviesCollectionViewCell, id: String, isFavorite: Bool)
+    func cell(_ cell: MoviesCollectionViewCell, needsPerform action: MoviesCollectionViewCell.Action)
 }
 
 final class MoviesCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - Types
+    enum Action {
+        case didTapFavorite(_ movie: Movie)
+    }
     
     // MARK: - IBOutlets
     @IBOutlet private weak var movieImageView: UIImageView!
@@ -32,9 +37,8 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     @IBAction private func heartButtonTouchUpInside(_ sender: UIButton) {
         guard let viewModel = viewModel else { return }
         if let delegate = delegate {
-            delegate.handleFavorite(cell: self, id: viewModel.id, isFavorite: viewModel.isFavorite)
+            delegate.cell(self, needsPerform: .didTapFavorite(viewModel.movie))
         }
-        updateView()
     }
     
     // MARK: - Function
