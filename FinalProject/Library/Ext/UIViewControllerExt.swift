@@ -12,10 +12,13 @@ var vSpinner: UIView?
 
 extension UIViewController {
     func showSpinner(onView: UIView) {
+        // Add UIView
         let spinnerView = UIView()
         spinnerView.frame = onView.bounds
         spinnerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         spinnerView.alpha = 0.5
+        
+        // Add UIActivityIndicatorView
         let ai = UIActivityIndicatorView(style: .large)
         ai.color = .white
         ai.startAnimating()
@@ -35,4 +38,3 @@ extension UIViewController {
         }
     }
 }
-
