@@ -12,6 +12,10 @@ import AVKit
 
 class DetailViewController: UIViewController {
 
+    enum Action {
+        case didTapFavorite(_ movie: Movie)
+    }
+    
     // MARK: - Outlet
     @IBOutlet private weak var youtubeButton: UIButton!
     @IBOutlet private weak var heartButton: UIButton!
@@ -39,6 +43,7 @@ class DetailViewController: UIViewController {
         configUI()
         updateUI()
         getDetail()
+        configSyncRealmData()
     }
     
     // MARK: - Function
@@ -60,6 +65,8 @@ class DetailViewController: UIViewController {
         
         headerImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
         contentImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
+        
+        heartButton.isSelected = viewModel.movie.isFavorite
     }
     
     private func getDetail() {
@@ -71,6 +78,14 @@ class DetailViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    private func configSyncRealmData() {
+        viewModel.delegate = self
+    }
+    
+    private func updateButton() {
+        heartButton.isSelected = viewModel.movie.isFavorite
     }
     
     // MARK: - Action
@@ -90,5 +105,16 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @IBAction private func heartTouchUpInside(_ sender: UIButton) {}
+    @IBAction private func heartTouchUpInside(_ sender: UIButton) {
+        viewModel.updateRealm()
+    }
+}
+
+extension DetailViewController: DetailViewModelDelegate {
+    func viewModel(_ viewModel: DetailViewModel, needsPerform action: DetailViewModel.Action) {
+        switch action {
+        case .reloadData:
+            updateButton()
+        }
+    }
 }
