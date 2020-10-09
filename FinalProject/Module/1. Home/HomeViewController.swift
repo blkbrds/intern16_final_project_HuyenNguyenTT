@@ -11,7 +11,6 @@ import SideMenu
 import UPCarouselFlowLayout
 
 final class HomeViewController: UIViewController {
-
     // MARK: - Outlets
     @IBOutlet private weak var tabPlayingButton: UIButton!
     @IBOutlet private weak var tabUpcommingButton: UIButton!

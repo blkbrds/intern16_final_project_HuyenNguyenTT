@@ -84,6 +84,7 @@ final class HomeViewModel {
                 guard let this = self else { return }
                 if let delegate = this.delegate {
                     this.fetchRealmData()
+                    this.syncFavoriteAllMovies()
                     delegate.viewModel(this, needsPerform: .reloadData)
                 }
             })

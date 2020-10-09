@@ -48,3 +48,9 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
         heartButton.isSelected = viewModel.isFavorite
     }
 }
+
+extension MoviesCollectionViewCell: DetailViewControllerDelegate {
+    func cell(_ cell: DetailViewController, needsPerform action: DetailViewController.Action) {
+        updateView()
+    }
+}

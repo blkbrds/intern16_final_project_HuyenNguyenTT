@@ -38,9 +38,9 @@ final class DetailViewModel {
             case .success(let detail):
                 for movie in this.favoriteMovies where movie.id == detail.id {
                     detail.isFavorite = true
-                    break
+                    this.movie = detail
                 }
-                this.movie = detail
+                
                 completion(.success)
             case .failure(let error):
                 completion(.failure(error))

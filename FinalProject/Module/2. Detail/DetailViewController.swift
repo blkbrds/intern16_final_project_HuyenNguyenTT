@@ -10,6 +10,10 @@ import UIKit
 import SDWebImage
 import AVKit
 
+protocol DetailViewControllerDelegate: class {
+    func cell(_ cell: DetailViewController, needsPerform action: DetailViewController.Action)
+}
+
 class DetailViewController: UIViewController {
 
     enum Action {
@@ -43,6 +47,7 @@ class DetailViewController: UIViewController {
         configUI()
         updateUI()
         getDetail()
+        updateButton()
         configSyncRealmData()
     }
     
