@@ -27,7 +27,6 @@ final class DetailViewModel {
 
     init(movie: Movie = Movie()) {
         self.movie = movie
-        setupObserve()
     }
     
     // MARK: - Function
@@ -38,9 +37,9 @@ final class DetailViewModel {
             case .success(let detail):
                 for movie in this.favoriteMovies where movie.id == detail.id {
                     detail.isFavorite = true
-                    this.movie = detail
+                    break
                 }
-                
+                this.movie = detail
                 completion(.success)
             case .failure(let error):
                 completion(.failure(error))
@@ -48,34 +47,12 @@ final class DetailViewModel {
         }
     }
     
-    private func setupObserve() {
-        do {
-            let realm = try Realm()
-            notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
-                guard let this = self else { return }
-                if let delegate = this.delegate {
-                    this.fetchRealmData()
-                    delegate.viewModel(this, needsPerform: .reloadData)
-                }
-            })
-        } catch {
-            print(error)
-        }
+    func setupRealm(failure: @escaping (Error) -> Void) {
+        setupObserve(failure: failure)
+        fetchRealmData(failure: failure)
     }
     
-    private func fetchRealmData() {
-        do {
-            let realm = try Realm()
-            let predicate = NSPredicate(format: "id = %@", movie.id)
-            let result = realm.objects(Movie.self).filter(predicate)
-//            let results = realm.objects(Movie.self)
-            favoriteMovies = Array(result)
-        } catch {
-            print(error)
-        }
-    }
-    
-    func updateRealm() {
+    func updateData(failure: (Error) -> Void) {
         do {
             let realm = try Realm()
             if let object = realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
@@ -90,7 +67,33 @@ final class DetailViewModel {
                 }
             }
         } catch {
-            print(error)
+            failure(error)
+        }
+    }
+    
+    private func setupObserve(failure: @escaping (Error) -> Void) {
+        do {
+            let realm = try Realm()
+            notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
+                guard let this = self else { return }
+                if let delegate = this.delegate {
+                    this.fetchRealmData(failure: failure)
+                    delegate.viewModel(this, needsPerform: .reloadData)
+                }
+            })
+        } catch {
+            failure(error)
+        }
+    }
+    
+    private func fetchRealmData(failure: (Error) -> Void) {
+        do {
+            let realm = try Realm()
+            let predicate = NSPredicate(format: "id = %@", movie.id)
+            let result = realm.objects(Movie.self).filter(predicate)
+            favoriteMovies = Array(result)
+        } catch {
+            failure(error)
         }
     }
 }

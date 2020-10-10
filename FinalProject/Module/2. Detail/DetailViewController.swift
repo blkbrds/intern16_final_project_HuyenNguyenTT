@@ -45,10 +45,8 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        updateUI()
+        configRealm()
         getDetail()
-        updateButton()
-        configSyncRealmData()
     }
     
     // MARK: - Function
@@ -71,21 +69,24 @@ class DetailViewController: UIViewController {
         headerImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
         contentImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
         
-        heartButton.isSelected = viewModel.movie.isFavorite
+        updateButton()
     }
     
     private func getDetail() {
-        viewModel.getDetail(id: viewModel.movie.id) { (result) in
+        viewModel.getDetail(id: viewModel.movie.id) { [weak self] (result) in
             switch result {
             case .success:
-                self.updateUI()
+                self?.updateUI()
             case .failure(let error):
-                print(error)
+                self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
     }
     
-    private func configSyncRealmData() {
+    private func configRealm() {
+        viewModel.setupRealm { [weak self] error in
+            self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+        }
         viewModel.delegate = self
     }
     
@@ -111,7 +112,9 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction private func heartTouchUpInside(_ sender: UIButton) {
-        viewModel.updateRealm()
+        viewModel.updateData { [weak self] error in
+            self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+        }
     }
 }
 
