@@ -12,7 +12,7 @@ import UPCarouselFlowLayout
 
 final class HomeViewController: UIViewController {
     
-    // MARK: - Outlet
+    // MARK: - Outlets
     @IBOutlet private weak var tabPlayingButton: UIButton!
     @IBOutlet private weak var tabUpcommingButton: UIButton!
     @IBOutlet private weak var tabFavoriteButton: UIButton!
@@ -42,6 +42,7 @@ final class HomeViewController: UIViewController {
         configNavigation()
         configCollectionView()
         getMovies()
+        configSyncRealmData()
     }
     
     // MARK: - Private function
@@ -83,12 +84,19 @@ final class HomeViewController: UIViewController {
             case .success:
                 self.reloadData()
             case .failure(let error):
-                self.showAlert(alertText: "Error", alertMessage: "\(error)")
+                self.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
     }
     
-    // MARK: - Action
+    private func configSyncRealmData() {
+        viewModel.setupRealm { [weak self] (error) in
+            self?.showAlert(alertText: "Error", alertMessage: error?.localizedDescription ?? "")
+        }
+        viewModel.delegate = self
+    }
+    
+    // MARK: - Actions
     @IBAction private func tabPlayingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .playing else { return }
         
@@ -120,7 +128,7 @@ final class HomeViewController: UIViewController {
     }
     
     @IBAction private func tabFavoriteButtonTouchUpInside(_ sender: UIButton) {
-        guard viewModel.movieType != .upcomming else { return }
+        guard viewModel.movieType != .favorite else { return }
         
         // set UI
         tabPlayingButton.titleLabel?.font = .none
@@ -130,10 +138,10 @@ final class HomeViewController: UIViewController {
         tabFavoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
         
-        viewModel.movieType = .favorites
+        viewModel.movieType = .favorite
         reloadData()
     }
-        
+    
     // MARK: - Objc
     @objc private func profileTouchUpInside() { }
     
@@ -150,7 +158,7 @@ final class HomeViewController: UIViewController {
     
     private func updateInfo() {
         movieNameLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.name
-        dateLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate
+        dateLabel.text = "Khởi chiếu: \(viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate ?? "")"
     }
 }
 
@@ -164,11 +172,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(MoviesCollectionViewCell.self, at: indexPath)
         cell.viewModel = viewModel.viewModelForItem(at: indexPath)
+        cell.delegate = self
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 2, height: 250)
+        return CGSize(width: UIScreen.main.bounds.width / 2, height: 2 * UIScreen.main.bounds.height / 5)
     }
     
     // Update label
@@ -184,5 +193,22 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let detailVC = DetailViewController()
         detailVC.viewModel = viewModel.getDetailViewModel(atIndexPath: indexPath)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+// MARK: - Extension HomeViewModelDelegate
+extension HomeViewController: HomeViewModelDelegate {
+    func viewModel(_ viewModel: HomeViewModel, needsPerform action: HomeViewModel.Action) {
+        collectionView.reloadData()
+    }
+}
+
+// MARK: - Extension MoviesCollectionViewCellDelegate
+extension HomeViewController: MoviesCollectionViewCellDelegate {
+    func cell(_ cell: MoviesCollectionViewCell, needsPerform action: MoviesCollectionViewCell.Action) {
+        guard let indexPath: IndexPath = collectionView.indexPath(for: cell) else { return }
+        viewModel.updateRealm(indexPath: indexPath) { [weak self] (error) in
+            self?.showAlert(alertText: "Error", alertMessage: error?.localizedDescription ?? "")
+        }
     }
 }

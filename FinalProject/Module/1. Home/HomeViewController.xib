@@ -152,14 +152,8 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Khởi chiếu:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="spW-pF-7ev">
-                            <rect key="frame" x="102" y="41" width="85" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11-09-2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltc-3K-ftG">
-                            <rect key="frame" x="187" y="41" width="92" height="21"/>
+                            <rect key="frame" x="141" y="41" width="92" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -167,12 +161,10 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="QHT-ar-1GO" firstAttribute="top" secondItem="wJw-9E-GC6" secondAttribute="top" constant="10" id="1Qv-k9-0sS"/>
-                        <constraint firstItem="ltc-3K-ftG" firstAttribute="leading" secondItem="QHT-ar-1GO" secondAttribute="centerX" id="3uH-GU-e51"/>
+                        <constraint firstItem="ltc-3K-ftG" firstAttribute="centerX" secondItem="QHT-ar-1GO" secondAttribute="centerX" id="3uH-GU-e51"/>
                         <constraint firstItem="ltc-3K-ftG" firstAttribute="top" secondItem="QHT-ar-1GO" secondAttribute="bottom" constant="10" id="7Gp-ct-8Ym"/>
                         <constraint firstItem="QHT-ar-1GO" firstAttribute="centerX" secondItem="wJw-9E-GC6" secondAttribute="centerX" id="NHB-wq-lJE"/>
                         <constraint firstAttribute="height" constant="80" id="TM7-PF-rhL"/>
-                        <constraint firstItem="spW-pF-7ev" firstAttribute="top" secondItem="QHT-ar-1GO" secondAttribute="bottom" constant="10" id="gN7-cC-uDo"/>
-                        <constraint firstItem="spW-pF-7ev" firstAttribute="trailing" secondItem="QHT-ar-1GO" secondAttribute="centerX" id="hzq-e6-6ZT"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHIM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AGx-RD-81w">
