@@ -46,13 +46,9 @@ final class HomeViewModel {
     weak var delegate: HomeViewModelDelegate?
     
     // MARK: - Initialization
-    init() {
-        setupObserve()
-    }
     
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
-        fetchRealmData()
         apiProvider.getMovies { [weak self] result in
             guard let this = self else { return }
             switch result {
@@ -77,22 +73,27 @@ final class HomeViewModel {
         }
     }
     
-    private func setupObserve() {
+    func setupRealm(failure: @escaping (Error) -> Void) {
+        setupObserve(failure: failure)
+        fetchRealmData(failure: failure)
+    }
+    
+    private func setupObserve(failure: @escaping (Error) -> Void) {
         do {
             let realm = try Realm()
             notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
                 guard let this = self else { return }
                 if let delegate = this.delegate {
-                    this.fetchRealmData()
+                    this.fetchRealmData(failure: failure)
                     delegate.viewModel(this, needsPerform: .reloadData)
                 }
             })
         } catch {
-            print(error)
+            failure(error)
         }
     }
     
-    private func fetchRealmData() {
+    private func fetchRealmData(failure: (Error) -> Void) {
         do {
             let realm = try Realm()
             let results = realm.objects(Movie.self)
@@ -102,19 +103,20 @@ final class HomeViewModel {
         }
     }
     
-    func updateRealm(movie: Movie) {
+    func updateRealm(indexPath: IndexPath, failure: (Error) -> Void) {
+        let movie = self.movies[indexPath.row]
         do {
             let realm = try Realm()
             if let object = realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
                 try realm.write {
-                    updateFavorite(favorite: false, id: movie.id)
+                    updateFavorite(indexPath: indexPath, isFavorite: false)
                     realm.delete(object)
                 }
             } else {
                 try realm.write {
                     movie.isFavorite = true
-                    updateFavorite(favorite: true, id: movie.id)
                     realm.create(Movie.self, value: movie, update: .all)
+                    updateFavorite(indexPath: indexPath, isFavorite: true)
                 }
             }
         } catch {
@@ -122,12 +124,21 @@ final class HomeViewModel {
         }
     }
     
-    func updateFavorite(favorite: Bool, id: String) {
-        for movie in playingMovies where movie.id == id {
-            movie.isFavorite = favorite
-        }
-        for movie in upcommingMovies where movie.id == id {
-            movie.isFavorite = favorite
+    func updateFavorite(indexPath: IndexPath, isFavorite: Bool) {
+        switch movieType {
+        case .playing:
+            playingMovies[indexPath.row].isFavorite = isFavorite
+        case .favorite:
+            let movie = favoriteMovies[indexPath.row]
+            favoriteMovies[indexPath.row].isFavorite = isFavorite
+            
+            let mvComming = upcommingMovies.first { movie.id == $0.id }
+            mvComming?.isFavorite = isFavorite
+            
+            let mvPlaying = playingMovies.first { movie.id == $0.id }
+            mvPlaying?.isFavorite = isFavorite
+        case .upcomming:
+            upcommingMovies[indexPath.row].isFavorite = isFavorite
         }
     }
     
