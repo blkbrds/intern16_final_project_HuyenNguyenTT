@@ -91,7 +91,7 @@ final class HomeViewController: UIViewController {
 
     private func configSyncRealmData() {
         viewModel.setupRealm { [weak self] (error) in
-            self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+            self?.showAlert(alertText: "Error", alertMessage: error?.localizedDescription ?? "")
         }
         viewModel.delegate = self
     }
@@ -208,7 +208,7 @@ extension HomeViewController: MoviesCollectionViewCellDelegate {
     func cell(_ cell: MoviesCollectionViewCell, needsPerform action: MoviesCollectionViewCell.Action) {
         guard let indexPath: IndexPath = collectionView.indexPath(for: cell) else { return }
         viewModel.updateRealm(indexPath: indexPath) { [weak self] (error) in
-            self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+            self?.showAlert(alertText: "Error", alertMessage: error?.localizedDescription ?? "")
         }
 
     }

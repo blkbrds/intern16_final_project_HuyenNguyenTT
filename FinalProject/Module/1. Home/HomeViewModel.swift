@@ -44,9 +44,7 @@ final class HomeViewModel {
     private var upcommingMovies: [Movie] = []
     private var favoriteMovies: [Movie] = []
     weak var delegate: HomeViewModelDelegate?
-    
-    // MARK: - Initialization
-    
+        
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
         apiProvider.getMovies { [weak self] result in
@@ -73,37 +71,39 @@ final class HomeViewModel {
         }
     }
     
-    func setupRealm(failure: @escaping (Error) -> Void) {
-        setupObserve(failure: failure)
-        fetchRealmData(failure: failure)
+    func setupRealm(failure: @escaping (Error?) -> Void) {
+        setupObserve(onCompleted: failure)
+        fetchRealmData(onCompleted: failure)
     }
     
-    private func setupObserve(failure: @escaping (Error) -> Void) {
+    private func setupObserve(onCompleted: @escaping (Error?) -> Void) {
         do {
             let realm = try Realm()
             notificationToken = realm.objects(Movie.self).observe({ [weak self] _ in
                 guard let this = self else { return }
                 if let delegate = this.delegate {
-                    this.fetchRealmData(failure: failure)
+                    this.fetchRealmData(onCompleted: onCompleted)
                     delegate.viewModel(this, needsPerform: .reloadData)
                 }
             })
+            onCompleted(nil)
         } catch {
-            failure(error)
+            onCompleted(error)
         }
     }
     
-    private func fetchRealmData(failure: (Error) -> Void) {
+    private func fetchRealmData(onCompleted: (Error?) -> Void) {
         do {
             let realm = try Realm()
             let results = realm.objects(Movie.self)
             favoriteMovies = Array(results)
+            onCompleted(nil)
         } catch {
-            print(error)
+            onCompleted(error)
         }
     }
     
-    func updateRealm(indexPath: IndexPath, failure: (Error) -> Void) {
+    func updateRealm(indexPath: IndexPath, onCompleted: (Error?) -> Void) {
         let movie = self.movies[indexPath.row]
         do {
             let realm = try Realm()
@@ -119,8 +119,9 @@ final class HomeViewModel {
                     updateFavorite(indexPath: indexPath, isFavorite: true)
                 }
             }
+            onCompleted(nil)
         } catch {
-            print(error)
+            onCompleted(error)
         }
     }
     
