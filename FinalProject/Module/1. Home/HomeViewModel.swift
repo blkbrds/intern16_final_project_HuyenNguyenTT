@@ -44,7 +44,7 @@ final class HomeViewModel {
     private var upcommingMovies: [Movie] = []
     private var favoriteMovies: [Movie] = []
     weak var delegate: HomeViewModelDelegate?
-        
+    
     // MARK: - Function
     func getMovies(completion: @escaping (APIResult) -> Void) {
         apiProvider.getMovies { [weak self] result in
