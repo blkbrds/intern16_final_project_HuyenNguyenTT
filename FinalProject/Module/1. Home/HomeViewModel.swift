@@ -86,6 +86,7 @@ final class HomeViewModel {
                     delegate.viewModel(this, needsPerform: .reloadData)
                 }
             })
+            onCompleted(nil)
         } catch {
             onCompleted(error)
         }
@@ -96,6 +97,7 @@ final class HomeViewModel {
             let realm = try Realm()
             let results = realm.objects(Movie.self)
             favoriteMovies = Array(results)
+            onCompleted(nil)
         } catch {
             onCompleted(error)
         }
@@ -117,6 +119,7 @@ final class HomeViewModel {
                     updateFavorite(indexPath: indexPath, isFavorite: true)
                 }
             }
+            onCompleted(nil)
         } catch {
             onCompleted(error)
         }

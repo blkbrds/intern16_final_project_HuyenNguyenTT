@@ -66,6 +66,7 @@ final class DetailViewModel {
                     realm.create(Movie.self, value: movie, update: .all)
                 }
             }
+            onCompleted(nil)
         } catch {
             onCompleted(error)
         }
@@ -81,6 +82,7 @@ final class DetailViewModel {
                     delegate.viewModel(this, needsPerform: .reloadData)
                 }
             })
+            onCompleted(nil)
         } catch {
             onCompleted(error)
         }
@@ -92,6 +94,7 @@ final class DetailViewModel {
             let predicate = NSPredicate(format: "id = %@", movie.id)
             let result = realm.objects(Movie.self).filter(predicate)
             favoriteMovies = Array(result)
+            onCompleted(nil)
         } catch {
             onCompleted(error)
         }
