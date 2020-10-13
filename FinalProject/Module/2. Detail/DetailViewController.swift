@@ -85,6 +85,7 @@ class DetailViewController: UIViewController {
     
     private func configRealm() {
         viewModel.setupRealm { [weak self] error in
+            guard let error = error else { return }
             self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
         }
         viewModel.delegate = self
@@ -113,6 +114,7 @@ class DetailViewController: UIViewController {
     
     @IBAction private func heartTouchUpInside(_ sender: UIButton) {
         viewModel.updateData { [weak self] error in
+            guard let error = error else { return }
             self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
         }
     }

@@ -36,10 +36,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func changeRoot(screen: Screen) {
         switch screen {
         case .login:
-//            let homeVC = HomeViewController()
-//            let navigationController = UINavigationController(rootViewController: homeVC)
-//            window?.rootViewController = navigationController
-            window?.rootViewController = LoginViewController()
+            let homeVC = HomeViewController()
+            let navigationController = UINavigationController(rootViewController: homeVC)
+            window?.rootViewController = navigationController
+//            window?.rootViewController = LoginViewController()
         case .home:
             let homeVC = HomeViewController()
             let navigationController = UINavigationController(rootViewController: homeVC)
