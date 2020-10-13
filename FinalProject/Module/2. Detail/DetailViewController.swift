@@ -10,8 +10,16 @@ import UIKit
 import SDWebImage
 import AVKit
 
+protocol DetailViewControllerDelegate: class {
+    func cell(_ cell: DetailViewController, needsPerform action: DetailViewController.Action)
+}
+
 class DetailViewController: UIViewController {
 
+    enum Action {
+        case didTapFavorite(_ movie: Movie)
+    }
+    
     // MARK: - Outlet
     @IBOutlet private weak var youtubeButton: UIButton!
     @IBOutlet private weak var heartButton: UIButton!
@@ -37,7 +45,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
-        updateUI()
+        configRealm()
         getDetail()
     }
     
@@ -60,17 +68,31 @@ class DetailViewController: UIViewController {
         
         headerImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
         contentImageView.sd_setImage(with: URL(string: viewModel.movie.thumbnail))
+        
+        updateButton()
     }
     
     private func getDetail() {
-        viewModel.getDetail(id: viewModel.movie.id) { (result) in
+        viewModel.getDetail(id: viewModel.movie.id) { [weak self] (result) in
             switch result {
             case .success:
-                self.updateUI()
+                self?.updateUI()
             case .failure(let error):
-                print(error)
+                self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
+    }
+    
+    private func configRealm() {
+        viewModel.setupRealm { [weak self] error in
+            guard let error = error else { return }
+            self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+        }
+        viewModel.delegate = self
+    }
+    
+    private func updateButton() {
+        heartButton.isSelected = viewModel.movie.isFavorite
     }
     
     // MARK: - Action
@@ -90,5 +112,19 @@ class DetailViewController: UIViewController {
         }
     }
     
-    @IBAction private func heartTouchUpInside(_ sender: UIButton) {}
+    @IBAction private func heartTouchUpInside(_ sender: UIButton) {
+        viewModel.updateData { [weak self] error in
+            guard let error = error else { return }
+            self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+        }
+    }
+}
+
+extension DetailViewController: DetailViewModelDelegate {
+    func viewModel(_ viewModel: DetailViewModel, needsPerform action: DetailViewModel.Action) {
+        switch action {
+        case .reloadData:
+            updateButton()
+        }
+    }
 }
