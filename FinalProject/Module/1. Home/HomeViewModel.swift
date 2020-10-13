@@ -132,10 +132,6 @@ final class HomeViewModel {
                 playingMovies[index].isFavorite = movie.isFavorite
             }
         case .favorite:
-            if let indexFavorite = favoriteMovies.firstIndex(where: { $0.id == movie.id }) {
-                favoriteMovies[indexFavorite].isFavorite = movie.isFavorite
-            }
-            
             if let indexPlaying = playingMovies.firstIndex(where: { $0.id == movie.id }) {
                 playingMovies[indexPlaying].isFavorite = movie.isFavorite
             }
@@ -157,7 +153,6 @@ final class HomeViewModel {
             playingMovies[indexPath.row].isFavorite = isFavorite
         case .favorite:
             let movie = favoriteMovies[indexPath.row]
-            favoriteMovies[indexPath.row].isFavorite = isFavorite
 
             let mvComming = upcommingMovies.first { movie.id == $0.id }
             mvComming?.isFavorite = isFavorite
