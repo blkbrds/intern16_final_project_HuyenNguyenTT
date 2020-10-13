@@ -109,14 +109,14 @@ final class HomeViewModel {
             let realm = try Realm()
             if let object = realm.object(ofType: Movie.self, forPrimaryKey: movie.id) {
                 try realm.write {
-                    updateFavorite(indexPath: indexPath, isFavorite: false)
+                    updateFavorite(movie: movie)
                     realm.delete(object)
                 }
             } else {
                 try realm.write {
                     movie.isFavorite = true
                     realm.create(Movie.self, value: movie, update: .all)
-                    updateFavorite(indexPath: indexPath, isFavorite: true)
+                    updateFavorite(movie: movie)
                 }
             }
             onCompleted(nil)
@@ -125,23 +125,49 @@ final class HomeViewModel {
         }
     }
     
-    func updateFavorite(indexPath: IndexPath, isFavorite: Bool) {
+    func updateFavorite(movie: Movie) {
         switch movieType {
         case .playing:
-            playingMovies[indexPath.row].isFavorite = isFavorite
+            if let index = playingMovies.firstIndex(where: { $0.id == movie.id }) {
+                playingMovies[index].isFavorite = movie.isFavorite
+            }
         case .favorite:
-            let movie = favoriteMovies[indexPath.row]
-            favoriteMovies[indexPath.row].isFavorite = isFavorite
+            if let indexFavorite = favoriteMovies.firstIndex(where: { $0.id == movie.id }) {
+                favoriteMovies[indexFavorite].isFavorite = movie.isFavorite
+            }
             
-            let mvComming = upcommingMovies.first { movie.id == $0.id }
-            mvComming?.isFavorite = isFavorite
+            if let indexPlaying = playingMovies.firstIndex(where: { $0.id == movie.id }) {
+                playingMovies[indexPlaying].isFavorite = movie.isFavorite
+            }
             
-            let mvPlaying = playingMovies.first { movie.id == $0.id }
-            mvPlaying?.isFavorite = isFavorite
+            if let indexComming = upcommingMovies.firstIndex(where: { $0.id == movie.id }) {
+                upcommingMovies[indexComming].isFavorite = movie.isFavorite
+            }
+
         case .upcomming:
-            upcommingMovies[indexPath.row].isFavorite = isFavorite
+            if let index = upcommingMovies.firstIndex(where: { $0.id == movie.id }) {
+                upcommingMovies[index].isFavorite = movie.isFavorite
+            }
         }
     }
+    
+//    func updateFavorite(indexPath: IndexPath, isFavorite: Bool) {
+//        switch movieType {
+//        case .playing:
+//            playingMovies[indexPath.row].isFavorite = isFavorite
+//        case .favorite:
+//            let movie = favoriteMovies[indexPath.row]
+//            favoriteMovies[indexPath.row].isFavorite = isFavorite
+//
+//            let mvComming = upcommingMovies.first { movie.id == $0.id }
+//            mvComming?.isFavorite = isFavorite
+//
+//            let mvPlaying = playingMovies.first { movie.id == $0.id }
+//            mvPlaying?.isFavorite = isFavorite
+//        case .upcomming:
+//            upcommingMovies[indexPath.row].isFavorite = isFavorite
+//        }
+//    }
     
     func syncFavoriteAllMovies() {
         playingMovies.forEach { movie in
