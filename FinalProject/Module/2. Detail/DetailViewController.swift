@@ -14,7 +14,7 @@ class DetailViewController: UIViewController {
 
     // MARK: - Outlet
     @IBOutlet private weak var youtubeButton: UIButton!
-    @IBOutlet private weak var bookButton: UIButton!
+    @IBOutlet private weak var heartButton: UIButton!
     
     @IBOutlet private weak var headerImageView: UIImageView!
     @IBOutlet private weak var contentImageView: UIImageView!
@@ -34,9 +34,6 @@ class DetailViewController: UIViewController {
     var viewModel = DetailViewModel()
     
     // MARK: - Life Cycle
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
@@ -48,7 +45,6 @@ class DetailViewController: UIViewController {
     private func configUI() {
         navigationController?.navigationBar.isHidden = true
         headerImageView.layer.opacity = 0.2
-        bookButton.layer.cornerRadius = bookButton.bounds.height / 2
     }
     
     private func updateUI() {
@@ -80,7 +76,7 @@ class DetailViewController: UIViewController {
     // MARK: - Action
     @IBAction private func backTouchUpInside(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
-        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.layer.opacity = 1
     }
     
     @IBAction private func youtubeTouchUpInside(_ sender: UIButton) {
@@ -89,17 +85,10 @@ class DetailViewController: UIViewController {
         let player = AVPlayer(url: URL)
         let vc = AVPlayerViewController()
         vc.player = player
-
         present(vc, animated: true) {
             vc.player?.play()
         }
     }
     
-    @IBAction private func bookTouchUpInside(_ sender: UIButton) {
-        let bookTicketVC = CalendarViewController()
-        navigationController?.navigationBar.isHidden = false
-        let backButton = UIBarButtonItem(title: viewModel.movie.name, style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem = backButton
-        navigationController?.pushViewController(bookTicketVC, animated: true)
-    }
+    @IBAction private func heartTouchUpInside(_ sender: UIButton) {}
 }

@@ -6,6 +6,11 @@ PODS:
     - Moya/Core
     - RxSwift (~> 5.0)
   - ObjectMapper (4.2.0)
+  - Realm (5.4.7):
+    - Realm/Headers (= 5.4.7)
+  - Realm/Headers (5.4.7)
+  - RealmSwift (5.4.7):
+    - Realm (= 5.4.7)
   - RxSwift (5.1.1)
   - SDWebImage (5.9.1):
     - SDWebImage/Core (= 5.9.1)
@@ -17,6 +22,7 @@ PODS:
 DEPENDENCIES:
   - Moya/RxSwift
   - ObjectMapper
+  - RealmSwift
   - SDWebImage (~> 5.0)
   - SideMenu
   - SwiftLint
@@ -27,6 +33,8 @@ SPEC REPOS:
     - Alamofire
     - Moya
     - ObjectMapper
+    - Realm
+    - RealmSwift
     - RxSwift
     - SDWebImage
     - SideMenu
@@ -37,12 +45,14 @@ SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  Realm: 4bfc08e376b2e30c84ec3200ebe715574da05cc0
+  RealmSwift: ed40f371b62e8677141939e05b44a0c1a0a2d965
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
   SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: 6702f343422ca1cd3da9a08557108197708a958e
+PODFILE CHECKSUM: cf9ef6147d6080bcdc5bb24aba187e29621bdb0d
 
 COCOAPODS: 1.9.3

@@ -12,13 +12,14 @@ import UPCarouselFlowLayout
 
 final class HomeViewController: UIViewController {
     
-    // MARK: - Outlet
-    @IBOutlet private weak var playingButton: UIButton!
-    @IBOutlet private weak var upcommingButton: UIButton!
-    @IBOutlet private weak var bookButton: UIButton!
+    // MARK: - Outlets
+    @IBOutlet private weak var tabPlayingButton: UIButton!
+    @IBOutlet private weak var tabUpcommingButton: UIButton!
+    @IBOutlet private weak var tabFavoriteButton: UIButton!
     
     @IBOutlet private weak var linePlayingView: UIView!
     @IBOutlet private weak var lineUpcomingView: UIView!
+    @IBOutlet private weak var lineFavoriteView: UIView!
     
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -39,9 +40,9 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configNavigation()
-        configButton()
         configCollectionView()
         getMovies()
+        configSyncRealmData()
     }
     
     // MARK: - Private function
@@ -60,10 +61,6 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         navigationController?.navigationBar.isTranslucent = false
-    }
-    
-    private func configButton() {
-        bookButton.layer.cornerRadius = 10
     }
     
     private func configCollectionView() {
@@ -87,43 +84,62 @@ final class HomeViewController: UIViewController {
             case .success:
                 self.reloadData()
             case .failure(let error):
-                self.showAlert(alertText: "Error", alertMessage: "\(error)")
+                self.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
     }
     
-    // MARK: - Action
-    @IBAction private func playingButtonTouchUpInside(_ sender: UIButton) {
+    private func configSyncRealmData() {
+        viewModel.setupRealm { [weak self] (error) in
+            self?.showAlert(alertText: "Error", alertMessage: error?.localizedDescription ?? "")
+        }
+        viewModel.delegate = self
+    }
+    
+    // MARK: - Actions
+    @IBAction private func tabPlayingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .playing else { return }
+        
         // set UI
-        playingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        tabPlayingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        upcommingButton.titleLabel?.font = .none
+        tabUpcommingButton.titleLabel?.font = .none
         lineUpcomingView.backgroundColor = .black
+        tabFavoriteButton.titleLabel?.font = .none
+        lineFavoriteView.backgroundColor = .black
         
         viewModel.movieType = .playing
         reloadData()
     }
     
-    @IBAction private func upcomingButtonTouchUpInside(_ sender: UIButton) {
+    @IBAction private func tabUpcomingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .upcomming else { return }
+        
         // set UI
-        playingButton.titleLabel?.font = .none
+        tabPlayingButton.titleLabel?.font = .none
         linePlayingView.backgroundColor = .black
-        upcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        tabUpcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+        tabFavoriteButton.titleLabel?.font = .none
+        lineFavoriteView.backgroundColor = .black
+        
         viewModel.movieType = .upcomming
         reloadData()
     }
     
-    @IBAction private func bookButtonTouchUpInside(_ sender: UIButton) {
-        let bookTicketVC = CalendarViewController()
+    @IBAction private func tabFavoriteButtonTouchUpInside(_ sender: UIButton) {
+        guard viewModel.movieType != .favorite else { return }
         
-        // TODO: crash
-        let backButton = UIBarButtonItem(title: viewModel.movies[currentIndexPath.row].name, style: .plain, target: self, action: .none)
-        navigationItem.backBarButtonItem = backButton
-
-        navigationController?.pushViewController(bookTicketVC, animated: true)
+        // set UI
+        tabPlayingButton.titleLabel?.font = .none
+        linePlayingView.backgroundColor = .black
+        tabUpcommingButton.titleLabel?.font = .none
+        lineUpcomingView.backgroundColor = .black
+        tabFavoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        lineFavoriteView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
+        
+        viewModel.movieType = .favorite
+        reloadData()
     }
     
     // MARK: - Objc
@@ -142,7 +158,7 @@ final class HomeViewController: UIViewController {
     
     private func updateInfo() {
         movieNameLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.name
-        dateLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate
+        dateLabel.text = "Khởi chiếu: \(viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate ?? "")"
     }
 }
 
@@ -156,11 +172,12 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeue(MoviesCollectionViewCell.self, at: indexPath)
         cell.viewModel = viewModel.viewModelForItem(at: indexPath)
+        cell.delegate = self
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width / 2, height: 250)
+        return CGSize(width: UIScreen.main.bounds.width / 2, height: 2 * UIScreen.main.bounds.height / 5)
     }
     
     // Update label
@@ -176,5 +193,22 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         let detailVC = DetailViewController()
         detailVC.viewModel = viewModel.getDetailViewModel(atIndexPath: indexPath)
         navigationController?.pushViewController(detailVC, animated: true)
+    }
+}
+
+// MARK: - Extension HomeViewModelDelegate
+extension HomeViewController: HomeViewModelDelegate {
+    func viewModel(_ viewModel: HomeViewModel, needsPerform action: HomeViewModel.Action) {
+        collectionView.reloadData()
+    }
+}
+
+// MARK: - Extension MoviesCollectionViewCellDelegate
+extension HomeViewController: MoviesCollectionViewCellDelegate {
+    func cell(_ cell: MoviesCollectionViewCell, needsPerform action: MoviesCollectionViewCell.Action) {
+        guard let indexPath: IndexPath = collectionView.indexPath(for: cell) else { return }
+        viewModel.updateRealm(indexPath: indexPath) { [weak self] (error) in
+            self?.showAlert(alertText: "Error", alertMessage: error?.localizedDescription ?? "")
+        }
     }
 }
