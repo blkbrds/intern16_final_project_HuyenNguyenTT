@@ -220,7 +220,7 @@ extension HomeViewController: DetailViewControllerDelegate {
     func controller(_ controller: DetailViewController, needsPerform action: DetailViewController.Action) {
         switch action {
         case .didUpdateFavorite(let movie):
-            viewModel.updateFavorite(movie: movie)
+            viewModel.updateFavoriteDetail(movie: movie)
             collectionView.reloadData()
         }
     }
