@@ -211,6 +211,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailVC = DetailViewController()
+        detailVC.delegate = self
         detailVC.viewModel = viewModel.getDetailViewModel(atIndexPath: indexPath)
         navigationController?.pushViewController(detailVC, animated: true)
     }
@@ -230,6 +231,16 @@ extension HomeViewController: MoviesCollectionViewCellDelegate {
         viewModel.updateRealm(indexPath: indexPath) { [weak self] (error) in
             guard let error = error else { return }
             self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+        }
+    }
+}
+
+extension HomeViewController: DetailViewControllerDelegate {
+    func controller(_ controller: DetailViewController, needsPerform action: DetailViewController.Action) {
+        switch action {
+        case .didUpdateFavorite(let movie):
+            viewModel.updateFavoriteDetail(movie: movie)
+            collectionView.reloadData()
         }
     }
 }
