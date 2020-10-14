@@ -11,13 +11,13 @@ import SDWebImage
 import AVKit
 
 protocol DetailViewControllerDelegate: class {
-    func cell(_ cell: DetailViewController, needsPerform action: DetailViewController.Action)
+    func controller(_ controller: DetailViewController, needsPerform action: DetailViewController.Action)
 }
 
 class DetailViewController: UIViewController {
-
+    
     enum Action {
-        case didTapFavorite(_ movie: Movie)
+        case didUpdateFavorite(_ movie: Movie)
     }
     
     // MARK: - Outlet
@@ -40,6 +40,7 @@ class DetailViewController: UIViewController {
     
     // MARK: - Properties
     var viewModel = DetailViewModel()
+    weak var delegate: DetailViewControllerDelegate?
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
@@ -125,6 +126,7 @@ extension DetailViewController: DetailViewModelDelegate {
         switch action {
         case .reloadData:
             updateButton()
+            delegate?.controller(self, needsPerform: .didUpdateFavorite(viewModel.movie))
         }
     }
 }

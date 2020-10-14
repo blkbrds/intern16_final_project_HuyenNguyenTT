@@ -50,7 +50,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
 }
 
 extension MoviesCollectionViewCell: DetailViewControllerDelegate {
-    func cell(_ cell: DetailViewController, needsPerform action: DetailViewController.Action) {
+    func controller(_ cell: DetailViewController, needsPerform action: DetailViewController.Action) {
         updateView()
     }
 }
