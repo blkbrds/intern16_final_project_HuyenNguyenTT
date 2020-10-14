@@ -21,17 +21,19 @@ final class CalendarViewController: UIViewController {
             for button in weekdayButtons {
                 button.backgroundColor = .clear
             }
-            if let button = weekdayButtons.first(where: { $0.tag == selectedIndex}) {
+            if let button = weekdayButtons.first(where: { $0.tag == selectedIndex }) {
                 button.backgroundColor = #colorLiteral(red: 1, green: 0.6980392157, blue: 0.137254902, alpha: 1)
             }
             let info = viewModel.calendarData[selectedIndex]
             selectedDateLabel.text = info.weekday.valueDay + ", ngày " + info.date.toString(format: "dd") + " tháng " + info.date.toString(format: "MM") + " năm " + info.date.toString(format: "yyyy")
         }
     }
+    var hiddenSections = Set<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
+        configTableView()
     }
     
     private func configUI() {
@@ -51,7 +53,80 @@ final class CalendarViewController: UIViewController {
         selectedIndex = 0
     }
     
+    private func configTableView() {
+        tableView.register(CalendarTableViewCell.self)
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
     @IBAction private func weekdayButtonTouchUpInside(_ sender: UIButton) {
         selectedIndex = sender.tag
     }
+    
+    @objc private func hideSection(sender: UIButton) {
+        let section = sender.tag
+        
+        func indexPathsForSection() -> [IndexPath] {
+            var indexPaths = [IndexPath]()
+            
+            for row in 0..<viewModel.tableViewData[section].count {
+                indexPaths.append(IndexPath(row: row,
+                                            section: section))
+            }
+            
+            return indexPaths
+        }
+        
+        if self.hiddenSections.contains(section) {
+            self.hiddenSections.remove(section)
+            self.tableView.insertRows(at: indexPathsForSection(),
+                                      with: .fade)
+        } else {
+            self.hiddenSections.insert(section)
+            self.tableView.deleteRows(at: indexPathsForSection(),
+                                      with: .fade)
+        }
+
+    }
+}
+
+extension CalendarViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.tableViewData.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if hiddenSections.contains(section) {
+            return 0
+        }
+        return viewModel.tableViewData[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(CalendarTableViewCell.self, indexPath: indexPath)
+        cell.cinemaLabel.text = viewModel.tableViewData[indexPath.section][indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "danang"
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionButton = UIButton()
+        sectionButton.setTitle(String(section), for: .normal)
+        sectionButton.contentHorizontalAlignment = .leading
+        sectionButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        sectionButton.backgroundColor = #colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1)
+        sectionButton.layer.borderWidth = 1
+        sectionButton.tag = section
+        sectionButton.addTarget(self, action: #selector(hideSection(sender:)), for: .touchUpInside)
+        return sectionButton
+    }
+}
+
+extension CalendarViewController: UITableViewDelegate {
+    
 }

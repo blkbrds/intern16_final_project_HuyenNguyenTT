@@ -64,6 +64,11 @@ struct CalendarInfo {
 
 final class CalendarViewModel {
     var calendarData: [CalendarInfo] = []
+    let tableViewData: [[String]] = [["1", "2", "3", "4", "5"],
+                                ["1", "2", "3", "4", "5"],
+                                ["1", "2", "3", "4", "5"],
+                                ["1", "2", "3", "4", "5"],
+                                ["1", "2", "3", "4", "5"]]
     
     init() {
         let calendar = Calendar.current

@@ -10,15 +10,30 @@ import UIKit
 
 class CalendarTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var cinemaLabel: UILabel!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        configCollectionView()
     }
     
+    private func configCollectionView() {
+        collectionView.register(CalendarCollectionViewCell.self)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+    }
 }
+
+extension CalendarTableViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeue(CalendarCollectionViewCell.self, at: indexPath)
+        return cell
+    }
+}
+
+extension CalendarTableViewCell: UICollectionViewDelegate {}
