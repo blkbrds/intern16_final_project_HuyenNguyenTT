@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="FinalProject" customModuleProvider="target">
             <connections>
+                <outlet property="calendarButton" destination="V6x-dE-Pom" id="9ru-D4-ThG"/>
                 <outlet property="collectionView" destination="toZ-T3-DYa" id="zd2-9K-PmP"/>
                 <outlet property="dateLabel" destination="ltc-3K-ftG" id="XbO-OR-lYo"/>
                 <outlet property="lineFavoriteView" destination="3Ld-gq-5Tb" id="Xlq-OO-Jez"/>
@@ -144,7 +145,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wJw-9E-GC6">
-                    <rect key="frame" x="20" y="652" width="374" height="80"/>
+                    <rect key="frame" x="20" y="642" width="374" height="80"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CÔ HẦU GÁI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHT-ar-1GO">
                             <rect key="frame" x="137" y="10" width="100" height="21"/>
@@ -173,16 +174,33 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6x-dE-Pom">
+                    <rect key="frame" x="157" y="744" width="100" height="35"/>
+                    <color key="backgroundColor" red="1" green="0.69803921570000005" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="ukk-wB-gID"/>
+                        <constraint firstAttribute="height" constant="35" id="xDc-B9-ugy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                    <state key="normal" title="LỊCH CHIẾU">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="calendarButtonTouchUpInside:" destination="-1" eventType="touchUpInside" id="2VX-M8-Dbh"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="toZ-T3-DYa" firstAttribute="height" secondItem="DJJ-yZ-QNZ" secondAttribute="height" multiplier="1:2" id="97r-iQ-2sS"/>
                 <constraint firstItem="8k3-fh-YvO" firstAttribute="trailing" secondItem="wJw-9E-GC6" secondAttribute="trailing" constant="20" id="AEj-De-h1w"/>
+                <constraint firstItem="V6x-dE-Pom" firstAttribute="top" secondItem="ltc-3K-ftG" secondAttribute="bottom" constant="40" id="CpP-SD-TBh"/>
                 <constraint firstItem="toZ-T3-DYa" firstAttribute="leading" secondItem="8k3-fh-YvO" secondAttribute="leading" id="D7v-Ap-87q"/>
                 <constraint firstItem="wJw-9E-GC6" firstAttribute="leading" secondItem="8k3-fh-YvO" secondAttribute="leading" constant="20" id="DZw-hY-3cj"/>
                 <constraint firstItem="toZ-T3-DYa" firstAttribute="top" secondItem="Xv1-pf-N6r" secondAttribute="bottom" constant="40" id="Lx2-ML-0fD"/>
+                <constraint firstItem="V6x-dE-Pom" firstAttribute="centerX" secondItem="DJJ-yZ-QNZ" secondAttribute="centerX" id="NDz-Ru-36j"/>
                 <constraint firstItem="Xv1-pf-N6r" firstAttribute="leading" secondItem="8k3-fh-YvO" secondAttribute="leading" constant="16" id="O6P-l5-qD7"/>
-                <constraint firstItem="wJw-9E-GC6" firstAttribute="top" secondItem="toZ-T3-DYa" secondAttribute="bottom" constant="30" id="V7b-zj-6DY"/>
+                <constraint firstItem="wJw-9E-GC6" firstAttribute="top" secondItem="toZ-T3-DYa" secondAttribute="bottom" constant="20" id="V7b-zj-6DY"/>
                 <constraint firstItem="toZ-T3-DYa" firstAttribute="trailing" secondItem="8k3-fh-YvO" secondAttribute="trailing" id="Vvg-kw-ppZ"/>
                 <constraint firstItem="AGx-RD-81w" firstAttribute="leading" secondItem="8k3-fh-YvO" secondAttribute="leading" constant="20" id="ae9-Fw-72u"/>
                 <constraint firstItem="8k3-fh-YvO" firstAttribute="trailing" secondItem="Xv1-pf-N6r" secondAttribute="trailing" constant="16" id="dBC-uB-o4w"/>
