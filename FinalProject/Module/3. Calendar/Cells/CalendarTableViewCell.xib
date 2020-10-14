@@ -17,9 +17,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="JE9-c6-GVo">
-                        <rect key="frame" x="0.0" y="33" width="410" height="235"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mYd-1q-2rv">
+                        <rect key="frame" x="40" y="243" width="330" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="ho0-eu-lNc"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mYd-1q-2rv">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -27,7 +29,7 @@
                         </collectionViewFlowLayout>
                     </collectionView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSC-LD-mO2">
-                        <rect key="frame" x="40" y="5" width="38" height="18"/>
+                        <rect key="frame" x="40" y="5" width="38" height="228"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -35,9 +37,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="JE9-c6-GVo" secondAttribute="bottom" id="1VJ-tA-dGz"/>
-                    <constraint firstAttribute="trailing" secondItem="JE9-c6-GVo" secondAttribute="trailing" id="G2F-qG-IO0"/>
+                    <constraint firstAttribute="trailing" secondItem="JE9-c6-GVo" secondAttribute="trailing" constant="40" id="G2F-qG-IO0"/>
                     <constraint firstItem="HSC-LD-mO2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="luR-9e-8bb"/>
-                    <constraint firstItem="JE9-c6-GVo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="qCI-aF-ls8"/>
+                    <constraint firstItem="JE9-c6-GVo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="qCI-aF-ls8"/>
                     <constraint firstItem="JE9-c6-GVo" firstAttribute="top" secondItem="HSC-LD-mO2" secondAttribute="bottom" constant="10" id="spi-Wt-FAb"/>
                     <constraint firstItem="HSC-LD-mO2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="ynR-B0-c1m"/>
                 </constraints>

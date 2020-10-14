@@ -43,10 +43,9 @@
 		8335ADCC2535EB91001E0021 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335ADCB2535EB91001E0021 /* CalendarViewModel.swift */; };
 		8335ADD02535EBC1001E0021 /* CalendarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8335ADCE2535EBC1001E0021 /* CalendarTableViewCell.swift */; };
 		8335ADD12535EBC1001E0021 /* CalendarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8335ADCF2535EBC1001E0021 /* CalendarTableViewCell.xib */; };
-		83419D892536D9840006CCB7 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83419D872536D9840006CCB7 /* CalendarCollectionViewCell.swift */; };
-		83419D8A2536D9840006CCB7 /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83419D882536D9840006CCB7 /* CalendarCollectionViewCell.xib */; };
-		83419D902536EBB80006CCB7 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83419D8E2536EBB80006CCB7 /* HeaderViewController.swift */; };
-		83419D912536EBB80006CCB7 /* HeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83419D8F2536EBB80006CCB7 /* HeaderViewController.xib */; };
+		83419D9725370AA00006CCB7 /* CalendarTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83419D9625370AA00006CCB7 /* CalendarTableViewCellViewModel.swift */; };
+		83419D9A25370C6E0006CCB7 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83419D9825370C6E0006CCB7 /* CalendarCollectionViewCell.swift */; };
+		83419D9B25370C6E0006CCB7 /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83419D9925370C6E0006CCB7 /* CalendarCollectionViewCell.xib */; };
 		836A68F3251CD89300ACA550 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836A68F2251CD89300ACA550 /* APIError.swift */; };
 		8EEB3D4DE025B99592CD1248 /* Pods_FinalProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B8B1F4D95006C6444E9465 /* Pods_FinalProjectTests.framework */; };
 		B62B00D71BA33A723BAF864B /* Pods_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED98509F8A89809E661E8135 /* Pods_FinalProject.framework */; };
@@ -106,10 +105,9 @@
 		8335ADCB2535EB91001E0021 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		8335ADCE2535EBC1001E0021 /* CalendarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCell.swift; sourceTree = "<group>"; };
 		8335ADCF2535EBC1001E0021 /* CalendarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarTableViewCell.xib; sourceTree = "<group>"; };
-		83419D872536D9840006CCB7 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalendarCollectionViewCell.swift; path = ../../../../../../../../Users/bu/Documents/CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
-		83419D882536D9840006CCB7 /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CalendarCollectionViewCell.xib; path = ../../../../../../../../Users/bu/Documents/CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
-		83419D8E2536EBB80006CCB7 /* HeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
-		83419D8F2536EBB80006CCB7 /* HeaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderViewController.xib; sourceTree = "<group>"; };
+		83419D9625370AA00006CCB7 /* CalendarTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		83419D9825370C6E0006CCB7 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
+		83419D9925370C6E0006CCB7 /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
 		836A68F2251CD89300ACA550 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8E81EE897478CE01D48B2924 /* Pods-FinalProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FinalProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-FinalProjectTests/Pods-FinalProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED98509F8A89809E661E8135 /* Pods_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -331,30 +329,21 @@
 		8335ADCD2535EB95001E0021 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				83419D8D2536EB860006CCB7 /* HeaderCellTable */,
-				8335ADD22535EBCB001E0021 /* CollectionCell */,
+				83419D922537058B0006CCB7 /* Collection */,
 				8335ADCE2535EBC1001E0021 /* CalendarTableViewCell.swift */,
 				8335ADCF2535EBC1001E0021 /* CalendarTableViewCell.xib */,
+				83419D9625370AA00006CCB7 /* CalendarTableViewCellViewModel.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		8335ADD22535EBCB001E0021 /* CollectionCell */ = {
+		83419D922537058B0006CCB7 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				83419D872536D9840006CCB7 /* CalendarCollectionViewCell.swift */,
-				83419D882536D9840006CCB7 /* CalendarCollectionViewCell.xib */,
+				83419D9825370C6E0006CCB7 /* CalendarCollectionViewCell.swift */,
+				83419D9925370C6E0006CCB7 /* CalendarCollectionViewCell.xib */,
 			);
-			path = CollectionCell;
-			sourceTree = "<group>";
-		};
-		83419D8D2536EB860006CCB7 /* HeaderCellTable */ = {
-			isa = PBXGroup;
-			children = (
-				83419D8E2536EBB80006CCB7 /* HeaderViewController.swift */,
-				83419D8F2536EBB80006CCB7 /* HeaderViewController.xib */,
-			);
-			path = HeaderCellTable;
+			path = Collection;
 			sourceTree = "<group>";
 		};
 		D2E67B09594A769705B6FA29 /* Pods */ = {
@@ -470,8 +459,7 @@
 				8335ADCA2535EB80001E0021 /* CalendarViewController.xib in Resources */,
 				83303CDF2519A6360089BE1E /* HomeViewController.xib in Resources */,
 				0EBA371C2511C6C7003465DD /* Assets.xcassets in Resources */,
-				83419D912536EBB80006CCB7 /* HeaderViewController.xib in Resources */,
-				83419D8A2536D9840006CCB7 /* CalendarCollectionViewCell.xib in Resources */,
+				83419D9B25370C6E0006CCB7 /* CalendarCollectionViewCell.xib in Resources */,
 				83303CDB2519A6360089BE1E /* MoviesCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,20 +560,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83419D9A25370C6E0006CCB7 /* CalendarCollectionViewCell.swift in Sources */,
 				8335ADC92535EB80001E0021 /* CalendarViewController.swift in Sources */,
 				832A65AE251CDE3400FA5AD9 /* Movie.swift in Sources */,
+				83419D9725370AA00006CCB7 /* CalendarTableViewCellViewModel.swift in Sources */,
 				0EBA37442511C97B003465DD /* NetworkManager.swift in Sources */,
 				0EBA37422511C97B003465DD /* Error.swift in Sources */,
 				8335ADCC2535EB91001E0021 /* CalendarViewModel.swift in Sources */,
 				8335ADD02535EBC1001E0021 /* CalendarTableViewCell.swift in Sources */,
 				83303CDD2519A6360089BE1E /* MoviesCollectionViewCellViewModel.swift in Sources */,
 				83303CE02519A6360089BE1E /* HomeViewController.swift in Sources */,
-				83419D892536D9840006CCB7 /* CalendarCollectionViewCell.swift in Sources */,
 				83303CDE2519A6360089BE1E /* HomeViewModel.swift in Sources */,
 				0EBA37462511C97B003465DD /* ServiceAPI.swift in Sources */,
 				832BD4492536A64B002226FE /* Date.Ext.swift in Sources */,
 				8321E1B32521892400183DEC /* DetailViewController.swift in Sources */,
-				83419D902536EBB80006CCB7 /* HeaderViewController.swift in Sources */,
 				832E7185251B3E31006BD2D4 /* UICollectionView.Ext.swift in Sources */,
 				8328A10C2521C5F8009AEAD6 /* UITableView.Ext.swift in Sources */,
 				0EBA374B2511CA7A003465DD /* App.swift in Sources */,

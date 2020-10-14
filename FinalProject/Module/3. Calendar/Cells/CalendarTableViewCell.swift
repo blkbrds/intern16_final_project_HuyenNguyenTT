@@ -21,13 +21,15 @@ class CalendarTableViewCell: UITableViewCell {
     private func configCollectionView() {
         collectionView.register(CalendarCollectionViewCell.self)
         collectionView.dataSource = self
-        collectionView.delegate = self
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.itemSize = CGSize(width: 50, height: 25)
+        }
     }
 }
 
 extension CalendarTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 50
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -35,5 +37,3 @@ extension CalendarTableViewCell: UICollectionViewDataSource {
         return cell
     }
 }
-
-extension CalendarTableViewCell: UICollectionViewDelegate {}

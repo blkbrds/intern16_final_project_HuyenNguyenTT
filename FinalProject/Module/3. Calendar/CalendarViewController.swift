@@ -65,7 +65,7 @@ final class CalendarViewController: UIViewController {
         selectedIndex = sender.tag
     }
     
-    @objc private func hideSection(sender: UIButton) {
+    @objc private func handleSelection(_ sender: UIButton) {
         let section = sender.tag
         
         func indexPathsForSection() -> [IndexPath] {
@@ -79,16 +79,13 @@ final class CalendarViewController: UIViewController {
             return indexPaths
         }
         
-        if self.hiddenSections.contains(section) {
-            self.hiddenSections.remove(section)
-            self.tableView.insertRows(at: indexPathsForSection(),
-                                      with: .fade)
+        if hiddenSections.contains(section) {
+            hiddenSections.remove(section)
+            tableView.insertRows(at: indexPathsForSection(), with: .fade)
         } else {
-            self.hiddenSections.insert(section)
-            self.tableView.deleteRows(at: indexPathsForSection(),
-                                      with: .fade)
+            hiddenSections.insert(section)
+            tableView.deleteRows(at: indexPathsForSection(), with: .fade)
         }
-
     }
 }
 
@@ -110,23 +107,20 @@ extension CalendarViewController: UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "danang"
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let sectionButton = UIButton()
+        
         sectionButton.setTitle(String(section), for: .normal)
         sectionButton.contentHorizontalAlignment = .leading
         sectionButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        
         sectionButton.backgroundColor = #colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1)
         sectionButton.layer.borderWidth = 1
         sectionButton.tag = section
-        sectionButton.addTarget(self, action: #selector(hideSection(sender:)), for: .touchUpInside)
+        
+        sectionButton.addTarget(self, action: #selector(handleSelection(_:)), for: .touchUpInside)
         return sectionButton
     }
 }
 
-extension CalendarViewController: UITableViewDelegate {
-    
-}
+extension CalendarViewController: UITableViewDelegate { }
