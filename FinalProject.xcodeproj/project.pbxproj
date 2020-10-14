@@ -22,6 +22,9 @@
 		83074400251305A50034E2BF /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 830743FE251305A50034E2BF /* LoginViewController.xib */; };
 		8321E1B32521892400183DEC /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321E1B12521892400183DEC /* DetailViewController.swift */; };
 		8321E1B42521892400183DEC /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8321E1B22521892400183DEC /* DetailViewController.xib */; };
+		8323E58C2537358F00E71FDD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323E58B2537358F00E71FDD /* Location.swift */; };
+		8323E58E253735C100E71FDD /* Cinema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323E58D253735C100E71FDD /* Cinema.swift */; };
+		8323E594253738B600E71FDD /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323E593253738B600E71FDD /* Session.swift */; };
 		83268486251DEF03007294CD /* UIImageView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83268485251DEF03007294CD /* UIImageView.Ext.swift */; };
 		8328639C251317A00048C63C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328639B251317A00048C63C /* LoginViewModel.swift */; };
 		8328A10C2521C5F8009AEAD6 /* UITableView.Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */; };
@@ -84,6 +87,9 @@
 		830743FE251305A50034E2BF /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		8321E1B12521892400183DEC /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8321E1B22521892400183DEC /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		8323E58B2537358F00E71FDD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		8323E58D253735C100E71FDD /* Cinema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cinema.swift; sourceTree = "<group>"; };
+		8323E593253738B600E71FDD /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		83268485251DEF03007294CD /* UIImageView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.Ext.swift; sourceTree = "<group>"; };
 		8328639B251317A00048C63C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		8328A10B2521C5F8009AEAD6 /* UITableView.Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.Ext.swift; sourceTree = "<group>"; };
@@ -222,6 +228,9 @@
 			isa = PBXGroup;
 			children = (
 				832A65AD251CDE3400FA5AD9 /* Movie.swift */,
+				8323E58B2537358F00E71FDD /* Location.swift */,
+				8323E58D253735C100E71FDD /* Cinema.swift */,
+				8323E593253738B600E71FDD /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -572,6 +581,8 @@
 				83303CE02519A6360089BE1E /* HomeViewController.swift in Sources */,
 				83303CDE2519A6360089BE1E /* HomeViewModel.swift in Sources */,
 				0EBA37462511C97B003465DD /* ServiceAPI.swift in Sources */,
+				8323E594253738B600E71FDD /* Session.swift in Sources */,
+				8323E58E253735C100E71FDD /* Cinema.swift in Sources */,
 				832BD4492536A64B002226FE /* Date.Ext.swift in Sources */,
 				8321E1B32521892400183DEC /* DetailViewController.swift in Sources */,
 				832E7185251B3E31006BD2D4 /* UICollectionView.Ext.swift in Sources */,
@@ -587,6 +598,7 @@
 				83268486251DEF03007294CD /* UIImageView.Ext.swift in Sources */,
 				0EBA37152511C6C2003465DD /* SceneDelegate.swift in Sources */,
 				830743FF251305A50034E2BF /* LoginViewController.swift in Sources */,
+				8323E58C2537358F00E71FDD /* Location.swift in Sources */,
 				83303CDC2519A6360089BE1E /* MoviesCollectionViewCell.swift in Sources */,
 				836A68F3251CD89300ACA550 /* APIError.swift in Sources */,
 			);
