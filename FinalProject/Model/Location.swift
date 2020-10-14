@@ -11,6 +11,7 @@ import ObjectMapper
 class Location: Mappable {
     var name: String = ""
     var cinemas: [Cinema] = []
+    var isExpanded: Bool = false
     
     required init (map: Map) { }
     required init() { }

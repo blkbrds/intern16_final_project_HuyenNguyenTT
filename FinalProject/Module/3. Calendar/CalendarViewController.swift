@@ -40,21 +40,28 @@ final class CalendarViewController: UIViewController {
         for label in weekdayLabels {
             let info = viewModel.calendarData[label.tag]
             if info.isToday {
-                label.text = "Hôm nay"
+                label.text = "Nay"
             } else {
                 label.text = info.weekday.firstChar
             }
         }
         for button in weekdayButtons {
             let info = viewModel.calendarData[button.tag]
-            button.layer.cornerRadius = button.bounds.height / 2
             button.setTitle("\(info.date.day)", for: .normal)
         }
         selectedIndex = 0
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        for button in weekdayButtons {
+            button.layer.cornerRadius = button.bounds.height / 2
+        }
+    }
+    
     private func configTableView() {
         tableView.register(CalendarTableViewCell.self)
+        tableView.register(CalendarTableViewHeader.self)
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -65,62 +72,41 @@ final class CalendarViewController: UIViewController {
         selectedIndex = sender.tag
     }
     
-    @objc private func handleSelection(_ sender: UIButton) {
-        let section = sender.tag
-        
-        func indexPathsForSection() -> [IndexPath] {
-            var indexPaths = [IndexPath]()
-            
-            for row in 0..<viewModel.tableViewData[section].count {
-                indexPaths.append(IndexPath(row: row,
-                                            section: section))
-            }
-            
-            return indexPaths
-        }
-        
-        if hiddenSections.contains(section) {
-            hiddenSections.remove(section)
-            tableView.insertRows(at: indexPathsForSection(), with: .fade)
-        } else {
-            hiddenSections.insert(section)
-            tableView.deleteRows(at: indexPathsForSection(), with: .fade)
-        }
+    @objc private func handleSelection(section: Int) {
+        viewModel.locations[section].isExpanded = !viewModel.locations[section].isExpanded
+        tableView.reloadSections([section], with: .automatic)
     }
 }
 
 extension CalendarViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.tableViewData.count
+        return viewModel.numberOfSections()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if hiddenSections.contains(section) {
-            return 0
-        }
-        return viewModel.tableViewData[section].count
+        return viewModel.numberOfItems(inSection: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(CalendarTableViewCell.self, indexPath: indexPath)
-        cell.cinemaLabel.text = viewModel.tableViewData[indexPath.section][indexPath.row]
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionButton = UIButton()
-        
-        sectionButton.setTitle(String(section), for: .normal)
-        sectionButton.contentHorizontalAlignment = .leading
-        sectionButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-        
-        sectionButton.backgroundColor = #colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1)
-        sectionButton.layer.borderWidth = 1
-        sectionButton.tag = section
-        
-        sectionButton.addTarget(self, action: #selector(handleSelection(_:)), for: .touchUpInside)
-        return sectionButton
     }
 }
 
-extension CalendarViewController: UITableViewDelegate { }
+extension CalendarViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeue(CalendarTableViewHeader.self)
+        header?.delegate = self
+        header?.section = section
+        return header
+    }
+}
+
+extension CalendarViewController: CalendarTableViewHeaderDelegate {
+    func header(_ header: CalendarTableViewHeader, needsPerform action: CalendarTableViewHeader.Action) {
+        switch action {
+        case .didSelect(let section):
+            handleSelection(section: section)
+        }
+    }
+}

@@ -11,7 +11,6 @@ import ObjectMapper
 class Session: Mappable {
     var id: Int = 0
     var time: String = ""
-    var isExpanded: Bool = false
     
     required init (map: Map) { }
     required init() { }
