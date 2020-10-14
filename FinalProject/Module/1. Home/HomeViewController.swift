@@ -174,11 +174,11 @@ final class HomeViewController: UIViewController {
     }
     
     private func updateInfo() {
-        movieNameLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.name
-        guard let releaseDate = viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate else { return }
-//        let date = App.DateTime.dateFormatter.date(from: releaseDate)
-//        guard let date = <#expression#> else { return <#return value#> }
+        guard let movie = viewModel.movies[safeIndex: currentIndexPath.row] else { return }
+        movieNameLabel.text = movie.name
+        let releaseDate = movie.releaseDate
         dateLabel.text = "Khởi chiếu: \(releaseDate)"
+        calendarButton.isHidden = Int(movie.sku) == nil
     }
 }
 

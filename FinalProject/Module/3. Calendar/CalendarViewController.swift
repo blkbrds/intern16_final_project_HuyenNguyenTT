@@ -40,7 +40,7 @@ final class CalendarViewController: UIViewController {
         for label in weekdayLabels {
             let info = viewModel.calendarData[label.tag]
             if info.isToday {
-                label.text = "Today"
+                label.text = "Hôm nay"
             } else {
                 label.text = info.weekday.firstChar
             }

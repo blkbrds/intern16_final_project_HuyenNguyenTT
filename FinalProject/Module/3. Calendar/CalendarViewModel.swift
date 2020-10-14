@@ -39,19 +39,19 @@ enum Weekday: Int, CaseIterable {
     var firstChar: String {
         switch self {
         case .monday:
-            return "Mon"
+            return "Th 2"
         case .tuesday:
-            return "Tue"
+            return "Th 3"
         case .wednesday:
-            return "Wed"
+            return "Th 4"
         case .thursday:
-            return "Thu"
+            return "Th 5"
         case .friday:
-            return "Fri"
+            return "Th 6"
         case .saturday:
-            return "Sat"
+            return "Th 7"
         case .sunday:
-            return "Sun"
+            return "CN"
         }
     }
 }
@@ -73,7 +73,8 @@ final class CalendarViewModel {
     init() {
         let calendar = Calendar.current
         for i in 0 ... 6 {
-            if let date = calendar.date(byAdding: .day, value: i, to: Date()), let weekday = Weekday(rawValue: calendar.component(.weekday, from: date)) {
+            if let date = calendar.date(byAdding: .day, value: i, to: Date()),
+                let weekday = Weekday(rawValue: calendar.component(.weekday, from: date)) {
                 calendarData.append(CalendarInfo(weekday: weekday, isToday: i == 0, date: date))
             }
         }
