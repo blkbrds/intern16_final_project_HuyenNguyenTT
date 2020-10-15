@@ -64,11 +64,7 @@ struct CalendarInfo {
 
 final class CalendarViewModel {
     var calendarData: [CalendarInfo] = []
-    let tableViewData: [[String]] = [["1", "2", "3", "4", "5"],
-                                ["1", "2", "3", "4", "5"],
-                                ["1", "2", "3", "4", "5"],
-                                ["1", "2", "3", "4", "5"],
-                                ["1", "2", "3", "4", "5"]]
+    var locations: [Location] = []
     
     init() {
         let calendar = Calendar.current
@@ -78,5 +74,15 @@ final class CalendarViewModel {
                 calendarData.append(CalendarInfo(weekday: weekday, isToday: i == 0, date: date))
             }
         }
+    }
+    
+    func numberOfSections() -> Int {
+        return locations.count
+    }
+    
+    func numberOfItems(inSection section: Int) -> Int {
+        guard let location = locations[safeIndex: section],
+            location.isExpanded else { return 0 }
+        return location.cinemas.count
     }
 }
