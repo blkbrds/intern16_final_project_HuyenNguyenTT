@@ -51,8 +51,8 @@ extension ServiceAPI: TargetType {
             return .requestParameters(parameters: ["cat": cat], encoding: URLEncoding.default)
         case .detail(id: let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.default)
-        case .showtimes(sku: let sku, date: let date):
-            return .requestCompositeParameters(bodyParameters: ["sku": sku], bodyEncoding: URLEncoding.default, urlParameters: ["date": date])
+        case .showtimes:
+            return .requestPlain
         }
     }
     

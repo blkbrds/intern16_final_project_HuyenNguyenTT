@@ -18,17 +18,29 @@ final class CalendarTableViewHeader: UITableViewHeaderFooterView {
         case didSelect(_ section: Int)
     }
     
-    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet private weak var titleLable: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
     
     var section: Int = 0
     weak var delegate: CalendarTableViewHeaderDelegate?
+    
+    var viewModel: CalendarTableViewHeaderViewModel? {
+        didSet {
+            updateView()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.backgroundColor = #colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1)
         contentView.layer.borderWidth = 1
         contentView.layer.backgroundColor = #colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1)
+    }
+    
+    private func updateView() {
+        guard let viewModel = viewModel else { return }
+        titleLable.text = viewModel.title
+        imageView.image = viewModel.isExpanded ? #imageLiteral(resourceName: "ic_up_calendar") : #imageLiteral(resourceName: "ic_down_calendar")
     }
     
     @IBAction private func selectionButtonTouchUpInside(_ sender: UIButton) {

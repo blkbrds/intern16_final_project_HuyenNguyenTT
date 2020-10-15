@@ -69,7 +69,7 @@ class NetworkManager: Networkable {
         }
     }
     
-    func getShowtime(sku: String, date: String, completion: @escaping (Result<[Session], Error>) -> Void) {
+    func getShowtime(sku: String, date: String, completion: @escaping (Result<[Location], Error>) -> Void) {
         provider.request(.showtimes(sku: sku, date: date)) { (result) in
             switch result {
             case .success(let response):
@@ -83,9 +83,10 @@ class NetworkManager: Networkable {
                     return
                 }
                 
-                if let data = json["data"] as? [JSON] {
-                    let sessions = data.compactMap { Session(JSON: $0) }
-                    completion(.success(sessions))
+                if let data = json["data"] as? [JSON],
+                    let locationsJson = data.first?["locations"] as? [JSON] {
+                    let locations = locationsJson.compactMap { Location(JSON: $0) }
+                    completion(.success(locations))
                     return
                 }
             case .failure(let error):

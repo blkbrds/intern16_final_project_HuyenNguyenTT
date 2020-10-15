@@ -10,8 +10,14 @@ import UIKit
 
 class CalendarTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var cinemaLabel: UILabel!
+    @IBOutlet private weak var cinemaLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
+    
+    var viewModel: CalendarTableViewCellViewModel? {
+        didSet {
+            updateView()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,15 +31,24 @@ class CalendarTableViewCell: UITableViewCell {
             layout.itemSize = CGSize(width: 50, height: 25)
         }
     }
+    
+    private func updateView() {
+        guard let viewModel = viewModel else { return }
+        cinemaLabel.text = viewModel.name
+        collectionView.reloadData()
+    }
 }
 
 extension CalendarTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        guard let viewModel = viewModel else { return 0 }
+        return viewModel.numberOfItems(inSection: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let viewModel = viewModel else { return UICollectionViewCell() }
         let cell = collectionView.dequeue(CalendarCollectionViewCell.self, at: indexPath)
+        cell.viewModel = viewModel.viewModelForItems(at: indexPath)
         return cell
     }
 }
