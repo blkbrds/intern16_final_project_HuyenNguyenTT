@@ -16,6 +16,7 @@ final class HomeViewController: UIViewController {
     @IBOutlet private weak var tabPlayingButton: UIButton!
     @IBOutlet private weak var tabUpcommingButton: UIButton!
     @IBOutlet private weak var tabFavoriteButton: UIButton!
+    @IBOutlet private weak var calendarButton: UIButton!
     
     @IBOutlet private weak var linePlayingView: UIView!
     @IBOutlet private weak var lineUpcomingView: UIView!
@@ -41,8 +42,14 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         configNavigation()
         configCollectionView()
+        configButton()
         getMovies()
         configSyncRealmData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Private function
@@ -76,6 +83,10 @@ final class HomeViewController: UIViewController {
         layout.sideItemAlpha = 0.2
         layout.spacingMode = UPCarouselFlowLayoutSpacingMode.fixed(spacing: -70)
         layout.scrollDirection = .horizontal
+    }
+    
+    private func configButton() {
+        calendarButton.layer.cornerRadius = calendarButton.bounds.height / 2
     }
     
     private func getMovies() {
@@ -143,6 +154,11 @@ final class HomeViewController: UIViewController {
         reloadData()
     }
     
+    @IBAction private func calendarButtonTouchUpInside(_ sender: UIButton) {
+        let calendarVC = CalendarViewController()
+        navigationController?.pushViewController(calendarVC, animated: true)
+    }
+    
     // MARK: - Objc
     @objc private func profileTouchUpInside() { }
     
@@ -158,8 +174,11 @@ final class HomeViewController: UIViewController {
     }
     
     private func updateInfo() {
-        movieNameLabel.text = viewModel.movies[safeIndex: currentIndexPath.row]?.name
-        dateLabel.text = "Khởi chiếu: \(viewModel.movies[safeIndex: currentIndexPath.row]?.releaseDate ?? "")"
+        guard let movie = viewModel.movies[safeIndex: currentIndexPath.row] else { return }
+        movieNameLabel.text = movie.name
+        let releaseDate = movie.releaseDate
+        dateLabel.text = "Khởi chiếu: \(releaseDate)"
+        calendarButton.isHidden = Int(movie.sku) == nil
     }
 }
 

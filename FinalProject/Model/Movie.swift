@@ -15,6 +15,7 @@ final class Movie: Object, Mappable {
     @objc dynamic var name: String = ""
     @objc dynamic var thumbnail: String = ""
     @objc dynamic var releaseDate: String = ""
+    @objc dynamic var sku: String = ""
     @objc dynamic var isFavorite: Bool = false
 
     //add propeties for detail
@@ -42,6 +43,7 @@ final class Movie: Object, Mappable {
         thumbnail <- map["thumbnail"]
         isBooking <- map["is_booking"]
         releaseDate <- map["release_date"]
+        sku <- map["sku"]
         
         // add map data for detail
         ratingCode <- map["rating_code"]
