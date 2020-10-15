@@ -11,12 +11,13 @@ import Moya
 enum ServiceAPI {
     case detail(id: String)
     case movies(cat: Int)
+    case showtimes(sku: String, date: String)
 }
 
 extension ServiceAPI: TargetType {
     
     var baseURL: URL {
-        guard let url = URL(string: "https://www.cgv.vn/default/api/") else {
+        guard let url = URL(string: "https://www.cgv.vn/default/api/movie/") else {
             fatalError("Invalid API URL")
         }
         return url
@@ -25,15 +26,17 @@ extension ServiceAPI: TargetType {
     var path: String {
         switch self {
         case .movies:
-            return "movie/listSneakShow"
+            return "listSneakShow"
         case .detail(let id):
-            return "movie/movie/id/\(id)"
+            return "movie/id/\(id)"
+        case .showtimes(let sku, let date):
+            return "showtimes/sku/\(sku)/date/\(date)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .movies, .detail:
+        case .movies, .detail, .showtimes:
             return .get
         }
     }
@@ -48,6 +51,8 @@ extension ServiceAPI: TargetType {
             return .requestParameters(parameters: ["cat": cat], encoding: URLEncoding.default)
         case .detail(id: let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.default)
+        case .showtimes(sku: let sku, date: let date):
+            return .requestCompositeParameters(bodyParameters: ["sku": sku], bodyEncoding: URLEncoding.default, urlParameters: ["date": date])
         }
     }
     
