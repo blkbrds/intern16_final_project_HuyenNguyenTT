@@ -60,7 +60,13 @@ class DetailViewController: UIViewController {
         nameLabel.text = viewModel.movie.name
         genreLabel.text = viewModel.movie.genre
         movieEndTimeLabel.text = "\(viewModel.movie.movieEndtime)"
-        releaseDateLabel.text = viewModel.movie.releaseDate
+        
+        let releaseDate = viewModel.movie.releaseDate
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = dateFormatter.date(from: releaseDate) else { return }
+        releaseDateLabel.text = date.toString(format: "dd-MM-yyyy")
+        
         ratingCodeLabel.text = viewModel.movie.ratingCode
         fullDescriptionLabel.text = viewModel.movie.fullDescription
         movieDirectorLabel.text = viewModel.movie.movieDirector
@@ -93,7 +99,8 @@ class DetailViewController: UIViewController {
     }
     
     private func updateButton() {
-        heartButton.isSelected = viewModel.movie.isFavorite
+        let image = viewModel.movie.isFavorite ? #imageLiteral(resourceName: "ic-heartfill") : #imageLiteral(resourceName: "ic-heart")
+        heartButton.setImage(image, for: .normal)
     }
     
     // MARK: - Action

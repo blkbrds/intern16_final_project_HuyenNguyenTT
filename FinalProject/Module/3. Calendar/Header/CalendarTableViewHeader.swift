@@ -40,7 +40,7 @@ final class CalendarTableViewHeader: UITableViewHeaderFooterView {
     private func updateView() {
         guard let viewModel = viewModel else { return }
         titleLable.text = viewModel.title
-        imageView.image = viewModel.isExpanded ? #imageLiteral(resourceName: "ic_up_calendar") : #imageLiteral(resourceName: "ic_down_calendar")
+        imageView.image = viewModel.isExpanded ? #imageLiteral(resourceName: "ic-up-calendar") : #imageLiteral(resourceName: "ic-down-calendar")
     }
     
     @IBAction private func selectionButtonTouchUpInside(_ sender: UIButton) {
