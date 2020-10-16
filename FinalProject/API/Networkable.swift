@@ -12,4 +12,5 @@ protocol Networkable {
     var provider: MoyaProvider<ServiceAPI> { get }
     func getMovies(completion: @escaping (_ result: Result<[Movie], Error>) -> Void)
     func getDetail(id: String, completion: @escaping (_ result: Result<Movie, Error>) -> Void)
+    func getShowtime(sku: String, date: String, completion: @escaping(_ result: Result<[Location], Error>) -> Void)
 }

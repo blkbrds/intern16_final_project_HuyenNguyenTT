@@ -15,7 +15,7 @@ final class CalendarViewController: UIViewController {
     @IBOutlet private weak var selectedDateLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     
-    let viewModel = CalendarViewModel()
+    var viewModel = CalendarViewModel(movie: Movie())
     private var selectedIndex: Int = 0 {
         didSet {
             for button in weekdayButtons {
@@ -26,6 +26,7 @@ final class CalendarViewController: UIViewController {
             }
             let info = viewModel.calendarData[selectedIndex]
             selectedDateLabel.text = info.weekday.valueDay + ", ngày " + info.date.toString(format: "dd") + " tháng " + info.date.toString(format: "MM") + " năm " + info.date.toString(format: "yyyy")
+            getLocations()
         }
     }
     var hiddenSections = Set<Int>()
@@ -68,6 +69,20 @@ final class CalendarViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
     }
     
+    private func getLocations() {
+        let info = viewModel.calendarData[selectedIndex]
+        let date = info.date.toString(format: "ddMMyyyy")
+        viewModel.getLocation(date: date) { [weak self] (result) in
+            guard let this = self else { return }
+            switch result {
+            case .success:
+                this.tableView.reloadData()
+            case .failure(let error):
+                this.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+            }
+        }
+    }
+    
     @IBAction private func weekdayButtonTouchUpInside(_ sender: UIButton) {
         selectedIndex = sender.tag
     }
@@ -89,6 +104,7 @@ extension CalendarViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(CalendarTableViewCell.self, indexPath: indexPath)
+        cell.viewModel = viewModel.viewModelForItems(at: indexPath)
         return cell
     }
 }
@@ -98,6 +114,7 @@ extension CalendarViewController: UITableViewDelegate {
         let header = tableView.dequeue(CalendarTableViewHeader.self)
         header?.delegate = self
         header?.section = section
+        header?.viewModel = viewModel.viewModelForHeader(inSection: section)
         return header
     }
 }

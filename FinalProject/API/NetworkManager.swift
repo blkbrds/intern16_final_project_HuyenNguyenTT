@@ -68,4 +68,30 @@ class NetworkManager: Networkable {
             }
         }
     }
+    
+    func getShowtime(sku: String, date: String, completion: @escaping (Result<[Location], Error>) -> Void) {
+        provider.request(.showtimes(sku: sku, date: date)) { (result) in
+            switch result {
+            case .success(let response):
+                guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {
+                    completion(.failure(MoyaError.statusCode(response)))
+                    return
+                }
+                
+                guard let json = try? filterResponse.mapJSON() as? JSON else {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                    return
+                }
+                
+                if let data = json["data"] as? [JSON],
+                    let locationsJson = data.first?["locations"] as? [JSON] {
+                    let locations = locationsJson.compactMap { Location(JSON: $0) }
+                    completion(.success(locations))
+                    return
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

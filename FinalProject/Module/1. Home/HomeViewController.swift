@@ -156,6 +156,8 @@ final class HomeViewController: UIViewController {
     
     @IBAction private func calendarButtonTouchUpInside(_ sender: UIButton) {
         let calendarVC = CalendarViewController()
+        let movie = viewModel.movies[currentIndexPath.row]
+        calendarVC.viewModel = CalendarViewModel(movie: movie)
         navigationController?.pushViewController(calendarVC, animated: true)
     }
     
