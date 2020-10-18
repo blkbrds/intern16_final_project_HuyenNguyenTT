@@ -8,11 +8,16 @@
 
 import Foundation
 
-typealias APICompletion = (Bool) -> Void
-
 final class LoginViewModel {
-    func requestLogin(username: String, password: String, completion: @escaping APICompletion) {
-        completion(true)
-        #warning("Make request here")
+    func requestLogin(email: String, password: String, completion: @escaping (APIResult) -> Void) {
+        apiProvider.login(email: email, password: password) { (result) in
+            switch result {
+            case .success:
+                completion(.success)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        
     }
 }

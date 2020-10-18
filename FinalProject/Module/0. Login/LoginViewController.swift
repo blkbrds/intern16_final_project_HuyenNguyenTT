@@ -52,17 +52,15 @@ final class LoginViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction private func loginButtonTouchUpInside(_ sender: UIButton) {
-        guard let userName = userNameTextField.text, let password = passwordTextField.text, !userName.isEmpty, !password.isEmpty else {
-            #warning("Show alert need input value")
+        guard let email = userNameTextField.text, let password = passwordTextField.text, !email.isEmpty, !password.isEmpty else {
             return
         }
-        viewModel.requestLogin(username: userName, password: password) { isSuccess in
-            switch isSuccess {
-            case true:
+        viewModel.requestLogin(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success:
                 SceneDelegate.shared.changeRoot(screen: .home)
-            case false:
-                // Show alert
-                break
+            case .failure(let error):
+                self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
     }

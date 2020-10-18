@@ -9,44 +9,52 @@
 import Moya
 
 enum ServiceAPI {
+    case login(email: String, password: String)
     case detail(id: String)
     case movies(cat: Int)
     case showtimes(sku: String, date: String)
 }
 
 extension ServiceAPI: TargetType {
-    
+
     var baseURL: URL {
-        guard let url = URL(string: "https://www.cgv.vn/default/api/movie/") else {
+        guard let url = URL(string: "https://www.cgv.vn/default/api/") else {
             fatalError("Invalid API URL")
         }
         return url
     }
-    
+
     var path: String {
         switch self {
+        case .login:
+            return "customer/login"
         case .movies:
-            return "listSneakShow"
+            return "movie/listSneakShow"
         case .detail(let id):
-            return "movie/id/\(id)"
+            return "movie/movie/id/\(id)"
         case .showtimes(let sku, let date):
-            return "showtimes/sku/\(sku)/date/\(date)"
+            return "movie/showtimes/sku/\(sku)/date/\(date)"
         }
     }
-    
+
     var method: Moya.Method {
         switch self {
+        case .login:
+            return .post
         case .movies, .detail, .showtimes:
             return .get
         }
     }
-    
+
     var sampleData: Data {
         return Data()
     }
-    
+
     var task: Task {
         switch self {
+        case .login(email: let email, password: let password):
+            let params = ["email": email, "password": password, "signature": "UPaRuOfUQL2CGOTIr885/fCNyXT8/wenO6cUnu2mTvA="]
+            return .requestParameters(parameters: params, encoding: URLEncoding.httpBody)
         case .movies(let cat):
             return .requestParameters(parameters: ["cat": cat], encoding: URLEncoding.default)
         case .detail(id: let id):
@@ -55,10 +63,16 @@ extension ServiceAPI: TargetType {
             return .requestPlain
         }
     }
-    
+
     var headers: [String: String]? {
         var headers: [String: String] = [:]
-        headers["Content-type"] = "application/json"
+        switch self {
+        case .login:
+            headers["Content-type"] = "application/x-www-form-urlencoded"
+            headers["X-Device"] = "iOS_14.0_2.2.8"
+        default:
+            headers["Content-type"] = "application/json"
+        }
         return headers
     }
 }

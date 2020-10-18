@@ -91,12 +91,12 @@ final class HomeViewController: UIViewController {
     }
     
     private func getMovies() {
-        viewModel.getMovies { (result) in
+        viewModel.getMovies { [weak self] (result) in
             switch result {
             case .success:
-                self.reloadData()
+                self?.reloadData()
             case .failure(let error):
-                self.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
+                self?.showAlert(alertText: "Error", alertMessage: error.localizedDescription)
             }
         }
     }

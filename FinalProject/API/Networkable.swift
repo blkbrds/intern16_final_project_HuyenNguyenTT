@@ -10,6 +10,7 @@ import Moya
 
 protocol Networkable {
     var provider: MoyaProvider<ServiceAPI> { get }
+    func login(email: String, password: String, completion: @escaping (_ result: Result<User, Error>) -> Void)
     func getMovies(completion: @escaping (_ result: Result<[Movie], Error>) -> Void)
     func getDetail(id: String, completion: @escaping (_ result: Result<Movie, Error>) -> Void)
     func getShowtime(sku: String, date: String, completion: @escaping(_ result: Result<[Location], Error>) -> Void)
