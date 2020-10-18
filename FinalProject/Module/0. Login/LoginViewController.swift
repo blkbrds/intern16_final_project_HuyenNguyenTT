@@ -55,7 +55,9 @@ final class LoginViewController: UIViewController {
         guard let email = userNameTextField.text, let password = passwordTextField.text, !email.isEmpty, !password.isEmpty else {
             return
         }
+        HUD.show()
         viewModel.requestLogin(email: email, password: password) { [weak self] result in
+            HUD.dismiss()
             switch result {
             case .success:
                 SceneDelegate.shared.changeRoot(screen: .home)

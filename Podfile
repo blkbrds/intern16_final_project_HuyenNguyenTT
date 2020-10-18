@@ -10,12 +10,13 @@ target 'FinalProject' do
   pod 'SwiftLint'
   pod 'RealmSwift'
   pod 'ObjectMapper'
+  pod 'SideMenu'
+  pod "UPCarouselFlowLayout"
+  pod 'SDWebImage', '~> 5.0'
+  pod 'SVProgressHUD'
 
   target 'FinalProjectTests' do
     inherit! :search_paths
     # Pods for testing
   end
-pod 'SideMenu'
-pod "UPCarouselFlowLayout"
-pod 'SDWebImage', '~> 5.0'
 end

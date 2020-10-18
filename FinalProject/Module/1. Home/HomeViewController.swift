@@ -91,7 +91,9 @@ final class HomeViewController: UIViewController {
     }
     
     private func getMovies() {
+        HUD.show()
         viewModel.getMovies { [weak self] (result) in
+            HUD.dismiss()
             switch result {
             case .success:
                 self?.reloadData()

@@ -72,7 +72,9 @@ final class CalendarViewController: UIViewController {
     private func getLocations() {
         let info = viewModel.calendarData[selectedIndex]
         let date = info.date.toString(format: "ddMMyyyy")
+        HUD.show()
         viewModel.getLocation(date: date) { [weak self] (result) in
+            HUD.dismiss()
             guard let this = self else { return }
             switch result {
             case .success:
