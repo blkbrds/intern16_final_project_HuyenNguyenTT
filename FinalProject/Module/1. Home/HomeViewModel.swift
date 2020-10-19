@@ -187,4 +187,12 @@ final class HomeViewModel {
         guard 0 <= indexPath.row && indexPath.row < movies.count else { return DetailViewModel() }
         return DetailViewModel(movie: movies[indexPath.row])
     }
+    
+    func checkFavoriteData(completion: @escaping (Bool) -> Void) {
+        if favoriteMovies.isEmpty, movieType == .favorite {
+            completion(true)
+        } else {
+            completion(false)
+        }
+    }
 }

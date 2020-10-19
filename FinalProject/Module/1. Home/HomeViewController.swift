@@ -26,6 +26,7 @@ final class HomeViewController: UIViewController {
     
     @IBOutlet private weak var movieNameLabel: UILabel!
     @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet weak var notificationLabel: UILabel!
     
     // MARK: - Properties
     private var currentIndexPath: IndexPath = IndexPath(row: 0, section: 0) {
@@ -42,7 +43,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         configNavigation()
         configCollectionView()
-        configButton()
+        configUI()
         getMovies()
         configSyncRealmData()
     }
@@ -56,10 +57,10 @@ final class HomeViewController: UIViewController {
     private func configNavigation() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         button.setImage(#imageLiteral(resourceName: "ic-profile-navi"), for: .normal)
-        let leftItm = UIBarButtonItem(customView: button)
+        let leftItem = UIBarButtonItem(customView: button)
         let menuItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic-sidemenu"), style: .plain, target: self, action: #selector(menuTouchUpInside))
         navigationItem.rightBarButtonItem = menuItem
-        navigationItem.leftBarButtonItem = leftItm
+        navigationItem.leftBarButtonItem = leftItem
         
         // set side menu
         sideMenu.leftSide = false
@@ -87,8 +88,10 @@ final class HomeViewController: UIViewController {
         layout.scrollDirection = .horizontal
     }
     
-    private func configButton() {
+    private func configUI() {
         calendarButton.layer.cornerRadius = calendarButton.bounds.height / 2
+        notificationLabel.isHidden = true
+        notificationLabel.text = "No Favorite!"
     }
     
     private func getMovies() {
@@ -112,6 +115,25 @@ final class HomeViewController: UIViewController {
         viewModel.delegate = self
     }
     
+    private func checkFavoriteData() {
+        viewModel.checkFavoriteData { [weak self] (done) in
+            guard let this = self else { return }
+            if done {
+                this.notificationLabel.isHidden = false
+                this.collectionView.isHidden = true
+                this.movieNameLabel.isHidden = true
+                this.dateLabel.isHidden = true
+                this.calendarButton.isHidden = true
+            } else {
+                this.collectionView.isHidden = false
+                this.notificationLabel.isHidden = true
+                this.movieNameLabel.isHidden = false
+                this.dateLabel.isHidden = false
+                this.calendarButton.isHidden = false
+            }
+        }
+    }
+    
     // MARK: - Actions
     @IBAction private func tabPlayingButtonTouchUpInside(_ sender: UIButton) {
         guard viewModel.movieType != .playing else { return }
@@ -126,6 +148,7 @@ final class HomeViewController: UIViewController {
         
         viewModel.movieType = .playing
         reloadData()
+        checkFavoriteData()
     }
     
     @IBAction private func tabUpcomingButtonTouchUpInside(_ sender: UIButton) {
@@ -141,6 +164,7 @@ final class HomeViewController: UIViewController {
         
         viewModel.movieType = .upcomming
         reloadData()
+        checkFavoriteData()
     }
     
     @IBAction private func tabFavoriteButtonTouchUpInside(_ sender: UIButton) {
@@ -156,6 +180,7 @@ final class HomeViewController: UIViewController {
         
         viewModel.movieType = .favorite
         reloadData()
+        checkFavoriteData()
     }
     
     @IBAction private func calendarButtonTouchUpInside(_ sender: UIButton) {
@@ -233,6 +258,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
 extension HomeViewController: HomeViewModelDelegate {
     func viewModel(_ viewModel: HomeViewModel, needsPerform action: HomeViewModel.Action) {
         collectionView.reloadData()
+        checkFavoriteData()
     }
 }
 
