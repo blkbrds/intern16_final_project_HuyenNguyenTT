@@ -24,6 +24,29 @@ class NetworkManager: Networkable {
     static let shared = NetworkManager()
     let detailVM = DetailViewModel()
     
+    func login(email: String, password: String, completion: @escaping (Result<User, Error>) -> Void) {
+        provider.request(.login(email: email, password: password)) { (result) in
+            switch result {
+            case .success(let response):
+                guard let filterResponse = try? response.filterSuccessfulStatusCodes() else {
+                    completion(.failure(MoyaError.statusCode(response)))
+                    return
+                }
+                guard let json = try? filterResponse.mapJSON() as? JSON else {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                    return
+                }
+                if let data = json["data"] as? JSON, let user = User(JSON: data) {
+                    completion(.success(user))
+                    return
+                }
+                completion(.failure(NSError(domain: "", code: 3_840, userInfo: [NSLocalizedDescriptionKey: "json"])))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     func getMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
         provider.request(.movies(cat: 2)) { result in
             switch result {
