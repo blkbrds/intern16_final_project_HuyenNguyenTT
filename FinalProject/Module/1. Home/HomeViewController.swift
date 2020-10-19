@@ -54,11 +54,12 @@ final class HomeViewController: UIViewController {
     
     // MARK: - Private function
     private func configNavigation() {
-        let infoItem = UIBarButtonItem(image: #imageLiteral(resourceName: "img_menu_logowhite"), style: .plain, target: self, action: #selector(profileTouchUpInside))
-        navigationItem.leftBarButtonItem = infoItem
-        
-        let menuItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_home_menu"), style: .plain, target: self, action: #selector(menuTouchUpInside))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        button.setImage(#imageLiteral(resourceName: "ic-profile-navi"), for: .normal)
+        let leftItm = UIBarButtonItem(customView: button)
+        let menuItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic-sidemenu"), style: .plain, target: self, action: #selector(menuTouchUpInside))
         navigationItem.rightBarButtonItem = menuItem
+        navigationItem.leftBarButtonItem = leftItm
         
         // set side menu
         sideMenu.leftSide = false
@@ -115,9 +116,9 @@ final class HomeViewController: UIViewController {
         // set UI
         tabPlayingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         linePlayingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        tabUpcommingButton.titleLabel?.font = .none
+        tabUpcommingButton.titleLabel?.font = .systemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = .black
-        tabFavoriteButton.titleLabel?.font = .none
+        tabFavoriteButton.titleLabel?.font = .systemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = .black
         
         viewModel.movieType = .playing
@@ -128,11 +129,11 @@ final class HomeViewController: UIViewController {
         guard viewModel.movieType != .upcomming else { return }
         
         // set UI
-        tabPlayingButton.titleLabel?.font = .none
+        tabPlayingButton.titleLabel?.font = .systemFont(ofSize: 15)
         linePlayingView.backgroundColor = .black
         tabUpcommingButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
-        tabFavoriteButton.titleLabel?.font = .none
+        tabFavoriteButton.titleLabel?.font = .systemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = .black
         
         viewModel.movieType = .upcomming
@@ -143,9 +144,9 @@ final class HomeViewController: UIViewController {
         guard viewModel.movieType != .favorite else { return }
         
         // set UI
-        tabPlayingButton.titleLabel?.font = .none
+        tabPlayingButton.titleLabel?.font = .systemFont(ofSize: 15)
         linePlayingView.backgroundColor = .black
-        tabUpcommingButton.titleLabel?.font = .none
+        tabUpcommingButton.titleLabel?.font = .systemFont(ofSize: 15)
         lineUpcomingView.backgroundColor = .black
         tabFavoriteButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         lineFavoriteView.backgroundColor = #colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1)
@@ -156,8 +157,11 @@ final class HomeViewController: UIViewController {
     
     @IBAction private func calendarButtonTouchUpInside(_ sender: UIButton) {
         let calendarVC = CalendarViewController()
+        //TODO
         let movie = viewModel.movies[currentIndexPath.row]
         calendarVC.viewModel = CalendarViewModel(movie: movie)
+        let backButton = UIBarButtonItem(title: movie.name, style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
         navigationController?.pushViewController(calendarVC, animated: true)
     }
     
@@ -179,7 +183,10 @@ final class HomeViewController: UIViewController {
         guard let movie = viewModel.movies[safeIndex: currentIndexPath.row] else { return }
         movieNameLabel.text = movie.name
         let releaseDate = movie.releaseDate
-        dateLabel.text = "Khởi chiếu: \(releaseDate)"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = dateFormatter.date(from: releaseDate) else { return }
+        dateLabel.text = "Khởi chiếu: " + date.toString(format: "dd-MM-yyyy")
         calendarButton.isHidden = Int(movie.sku) == nil
     }
 }

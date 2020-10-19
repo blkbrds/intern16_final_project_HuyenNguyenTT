@@ -104,6 +104,8 @@ extension CalendarViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(CalendarTableViewCell.self, indexPath: indexPath)
+        cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        cell.layer.borderWidth = 0.2
         cell.viewModel = viewModel.viewModelForItems(at: indexPath)
         return cell
     }

@@ -49,7 +49,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="C16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zhZ-4f-DgG">
-                            <rect key="frame" x="193.5" y="14" width="32" height="22"/>
+                            <rect key="frame" x="188.5" y="14" width="32" height="22"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="0.75686274509803919" green="0.49019607843137253" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -109,7 +109,7 @@
                         <constraint firstItem="syV-OC-LgD" firstAttribute="leading" secondItem="xbT-pT-1hh" secondAttribute="leading" id="hlM-dC-hmU"/>
                         <constraint firstItem="FAZ-s3-ZtE" firstAttribute="top" secondItem="tCi-33-0TM" secondAttribute="top" id="jdV-Om-Hpy"/>
                         <constraint firstItem="Wic-by-4Zz" firstAttribute="top" secondItem="GrY-A1-c4o" secondAttribute="bottom" constant="12" id="n6z-he-GRa"/>
-                        <constraint firstItem="zhZ-4f-DgG" firstAttribute="leading" secondItem="xbT-pT-1hh" secondAttribute="trailing" constant="15" id="oCU-xK-ohE"/>
+                        <constraint firstItem="zhZ-4f-DgG" firstAttribute="leading" secondItem="xbT-pT-1hh" secondAttribute="trailing" constant="10" id="oCU-xK-ohE"/>
                         <constraint firstItem="fhP-PU-SaJ" firstAttribute="leading" secondItem="UN9-RX-JZr" secondAttribute="leading" id="qHS-q7-bGj"/>
                         <constraint firstItem="syV-OC-LgD" firstAttribute="top" secondItem="xbT-pT-1hh" secondAttribute="bottom" constant="14" id="xdb-Fv-pGq"/>
                         <constraint firstItem="UN9-RX-JZr" firstAttribute="centerY" secondItem="GrY-A1-c4o" secondAttribute="centerY" id="ybp-q1-1Mo"/>
