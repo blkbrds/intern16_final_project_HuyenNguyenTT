@@ -65,6 +65,7 @@ final class HomeViewController: UIViewController {
         sideMenu.leftSide = false
         SideMenuManager.default.rightMenuNavigationController = sideMenu
         SideMenuManager.default.addPanGestureToPresent(toView: view)
+        sideMenu.sideMenuDelegate = self
         
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -91,7 +92,9 @@ final class HomeViewController: UIViewController {
     }
     
     private func getMovies() {
+        HUD.show()
         viewModel.getMovies { [weak self] (result) in
+            HUD.dismiss()
             switch result {
             case .success:
                 self?.reloadData()
@@ -251,5 +254,11 @@ extension HomeViewController: DetailViewControllerDelegate {
             viewModel.updateFavoriteDetail(movie: movie)
             collectionView.reloadData()
         }
+    }
+}
+
+extension HomeViewController: SideMenuNavigationControllerDelegate {
+    func sideMenuDidDisappear(menu: SideMenuNavigationController, animated: Bool) {
+        getMovies()
     }
 }

@@ -16,6 +16,7 @@ PODS:
     - SDWebImage/Core (= 5.9.1)
   - SDWebImage/Core (5.9.1)
   - SideMenu (6.4.9)
+  - SVProgressHUD (2.2.5)
   - SwiftLint (0.40.2)
   - UPCarouselFlowLayout (1.1.2)
 
@@ -25,6 +26,7 @@ DEPENDENCIES:
   - RealmSwift
   - SDWebImage (~> 5.0)
   - SideMenu
+  - SVProgressHUD
   - SwiftLint
   - UPCarouselFlowLayout
 
@@ -38,6 +40,7 @@ SPEC REPOS:
     - RxSwift
     - SDWebImage
     - SideMenu
+    - SVProgressHUD
     - SwiftLint
     - UPCarouselFlowLayout
 
@@ -50,9 +53,10 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
   SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
   UPCarouselFlowLayout: 4c7d2c43a10ebb1597bde502a53699d378341dad
 
-PODFILE CHECKSUM: cf9ef6147d6080bcdc5bb24aba187e29621bdb0d
+PODFILE CHECKSUM: 93fe1a679253eab8899fa4e250e9884e132adceb
 
 COCOAPODS: 1.9.3

@@ -8,6 +8,9 @@
 
 import UIKit
 import SideMenu
+import SVProgressHUD
+
+typealias HUD = SVProgressHUD
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -29,6 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         self.window = window
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+            appDelegate.window = self.window
+        }
         changeRoot(screen: .login)
         window.makeKeyAndVisible()
     }

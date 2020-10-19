@@ -80,7 +80,9 @@ class DetailViewController: UIViewController {
     }
     
     private func getDetail() {
+        HUD.show()
         viewModel.getDetail(id: viewModel.movie.id) { [weak self] (result) in
+            HUD.dismiss()
             switch result {
             case .success:
                 self?.updateUI()
