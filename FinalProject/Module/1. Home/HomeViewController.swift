@@ -91,7 +91,7 @@ final class HomeViewController: UIViewController {
     private func configUI() {
         calendarButton.layer.cornerRadius = calendarButton.bounds.height / 2
         notificationLabel.isHidden = true
-        notificationLabel.text = "No Favorite!"
+        notificationLabel.text = "Không có phim yêu thích!"
     }
     
     private func getMovies() {
