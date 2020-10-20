@@ -44,7 +44,7 @@ final class MoviesCollectionViewCell: UICollectionViewCell {
     // MARK: - Function
     private func updateView() {
         guard let viewModel = viewModel else { return }
-        movieImageView.sd_setImage(with: URL(string: viewModel.imageName))
+        movieImageView.sd_setImage(with: URL(string: viewModel.imageName), placeholderImage: #imageLiteral(resourceName: "ic-logowhit"))
         let image = viewModel.isFavorite ? #imageLiteral(resourceName: "ic-heartfill") : #imageLiteral(resourceName: "ic-heart")
         heartButton.setImage(image, for: .normal)
     }
