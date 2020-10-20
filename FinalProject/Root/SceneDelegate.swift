@@ -37,6 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         changeRoot(screen: .login)
         window.makeKeyAndVisible()
+        customHUD()
     }
     
     func changeRoot(screen: Screen) {
@@ -49,7 +50,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = navigationController
         }
     }
-
+    
+    func customHUD() {
+        SVProgressHUD.setDefaultStyle(.custom)
+        SVProgressHUD.setDefaultMaskType(.custom)
+        SVProgressHUD.setForegroundColor(#colorLiteral(red: 0.999976337, green: 0.6980721354, blue: 0.1373093724, alpha: 1))
+        SVProgressHUD.setBackgroundColor(#colorLiteral(red: 0.1293964982, green: 0.1294215322, blue: 0.1293910444, alpha: 1))
+    }
     func sceneDidDisconnect(_ scene: UIScene) { }
     
     func sceneDidBecomeActive(_ scene: UIScene) { }
